@@ -12,17 +12,23 @@ import javax.annotation.Resource;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
-import sun.tools.tree.ThisExpression;
-
 import com.qjk.qblog.data.Pager;
+import com.qjk.qblog.util.SerializeUtil;
 
 @Repository
 public abstract class BaseDaoImpl<T> {
 
 	@Resource
 	protected SessionFactory sessionFactory;
+
+	@Resource
+	protected RedisTemplate<String, T> redisTemplate;
 
 	protected abstract Class<T> getDataClass();
 
@@ -31,7 +37,7 @@ public abstract class BaseDaoImpl<T> {
 	}
 
 	protected void save(T t) {
-		this.getSession().save(t);
+		this.getSession().saveOrUpdate(t);
 	}
 
 	protected void update(T t) {
@@ -39,17 +45,17 @@ public abstract class BaseDaoImpl<T> {
 	}
 
 	protected T findById(Serializable id) {
-		return this.getSession().load(getDataClass(), id);
+		return this.getSession().get(getDataClass(), id);
 	}
 
-	protected void delete( Serializable id) {
-		this.getSession().delete(findById( id));
+	protected void delete(Serializable id) {
+		this.getSession().delete(findById(id));
 	}
 
 	protected List<T> findListByHQL(String hql, Object... params) {
 		Query query = this.getSession().createQuery(hql);
 		for (int i = 0; params != null && i < params.length; i++) {
-			query.setParameter(i, params);
+			query.setParameter(i, params[i]);
 		}
 		return query.list();
 	}
@@ -57,7 +63,7 @@ public abstract class BaseDaoImpl<T> {
 	protected T findOneByHQL(String hql, Object... params) {
 		Query query = this.getSession().createQuery(hql);
 		for (int i = 0; params != null && i < params.length; i++) {
-			query.setParameter(i, params);
+			query.setParameter(i, params[i]);
 		}
 		return (T) query.uniqueResult();
 	}
@@ -66,16 +72,16 @@ public abstract class BaseDaoImpl<T> {
 		hql = "select count(*) " + hql;
 		Query query = this.getSession().createQuery(hql);
 		for (int i = 0; params != null && i < params.length; i++) {
-			query.setParameter(i, params);
+			query.setParameter(i, params[i]);
 		}
 		return (Integer) query.uniqueResult();
 	}
 
-	protected List<T> findListByHQLLimit(String hql, Object[] params, int firstResult,
-			int maxResults) {
+	protected List<T> findListByHQLLimit(String hql, Object[] params,
+			int firstResult, int maxResults) {
 		Query query = this.getSession().createQuery(hql);
 		for (int i = 0; params != null && i < params.length; i++) {
-			query.setParameter(i, params);
+			query.setParameter(i, params[i]);
 		}
 		query.setFirstResult(firstResult);
 		query.setMaxResults(maxResults);
@@ -87,12 +93,13 @@ public abstract class BaseDaoImpl<T> {
 		StringBuilder hql = new StringBuilder();
 		List<Object> params = new ArrayList<Object>();
 		List<T> list = null;
-		hql.append(" from ").append(getDataClass().getSimpleName()).append(" where 1=1");
-		
+		hql.append(" from ").append(getDataClass().getSimpleName())
+				.append(" where 1=1");
+
 		if (pager != null) {
 			Map<String, Object> fieldParamsMap = pager.getFieldParams();
 
-			if (fieldParamsMap != null && fieldParamsMap.size() >0) {
+			if (fieldParamsMap != null && fieldParamsMap.size() > 0) {
 
 				Iterator<Entry<String, Object>> it = fieldParamsMap.entrySet()
 						.iterator();
@@ -104,10 +111,10 @@ public abstract class BaseDaoImpl<T> {
 				}
 
 			}
-			
+
 			Map<String, Object> sqlParamsMap = pager.getSqlParams();
 
-			if (sqlParamsMap != null && sqlParamsMap.size() >0) {
+			if (sqlParamsMap != null && sqlParamsMap.size() > 0) {
 
 				Iterator<Entry<String, Object>> it = sqlParamsMap.entrySet()
 						.iterator();
@@ -119,7 +126,7 @@ public abstract class BaseDaoImpl<T> {
 				}
 
 			}
-			
+
 			if (pager.isCounter()) {
 				int totalRows = count(hql.toString(), params.toArray());
 				pager.setTotalRows(totalRows).calculate();
@@ -127,7 +134,7 @@ public abstract class BaseDaoImpl<T> {
 				list = findListByHQLLimit(hql.toString(), params.toArray(),
 						pager.getFistRowNum(), pager.getPageSize());
 			} else {
-				
+
 				list = findListByHQL(hql.toString(), params.toArray());
 			}
 
@@ -137,20 +144,82 @@ public abstract class BaseDaoImpl<T> {
 
 		return pager;
 	}
-	
-	protected void execHQL(String hql,Object...params){
+
+	protected void execHQL(String hql, Object... params) {
 		Query query = this.getSession().createQuery(hql);
 		for (int i = 0; params != null && i < params.length; i++) {
-			query.setParameter(i, params);
+			query.setParameter(i, params[i]);
 		}
 		query.executeUpdate();
 	}
-	
-	protected void execSQL(String sql,Object...params){
+
+	protected void execSQL(String sql, Object... params) {
 		Query query = this.getSession().createSQLQuery(sql);
 		for (int i = 0; params != null && i < params.length; i++) {
-			query.setParameter(i, params);
+			query.setParameter(i, params[i]);
 		}
 		query.executeUpdate();
+	}
+
+	protected void add2Redis(final String id, final T t) {
+
+		redisTemplate.execute(new RedisCallback<Boolean>() {
+			public Boolean doInRedis(RedisConnection connection)
+					throws DataAccessException {
+				byte[] key = id.getBytes();
+				byte[] value = SerializeUtil.serialize(t);
+				return connection.setNX(key, value);
+			}
+		});
+
+	}
+
+	protected T getFromRedis(final String keyId) {
+		T result = redisTemplate.execute(new RedisCallback<T>() {
+			public T doInRedis(RedisConnection connection)
+					throws DataAccessException {
+				byte[] key = keyId.getBytes();
+				byte[] value = connection.get(key);
+				if (value == null) {
+					return null;
+				}
+				T t = (T) SerializeUtil.unserialize(value);
+				return t;
+			}
+		});
+		return result;
+	}
+
+	protected void deleteFromRedis(String key) {
+		List<String> list = new ArrayList<String>();
+		list.add(key);
+		deleteFromRedis(list);
+	}
+
+	/**
+	 * 删除多个 
+	 * 
+	 * @param keys
+	 */
+	protected void deleteFromRedis(List<String> keys) {
+		redisTemplate.delete(keys);
+	}
+
+	protected boolean updateFromRedis(final String id, final T t) {
+
+		if (getFromRedis(id) == null) {
+			add2Redis(id, t);
+			return true;
+		}
+		boolean result = redisTemplate.execute(new RedisCallback<Boolean>() {
+			public Boolean doInRedis(RedisConnection connection)
+					throws DataAccessException {
+				byte[] key = id.getBytes();
+				byte[] value = SerializeUtil.serialize(t);
+				connection.set(key, value);
+				return true;
+			}
+		});
+		return result;
 	}
 }

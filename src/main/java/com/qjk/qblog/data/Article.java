@@ -18,6 +18,12 @@ import com.qjk.qblog.group.ValidateInPost;
 @Table(name="qblog_article")
 public class Article implements Serializable{
 	
+	public static final String ALIAS_ARTICLE="article";
+	public static final String ALIAS_BANNER="banner";
+	public static final String ALIAS_FRIENDLINK ="friendlink";
+	public static final String ALIAS_INFORMATION="information";
+	public static final String ALIAS_DIARY="diary";
+	
 	/**
 	 * 
 	 */
@@ -25,8 +31,9 @@ public class Article implements Serializable{
 	private long articleId;
 	private String title;
 	private String image;
+	private String alias;
 	private long grouId;
-	private String tag;
+	private String tags;
 	private String content;
 	private String contentType;
 	private long ctime;
@@ -70,11 +77,11 @@ public class Article implements Serializable{
 		this.image = image;
 	}
 	@Column(length=255)
-	public String getTag() {
-		return tag;
+	public String getTags() {
+		return tags;
 	}
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 	@Column(columnDefinition="mediumtext")
 	@Basic(fetch=FetchType.LAZY)
@@ -145,6 +152,14 @@ public class Article implements Serializable{
 	}
 	public void setIndexNo(long indexNo) {
 		this.indexNo = indexNo;
+	}
+	
+	@Column(length=32)
+	public String getAlias() {
+		return alias;
+	}
+	public void setAlias(String alias) {
+		this.alias = alias;
 	} 
 	
 	
