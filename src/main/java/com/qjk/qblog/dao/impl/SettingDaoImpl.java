@@ -68,8 +68,11 @@ public class SettingDaoImpl extends BaseDaoImpl<Setting> implements ISettingDao 
 
 		if (setting == null) {
 			setting = this.findOneByHQL("from Setting where name=?", name);
-			this.add2Redis(RedisUtil.getKey(Setting.class, setting.getName()),
-					setting);
+			if (setting != null) {
+				this.add2Redis(
+						RedisUtil.getKey(Setting.class, setting.getName()),
+						setting);
+			}
 			return setting;
 		}
 

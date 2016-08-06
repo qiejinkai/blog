@@ -1,7 +1,9 @@
 package com.qjk.qblog.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -49,7 +51,7 @@ public class Setting implements Serializable{
 	private String version;
 	private long ctime;
 	private long mtime;
-	private Set<SettingOption>options = new HashSet<SettingOption>();
+	private List<SettingOption>options = new ArrayList<SettingOption>();
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -101,10 +103,10 @@ public class Setting implements Serializable{
 		this.mtime = mtime;
 	}
 	@OneToMany(mappedBy="setting",cascade={CascadeType.ALL},fetch=FetchType.EAGER)
-	public Set<SettingOption> getOptions() {
+	public List<SettingOption> getOptions() {
 		return options;
 	}
-	public void setOptions(Set<SettingOption> options) {
+	public void setOptions(List<SettingOption> options) {
 		this.options = options;
 	}
 	

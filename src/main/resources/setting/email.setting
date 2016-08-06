@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<title>邮件通道</title>
+	<summary></summary>
+	<name>email</name>
+	<version>1.0.0</version>
+	<types></types>
+	<indexId>5</indexId>
+	<option>
+		<summary>基础设置</summary>
+		<name>from</name>
+		<value></value>
+		<title>发件人邮箱地址</title>
+	</option>
+	<option>
+		<summary>基础设置</summary>
+		<name>smtp</name>
+		<value></value>
+		<title>发送服务器地址</title>
+	</option>
+	<option>
+		<summary>基础设置</summary>
+		<name>user</name>
+		<value></value>
+		<title>发送服务器验证用户名</title>
+	</option>
+	<option>
+		<summary>基础设置</summary>
+		<name>password</name>
+		<value></value>
+		<title>发送服务器验证密码</title>
+	</option>
+	
+</settings>

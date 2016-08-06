@@ -51,7 +51,6 @@ public class SerializeUtil {
                	ois=  new ObjectInputStream(bais);
                 return ois.readObject();
           } catch (Exception e) {
-
           }finally{
         	  if(ois != null){
         		  try {

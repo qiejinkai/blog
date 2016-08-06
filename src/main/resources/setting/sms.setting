@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<title>短信通道</title>
+	<summary></summary>
+	<name>sms</name>
+	<version>1.0.0</version>
+	<types></types>
+	<indexId>5</indexId>
+	<option>
+		<summary>如：</summary>
+		<name>url</name>
+		<value></value>
+		<title>地址</title>
+	</option>
+	<option>
+		<summary>HTTP 方法, 支持 GET、POST</summary>
+		<name>method</name>
+		<value>GET</value>
+		<title>提交方式</title>
+	</option>
+	<option>
+		<summary>utf-8;gbk</summary>
+		<name>charset</name>
+		<value>gbk</value>
+		<title>字符编码</title>
+	</option>
+	<option>
+		<summary>如【方丁易筹】</summary>
+		<name>suffix</name>
+		<value></value>
+		<title>短信后缀</title>
+	</option>
+	<option>
+		<summary>如【方丁易筹】</summary>
+		<name>prefix</name>
+		<value></value>
+		<title>短信前缀</title>
+	</option>
+	
+</settings>
