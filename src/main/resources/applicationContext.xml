@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task" 
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:cache="http://www.springframework.org/schema/cache"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
            http://www.springframework.org/schema/context
@@ -10,13 +11,31 @@
            http://www.springframework.org/schema/aop 
            http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
            http://www.springframework.org/schema/tx
-     	   http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+     	   http://www.springframework.org/schema/tx/spring-tx-4.1.xsd    	   
+		   http://www.springframework.org/schema/cache
+   		   http://www.springframework.org/schema/cache/spring-cache.xsd">
 
 
 	<!-- 采用注释的方式配置bean -->
 	<context:annotation-config />
 	<!-- 配置要扫描的包 -->
 	<context:component-scan base-package="com.qjk" />
+
+	 <!-- 定义CacheManager -->
+	 
+    <cache:annotation-driven cache-manager="cacheManager" />  
+	<bean id="cacheManagerFactory"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<!-- 指定配置文件的位置 -->
+		<property name="configLocation" value="classpath:ehcache.xml" />
+		<!-- 指定新建的CacheManager的名称 -->
+		<property name="cacheManagerName" value="cacheManager" />
+	</bean>
+	  <!-- 定义一个Ehcache -->
+   <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+      <property name="cacheManager" ref="cacheManagerFactory"/>
+   </bean>   
+
 	<!-- 加载 settings.properties 配置文件 -->
 	<bean id="settings"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -31,9 +50,9 @@
 		<property name="location" value="classpath:settings.properties"/> </bean> -->
 	<!-- redis 配置 -->
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxIdle" value="${redis.maxIdle}" />        
-        <property name="maxWaitMillis" value="${redis.maxWait}" />  
-        <property name="testOnBorrow" value="${redis.testOnBorrow}" />  
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<property name="maxWaitMillis" value="${redis.maxWait}" />
+		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
 	</bean>
 
 	<bean id="connectionFactory"
@@ -41,14 +60,14 @@
 		p:host-name="${redis.host}" p:port="${redis.port}" p:password="${redis.pass}"
 		p:pool-config-ref="poolConfig" />
 
-	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate" >
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
 		<property name="connectionFactory" ref="connectionFactory" />
 	</bean>
-	
+
 	<!-- 将session放入redis -->
 	<bean id="redisHttpSessionConfiguration"
-	class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
-	    <property name="maxInactiveIntervalInSeconds" value="1800" />
+		class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
+		<property name="maxInactiveIntervalInSeconds" value="1800" />
 	</bean>
 
 	<!-- 配置数据源(连接池，druid) -->
@@ -78,59 +97,53 @@
 	</bean>
 
 	<!-- 支持上传文件 -->
-	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-	 	<property name="maxUploadSize" value="${upload.maxSize}"></property>
-	 
-	 </bean> 
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="${upload.maxSize}"></property>
+
+	</bean>
 
 
 	<!-- hibernate -->
 
-    <bean id="sessionFactory"
-        class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="packagesToScan">
-            <list>
-                <value>com.qjk.qblog.data</value>
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
-                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
-                <prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
-                <prop key="hibernate.current_session_context_class">${hibernate.current_session_context_class}</prop>
-            </props>
-        </property>
-    </bean>
-	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan">
+			<list>
+				<value>com.qjk.qblog.data</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+				<prop key="hibernate.current_session_context_class">${hibernate.current_session_context_class}</prop>
+			</props>
+		</property>
+	</bean>
+
 
 	<!-- transaction manager, use org.springframework.orm.hibernate5.HibernateTransactionManager -->
 	<bean id="txManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+
 	<!-- 开启事务注解驱动 -->
-	 <tx:annotation-driven  transaction-manager="txManager"/>
+	<tx:annotation-driven transaction-manager="txManager" />
 
 	<!-- spring declarative transaction management -->
-<!-- 	<aop:config>
-		<aop:pointcut id="fooServiceMethods"
-			expression="execution(* com.qjk.service.impl.*.*(..))" />
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="fooServiceMethods" />
-	</aop:config>
-	<tx:advice id="txAdvice" transaction-manager="txManager">
-		<tx:attributes>
-			<tx:method name="add*" propagation="REQUIRED" />
-			<tx:method name="delete*" propagation="REQUIRED" />
-			<tx:method name="update*" propagation="REQUIRED" />
-			<tx:method name="*" rollback-for="Exception" />
-		</tx:attributes>
-	</tx:advice> -->
-	
+	<!-- <aop:config> <aop:pointcut id="fooServiceMethods" expression="execution(* 
+		com.qjk.service.impl.*.*(..))" /> <aop:advisor advice-ref="txAdvice" pointcut-ref="fooServiceMethods" 
+		/> </aop:config> <tx:advice id="txAdvice" transaction-manager="txManager"> 
+		<tx:attributes> <tx:method name="add*" propagation="REQUIRED" /> <tx:method 
+		name="delete*" propagation="REQUIRED" /> <tx:method name="update*" propagation="REQUIRED" 
+		/> <tx:method name="*" rollback-for="Exception" /> </tx:attributes> </tx:advice> -->
+
 
 
 
