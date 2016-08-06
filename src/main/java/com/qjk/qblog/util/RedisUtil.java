@@ -11,19 +11,23 @@ public final class RedisUtil {
 
 	}
 
-	public static String getKey(Class<?> c, Object id) {
+	public static String getKey(String name, Object id) {
 
 		String key = "";
 
-		if (c == User.class) {
+		if (name.equals(User.class.getSimpleName().toLowerCase())) {
 			key = USER_PREFIX + id;
 		}
 
-		if (c == Setting.class) {
+		if (name.equals(Setting.class.getSimpleName().toLowerCase())) {
 			key = SETTING_PREFIX + id;
 		}
 
 		return key;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(User.class.getSimpleName().toLowerCase());
 	}
 
 }

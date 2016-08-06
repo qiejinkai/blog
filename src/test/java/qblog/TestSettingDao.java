@@ -12,12 +12,14 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.junit.Test;
+import org.springframework.cache.CacheManager;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.qjk.qblog.dao.ISettingDao;
 import com.qjk.qblog.data.Setting;
 import com.qjk.qblog.data.SettingOption;
+import com.qjk.qblog.service.ISettingService;
 import com.qjk.qblog.util.Value;
 
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
@@ -158,5 +160,81 @@ public class TestSettingDao extends AbstractJUnit4SpringContextTests {
 			}
 
 		}
+	}
+	
+	@Resource
+	private ISettingService settingService;
+	
+	@Resource
+	private CacheManager cacheManager;
+	
+	@Test
+	public void testServiceFind(){
+		
+		String name = "sms";
+		System.out.println("第一次查询");
+		Setting setting = settingService.getSettingByName(name);
+		
+		System.out.println(setting.getName());
+		
+		List<SettingOption>list =  setting.getOptions();
+		for (SettingOption settingOption : list) {
+			System.out.println(settingOption.getName() +" , "+settingOption.getValue());
+		}
+
+		System.out.println("第二次查询");
+		Setting setting2 = settingService.getSettingByName(name);
+		
+		System.out.println(setting2.getName());
+		
+		List<SettingOption>list2 =  setting2.getOptions();
+		for (SettingOption settingOption : list2) {
+			System.out.println(settingOption.getName() +" , "+settingOption.getValue());
+		}
+		
+//		try {
+//			Thread.sleep(11000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		System.out.println("第三次查询");
+		Setting setting3 = settingService.getSettingByName(name);
+		
+		System.out.println(setting3.getName());
+		
+		List<SettingOption>list3 =  setting3.getOptions();
+		for (SettingOption settingOption : list3) {
+			System.out.println(settingOption.getName() +" , "+settingOption.getValue());
+		}
+		
+		System.out.println("第四次查询");
+		
+		Setting setting4  = cacheManager.getCache("systemConfig").get("setting:name:sms", Setting.class);
+		
+		if(setting4 != null){
+		
+			System.out.println(setting4.getName());
+			
+			List<SettingOption>list4 =  setting4.getOptions();
+			for (SettingOption settingOption : list4) {
+				System.out.println(settingOption.getName() +" , "+settingOption.getValue());
+			}
+		}
+		
+		System.out.println("第五次查询");
+		
+		Setting setting5  = cacheManager.getCache("systemConfig2").get("setting:name:sms", Setting.class);
+		
+		if(setting5 != null){
+		
+			System.out.println(setting5.getName());
+			
+			List<SettingOption>list5 =  setting5.getOptions();
+			for (SettingOption settingOption : list5) {
+				System.out.println(settingOption.getName() +" , "+settingOption.getValue());
+			}
+		}
+		
 	}
 }

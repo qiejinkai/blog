@@ -16,7 +16,7 @@ public class SettingDaoImpl extends BaseDaoImpl<Setting> implements ISettingDao 
 
 		this.save(setting);
 
-		this.add2Redis(RedisUtil.getKey(Setting.class, setting.getName()),
+		this.add2Redis(RedisUtil.getKey("setting", setting.getName()),
 				setting);
 	}
 
@@ -29,7 +29,7 @@ public class SettingDaoImpl extends BaseDaoImpl<Setting> implements ISettingDao 
 		this.update(setting);
 
 		this.updateFromRedis(
-				RedisUtil.getKey(getDataClass(), setting.getName()), setting);
+				RedisUtil.getKey("setting", setting.getName()), setting);
 
 		// this.execHQL(
 		// "update from Setting set name=?,types=?,summary=?,mtime=?,version=? where settingId=?",
@@ -63,18 +63,20 @@ public class SettingDaoImpl extends BaseDaoImpl<Setting> implements ISettingDao 
 	@Override
 	public Setting getSettingByName(String name) {
 
-		Setting setting = this.getFromRedis(RedisUtil.getKey(getDataClass(),
+		Setting setting = this.getFromRedis(RedisUtil.getKey("setting",
 				name));
 
 		if (setting == null) {
 			setting = this.findOneByHQL("from Setting where name=?", name);
 			if (setting != null) {
 				this.add2Redis(
-						RedisUtil.getKey(Setting.class, setting.getName()),
+						RedisUtil.getKey("setting", setting.getName()),
 						setting);
 			}
+			System.out.println("使用数据库查询");
 			return setting;
 		}
+		System.out.println("使用redis缓存");
 
 		return setting;
 	}
