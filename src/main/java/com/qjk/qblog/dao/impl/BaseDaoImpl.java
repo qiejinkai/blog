@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
 
 import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.util.SerializeUtil;
+import com.qjk.qblog.util.Value;
 
 @Repository
 public abstract class BaseDaoImpl<T> {
@@ -68,13 +69,13 @@ public abstract class BaseDaoImpl<T> {
 		return (T) query.uniqueResult();
 	}
 
-	protected int count(String hql, Object... params) {
+	protected long count(String hql, Object... params) {
 		hql = "select count(*) " + hql;
 		Query query = this.getSession().createQuery(hql);
 		for (int i = 0; params != null && i < params.length; i++) {
 			query.setParameter(i, params[i]);
 		}
-		return (Integer) query.uniqueResult();
+		return (Long) query.uniqueResult();
 	}
 
 	protected List<T> findListByHQLLimit(String hql, Object[] params,
@@ -128,12 +129,20 @@ public abstract class BaseDaoImpl<T> {
 			}
 
 			if (pager.isCounter()) {
-				int totalRows = count(hql.toString(), params.toArray());
+				int totalRows = (int) count(hql.toString(), params.toArray());
 				pager.setTotalRows(totalRows).calculate();
+
+				if (!Value.isEmpty(pager.getOrder())) {
+					hql.append(" ").append(pager.getOrder());
+				}
 
 				list = findListByHQLLimit(hql.toString(), params.toArray(),
 						pager.getFistRowNum(), pager.getPageSize());
 			} else {
+
+				if (!Value.isEmpty(pager.getOrder())) {
+					hql.append(" ").append(pager.getOrder());
+				}
 
 				list = findListByHQL(hql.toString(), params.toArray());
 			}
@@ -197,7 +206,7 @@ public abstract class BaseDaoImpl<T> {
 	}
 
 	/**
-	 * 删除多个 
+	 * 删除多个
 	 * 
 	 * @param keys
 	 */

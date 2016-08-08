@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+/* 链接 */
+.ui-a {
+	color: #35ac3e;
+	text-decoration: none;
+	font-size: 14px;
+	display: inline-block;
+}
+
+.ui-a:hover {
+	color: #39c543;
+}

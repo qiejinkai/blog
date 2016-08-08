@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+/* 进度 */
+.ui-progress {
+	display: inline-block;
+	width: 220px;
+	height: 12px;
+	border: solid 1px #e5e5e5;
+	padding: 1px;
+	position: relative;
+	box-sizing: border-box;
+	background-color: #fff;
+	overflow: hidden;
+}
+
+.ui-progress span {
+	position: absolute;
+	display: inline-block;
+	background-color: #00c14b;
+	height: 8px;
+}
+

@@ -16,6 +16,11 @@ public class Pager<T> {
 	 */
 	private Map<String, Object> sqlParams = new HashMap<String, Object>();
 	
+	/**
+	 * 排序
+	 */
+	private String order;
+	
 	
 
 	/**
@@ -151,8 +156,8 @@ public class Pager<T> {
 			return this;
 		} else {
 			this.totalPages = this.totalRows % this.pageSize == 0 ? this.totalRows
-					% this.pageSize
-					: this.totalRows % this.pageSize + 1;
+					/ this.pageSize
+					: this.totalRows / this.pageSize + 1;
 		}
 		return this;
 	}
@@ -161,5 +166,16 @@ public class Pager<T> {
 
 		return (this.pageIndex - 1) * this.pageSize;
 	}
+
+	public String getOrder() {
+		return order;
+	}
+
+	public Pager<T> setOrder(String order) {
+		this.order = order;
+		return this;
+	}
+	
+	
 
 }

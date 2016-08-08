@@ -73,10 +73,10 @@ public class SettingDaoImpl extends BaseDaoImpl<Setting> implements ISettingDao 
 						RedisUtil.getKey("setting", setting.getName()),
 						setting);
 			}
-			System.out.println("使用数据库查询");
+//			System.out.println("使用数据库查询");
 			return setting;
 		}
-		System.out.println("使用redis缓存");
+//		System.out.println("使用redis缓存");
 
 		return setting;
 	}

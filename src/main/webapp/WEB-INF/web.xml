@@ -109,6 +109,15 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<filter>
+		<filter-name>adminLoginFilter</filter-name>
+		<filter-class>com.qjk.qblog.filter.AdminLoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>adminLoginFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
+
 	<!-- me -->
 	<context-param>
 		<param-name>menuFileLocation</param-name>
@@ -118,8 +127,20 @@
 		<param-name>settingFileLocation</param-name>
 		<param-value>/setting/</param-value>
 	</context-param>
+	<context-param>
+		<param-name>isInitData</param-name>
+		<param-value>true</param-value>
+	</context-param>
 	<listener>
 		<listener-class>com.qjk.qblog.listener.InitDataServletContextListener</listener-class>
 	</listener>
+	
+	<!-- Tag -->
+	<jsp-config>  
+        <taglib>  
+            <taglib-uri>/admin/pager</taglib-uri>  
+            <taglib-location>/WEB-INF/tags/qjk_core.tld</taglib-location>  
+        </taglib>  
+    </jsp-config> 
 
 </web-app>

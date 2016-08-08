@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+/* 标签栏 */
+
+.ui-tabbar {
+	display: block;
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	background-color: #f8f9fa;
+	overflow: auto;
+}
+
+.ui-tabbar li {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	display: inline-block;
+	background-color: #f8f9fa;
+}
+
+.ui-tabbar li a {
+	display: block;
+	padding: 14px;
+	font-size: 14px;
+	border-top: solid 3px #f8f9fa;
+	color: #69717c;
+	text-decoration: none;
+	background-color: #f8f9fa;
+}
+
+.ui-tabbar li a.selected {
+	color: #2dae36;
+	border-top: solid 3px #2dae36;
+	background-color: #fff;
+}
+
+.ui-tabbar li a:hover {
+	color: #2dae36;
+}
+

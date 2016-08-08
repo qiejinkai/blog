@@ -18,7 +18,7 @@ public class SettingServiceImpl implements ISettingService {
 	@Resource
 	private ISettingDao settingDao;
 
-	@Cacheable(cacheNames="systemConfig2",key="T(com.qjk.qblog.util.RedisUtil).getKey('setting',#name)")
+	@Cacheable(cacheNames="systemConfig",key="T(com.qjk.qblog.util.RedisUtil).getKey('setting',#name)")
 	public Setting getSettingByName(String name) {
 		
 		Assert.hasText(name, "name 不能为空");

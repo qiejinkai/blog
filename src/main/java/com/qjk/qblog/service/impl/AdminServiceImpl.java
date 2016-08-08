@@ -1,0 +1,36 @@
+package com.qjk.qblog.service.impl;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import com.qjk.qblog.dao.IAdminDao;
+import com.qjk.qblog.data.Admin;
+import com.qjk.qblog.service.IAdminService;
+import com.qjk.qblog.util.DigestUtil;
+
+@Service
+public class AdminServiceImpl implements IAdminService {
+	
+	@Resource IAdminDao adminDao;
+	
+	@Override
+	public Admin login(String account, String password) {
+		
+		Assert.hasText(account, "账号不能为空");
+		Assert.hasText(password, "密码不能为空");
+		
+		Admin admin = adminDao.findAdminByAccount(account);
+		
+		Assert.notNull(admin,"账号错误");
+		
+		String pwd = admin.getPassword();
+		
+		Assert.isTrue(DigestUtil.encodePassword(password).equals(pwd), "密码错误");
+		
+		return admin;
+		
+	}
+
+}

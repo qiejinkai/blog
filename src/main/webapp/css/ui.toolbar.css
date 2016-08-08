@@ -1,0 +1,77 @@
+@CHARSET "UTF-8";
+
+/* 工具栏 */
+
+.ui-toolbar {
+	display: block;
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	border: solid 1px #e5e5e5;
+	box-sizing: border-box;
+	height: 64px;
+	/*white-space: nowrap;*/
+	overflow: hidden;
+	background-color: #fff;
+}
+
+.ui-toolbar li {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	display: inline-block;
+}
+
+.ui-toolbar li.r {
+	float: right;
+}
+
+.ui-toolbar li a {
+	display: block;
+	padding: 0px 24px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #999;
+	text-decoration: none;
+	height: 64px;
+	line-height: 64px;
+}
+.ui-toolbar li a .icon-logout{
+	width:30px;
+	height:64px;
+	display:block;
+	float:left;
+	background:url(../img/icon.png) no-repeat 3px -636px;
+}
+.ui-toolbar li a:hover .icon-logout{
+	background-position:3px -691px;
+}
+.ui-toolbar li a .icon-user{
+	width:30px;
+	height:64px;
+	display:block;
+	float:left;
+	background:url(../img/icon.png) no-repeat 3px -747px;
+}
+.ui-toolbar li a:hover .icon-user{
+	background-position:3px -802px;
+}
+.ui-toolbar li a .ui-icon {
+	color: #999;
+}
+.ui-toolbar li a:hover .ui-icon{
+	color: #39c543;
+}
+.ui-toolbar li a.selected {
+	color: #333;
+	border-bottom: solid 2px #008dd5;
+}
+
+.ui-toolbar li a:hover {
+	color: #39c543;
+	background-color:#f8f9fa;
+}
+
+
+
+

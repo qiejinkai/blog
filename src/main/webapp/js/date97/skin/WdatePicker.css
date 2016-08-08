@@ -1,0 +1,17 @@
+.Wdate{
+	/*border:#999 1px solid;
+	height:20px;*/
+	background:#fff url(icon_time.png) no-repeat right top;
+}
+.Wdate:hover{
+	background:#fff url(icon_time.png) no-repeat right bottom;
+}
+.Wdate:focus{
+	background:#fff url(icon_time.png) no-repeat right bottom;
+}
+.Wdate::-ms-clear{display:none;}
+
+.WdateFmtErr{
+	font-weight:bold;
+	color:red;
+}

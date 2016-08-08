@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+/* 分页 */
+
+.ui-page {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.ui-page li {
+	display: inline-block;
+	padding: 0px;
+	margin: 0px;
+}
+
+.ui-page li a{
+	display: block;
+	padding: 4px;
+	color: #35ac3e;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.ui-page li a:hover {
+	color: #39c543;
+}

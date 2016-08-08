@@ -141,7 +141,7 @@ public class TestSettingDao extends AbstractJUnit4SpringContextTests {
 				setting.setVersion(version);
 				setting.setCtime(new Date().getTime()/1000);
 				setting.setSummary(root.elementText("summary"));
-				setting.setTypes(Value.longValueOf(root.elementText("types"), 0));
+				setting.setTypes(Value.longValue(root.elementText("types"), 0));
 				
 				List<Element> els = root.elements("option");
 				

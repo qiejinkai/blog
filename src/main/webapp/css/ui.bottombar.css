@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+/* 工具栏 */
+
+.ui-bottombar {
+	display: block;
+	margin-top: 40px;
+}
+
+

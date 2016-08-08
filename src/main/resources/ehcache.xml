@@ -30,6 +30,24 @@
            statistics="true"
            timeToLiveSeconds="200"
            memoryStoreEvictionPolicy="LFU"/>
+    <cache name="menuConfig"
+           eternal="false"
+           maxEntriesLocalHeap="200"
+           overflowToDisk="false"
+           diskPersistent="false"
+           timeToIdleSeconds="6000"
+           statistics="true"
+           timeToLiveSeconds="0"
+           memoryStoreEvictionPolicy="LFU"/>
+    <cache name="artilceConfig"
+           eternal="false"
+           maxEntriesLocalHeap="200"
+           overflowToDisk="false"
+           diskPersistent="false"
+           timeToIdleSeconds="6000"
+           statistics="true"
+           timeToLiveSeconds="0"
+           memoryStoreEvictionPolicy="LFU"/>
 
     <!--
         eternal="false"   // 元素是否永恒,如果是就永不过期(必须设置)

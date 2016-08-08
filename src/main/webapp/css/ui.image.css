@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+/* 图片上传 */
+
+.ui-image {
+	display: block;
+	width: 120px;
+	height: 120px;
+	border: solid 1px #e5e5e5;
+	background-color: #f4f4f4;
+	overflow: hidden;
+}
+
+.ui-image img{
+	width: 100%;
+}
+

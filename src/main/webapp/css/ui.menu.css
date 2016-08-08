@@ -1,0 +1,123 @@
+@CHARSET "UTF-8";
+
+/* 菜单 */
+.ui-menu {
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+}
+
+.ui-menu .ui-section {
+	padding: 0px;
+	border-bottom: solid 1px #212530;
+}
+
+.ui-menu .ui-section a {
+	color: #a7b0bc;
+	padding: 18px 18px 18px 44px;
+	text-decoration: none;
+	display: block;
+	font-size: 14px;
+	position: relative;
+}
+
+.ui-menu .ui-section a:hover {
+	color: #2dae36;
+}
+
+.ui-menu .ui-section a:hover .ui-icon {
+	color: #2dae36;
+}
+
+.ui-menu .ui-section .ui-icon.r {
+	position: absolute;
+	right: 12px;
+	top: 10px;
+	color: #a7b0bc;
+	font-size: 14px;
+}
+
+.ui-menu .ui-section.selected {
+	background-color: #212530;
+}
+
+.ui-menu .ui-section.selected>a .ui-icon.r {
+	position: absolute;
+	right: 12px;
+	top: 10px;
+	color: #2dae36;
+}
+
+.ui-menu .ui-section ul {
+	list-style: none;
+	margin: 0px 0px 0px 0px;
+	padding: 0px;
+	display: none;
+}
+
+.ui-menu .ui-section.selected>ul {
+	display: block;
+}
+
+.ui-menu .ui-section ul li a{
+	color: #a7b0bc;
+	padding: 18px 18px 18px 48px;
+	text-decoration: none;
+	display: block;
+	font-size: 14px;
+}
+.ui-menu .ui-section ul li a:hover{
+	color:#2dae36;
+}
+.ui-menu .ui-section ul li a.selected {
+	color: #eee;
+	background-color: #2dae36;
+}
+
+.ui-menu .ui-icon {
+	color: #a7b0bc;
+	padding: 8px;
+}
+/*ui-menu-img*/
+.ui-menu-img{
+	background:url(../img/icon.png) no-repeat
+}
+
+
+
+.ui-menu .ui-section .bg_1{
+	background-position:16px 20px;
+}
+.ui-menu .ui-section .bg_1:hover{
+	background-position:16px -35px;
+}
+.ui-menu .ui-section .bg_2{
+	background-position:16px -200px;
+}
+.ui-menu .ui-section .bg_2:hover{
+	background-position:16px -255px;
+}
+.ui-menu .ui-section .bg_3{
+	background-position:16px -310px;
+}
+.ui-menu .ui-section .bg_3:hover{
+	background-position:16px -365px;
+}
+.ui-menu .ui-section .bg_4{
+	background-position:16px -420px;
+}
+.ui-menu .ui-section .bg_4:hover{
+	background-position:16px -475px;
+}
+.ui-menu .ui-section .bg_5{
+	background-position:16px -90px;
+}
+.ui-menu .ui-section .bg_5:hover{
+	background-position:16px -145px;
+}
+.ui-menu .ui-section .bg_6{
+	background-position:16px -530px;
+}
+.ui-menu .ui-section .bg_6:hover{
+	background-position:16px -585px;
+}

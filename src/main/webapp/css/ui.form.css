@@ -1,0 +1,103 @@
+@CHARSET "UTF-8";
+
+/* 表单 */
+.ui-form {
+	table-layout: auto;
+	border-spacing: 0px;
+	border-collapse: collapse;
+}
+
+.ui-form tbody th {
+	text-align: left;
+	color: #666;
+	padding: 12px 0px 2px 0px;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.ui-form tbody th.r {
+	text-align: right;
+	padding: 12px;
+	color: #999;
+	vertical-align: top;
+}
+
+.ui-form tbody td {
+	padding: 4px 0px;
+	color: #333;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.ui-form tbody td span.note {
+	font-size: 14px;
+	color: #999;
+}
+
+.ui-form tbody td .ui-input {
+	width: 320px;
+}
+
+.ui-form tbody td .ui-input {
+	width: 320px;
+}
+
+.ui-form tbody td p {
+	padding: 4px;
+	margin: 0px;
+	font-size: 14px;
+	color: #999;
+}
+
+/* 字段 */
+.ui-field {
+	display: inline-block;
+	position: relative;
+}
+
+.ui-field .l {
+	position: absolute;
+	top: auto;
+	bottom: auto;
+	left: 0px;
+}
+
+.ui-field .ui-input.lp {
+	padding-left: 30px;
+}
+
+.ui-field .ui-input.rp {
+	padding-right: 32px;
+}
+
+.ui-field .ui-select.lp {
+	padding-left: 30px;
+}
+
+.ui-field .ui-select.rp {
+	padding-right: 32px;
+}
+
+.ui-field .r {
+	position: absolute;
+	top: auto;
+	bottom: auto;
+	right: 0px;
+	left: auto;
+}
+
+.ui-field .c {
+	position: absolute;
+	top: auto;
+	bottom: auto;
+	right: auto;
+	left: auto;
+}
+
+.ui-field .ui-icon {
+	padding: 8px 6px;
+	font-size: 16px;
+	min-height: 16px;
+	min-width: 16px;
+}
+

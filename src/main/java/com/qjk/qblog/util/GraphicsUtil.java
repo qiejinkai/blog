@@ -14,8 +14,8 @@ public final class GraphicsUtil {
 	
 	public final static int width = 138;
 	public final static int height = 50;
-	public final static int bgColor = 0xffe5e5e5;
-	public final static int color = 0xff40dc82;
+	public final static int bgColor = Color.WHITE.getRGB();
+	public final static int color =Color.GRAY.getRGB();
 	
 	public static void drawImage(String content,OutputStream out) throws Exception{
 		

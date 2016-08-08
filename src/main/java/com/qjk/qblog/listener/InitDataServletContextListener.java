@@ -36,6 +36,7 @@ public class InitDataServletContextListener implements ServletContextListener {
 
 	private static final String MENUFILELOCATION = "menuFileLocation";
 	private static final String SETTINGFILELOCATION = "settingFileLocation";
+	private static final String ISINITDATA = "isInitData";
 
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
@@ -44,28 +45,31 @@ public class InitDataServletContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
-		logger.info("InitDataServletContextListener contextInitialized");
-		String menuLocation = event.getServletContext().getInitParameter(
-				MENUFILELOCATION);
-		menuLocation = this.getClass().
-				getResource(menuLocation).
-					getPath();
-//		String menuFullLocation = event.getServletContext().getRealPath(
-//				menuLocation);
-		if (!Value.isEmpty(menuLocation)) {
-//			logger.info("initMenu    menuPath :" + menuLocation);
-			initMenu(event.getServletContext(), menuLocation);
-		}
 
-		String settingLocation = event.getServletContext().getInitParameter(
-				SETTINGFILELOCATION);
-		settingLocation = this.getClass().getResource(settingLocation)
-				.getPath();
-//		String settingFullLocation = event.getServletContext().getRealPath(
-//				settingLocation);
-		if (!Value.isEmpty(settingLocation)) {
-//			logger.info("initSetting    settingPath :" + settingLocation);
-			initSetting(event.getServletContext(), settingLocation);
+		String isInitData = event.getServletContext().getInitParameter(
+				ISINITDATA);
+
+		if (!Value.isEmpty(isInitData) && isInitData.equals("true")) {
+
+			logger.info("InitDataServletContextListener contextInitialized");
+			String menuLocation = event.getServletContext().getInitParameter(
+					MENUFILELOCATION);
+			menuLocation = this.getClass().getResource(menuLocation).getPath();
+
+			if (!Value.isEmpty(menuLocation)) {
+				initMenu(event.getServletContext(), menuLocation);
+			}
+
+			String settingLocation = event.getServletContext()
+					.getInitParameter(SETTINGFILELOCATION);
+			settingLocation = this.getClass().getResource(settingLocation)
+					.getPath();
+
+			if (!Value.isEmpty(settingLocation)) {
+				initSetting(event.getServletContext(), settingLocation);
+			}
+
+			logger.info("InitDataServletContextListener contextInitialized End");
 		}
 
 	}
@@ -77,7 +81,6 @@ public class InitDataServletContextListener implements ServletContextListener {
 			List<File> files = new ArrayList<File>(4);
 			File path = new File(filePath);
 
-			logger.info(path.isDirectory());
 			if (path.isDirectory()) {
 				for (File f : path.listFiles(new FilenameFilter() {
 
@@ -116,8 +119,7 @@ public class InitDataServletContextListener implements ServletContextListener {
 						setting.setVersion(version);
 						setting.setCtime(new Date().getTime() / 1000);
 						setting.setSummary(root.elementText("summary"));
-						setting.setTypes(Value.longValueOf(
-								root.elementText("types"), 0));
+						setting.setTypes(Value.longValue(root.elementText("types"), 0));
 
 						List<Element> els = root.elements("option");
 
@@ -171,7 +173,6 @@ public class InitDataServletContextListener implements ServletContextListener {
 			List<File> files = new ArrayList<File>(4);
 
 			File path = new File(filePath);
-			logger.info(path.isDirectory());
 			if (path.isDirectory()) {
 				for (File f : path.listFiles(new FilenameFilter() {
 
@@ -213,7 +214,7 @@ public class InitDataServletContextListener implements ServletContextListener {
 						menu.setVersion(version);
 						menu = makeMenu(menu, el);
 						menuDao.addMenu(menu);
-//						logger.info(menu.getChilden().size());
+						// logger.info(menu.getChilden().size());
 
 					}
 				}

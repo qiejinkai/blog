@@ -2,9 +2,12 @@ package com.qjk.qblog.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.qjk.qblog.dao.IAGroupDao;
 import com.qjk.qblog.data.AGroup;
 
+@Repository
 public class AGroupDaoImpl extends BaseDaoImpl<AGroup> implements IAGroupDao{
 
 	@Override

@@ -1,0 +1,52 @@
+@CHARSET "UTF-8";
+
+/* 表格 */
+
+
+.ui-table {
+	table-layout: auto;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	border: solid 1px #dfe5e8;
+}
+
+.ui-table thead {
+	background-color: #f3f5f7;
+}
+.ui-table tr.striped{
+	background-color:#f9fafb;
+}
+.ui-table thead td {
+	padding: 12px 0 12px 8px;
+	font-size: 14px;
+	color: #69717c;
+	border-right:1px solid #eee;
+}
+
+.ui-table tbody {
+}
+
+.ui-table tbody td {
+	padding: 12px 4px;
+	font-size: 14px;
+	color: #69717c;
+	border-left: solid 1px #f4f4f4;
+}
+
+.ui-table tbody td a {
+	text-decoration: none;
+	font-size: 14px;
+	color: #35ac3e;	
+	padding: 0px 4px;
+	display: inline-block;
+	line-height: 16px;
+}
+
+.ui-table tbody td a:hover {
+	color: #39c543;
+}
+.ui-table tbody tr td.table_a_list a{
+	width:60px;
+	height:16px;
+	display:inline-block;
+}

@@ -1,70 +1,61 @@
 <?xml version="1.0"?>
 <menu>
 	<name>admin</name>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<title>系统管理目录</title>
 
 	<menu>
 		<title>用户管理</title>
 		<icon>bg_1</icon>
+	</menu>
+	
+	<menu>
+		<title>内容管理</title>
+		<icon>bg_2</icon>
 		<menu>
-			<title>用户查询</title>
-			<href>/user/users</href>
-			<resource>user/users</resource>
-			<menu>
-				<title>用户修改</title>
-				<href>/user/users/update</href>
-				<resource>user/users/update</resource>
-			</menu>
+			<title>banner管理</title>
+			<href>/admin/content/banner</href>
+			<resource>admin/content/banner</resource>
 		</menu>
 		<menu>
-			<title>用户黑名单</title>
-			<href>/user/black</href>
-			<resource>user/black</resource>
+			<title>友情链接管理</title>
+			<href>/admin/content/friendlink</href>
+			<resource>admin/content/friendlink</resource>
 		</menu>
 		<menu>
-			<title>充值查询</title>
-			<href>/user/recharge</href>
-			<resource>user/recharge</resource>
+			<title>公告管理</title>
+			<href>/admin/content/notice</href>
+			<resource>admin/content/notice</resource>
 		</menu>
 		<menu>
-			<title>提现查询</title>
-			<href>/user/withward</href>
-			<resource>user/withward</resource>
+			<title>文章管理</title>
+			<href>/admin/content/article</href>
+			<resource>admin/content/article</resource>
 		</menu>
 		<menu>
-			<title>短信发送</title>
-			<href>/user/sms</href>
-			<resource>user/sms</resource>
+			<title>日记管理</title>
+			<href>/admin/content/diary</href>
+			<resource>admin/content/diary</resource>
 		</menu>
 	</menu>
 
 	<menu>
 		<title>系统管理</title>
-		<menu>
-			<title>提现策略</title>
-			<href>/system/withward</href>
-			<resource>user/withward</resource>
-		</menu>
+		<icon>bg_3</icon>
 		<menu>
 			<title>角色管理</title>
-			<href>/system/role</href>
-			<resource>user/role</resource>
+			<href>/admin/system/role</href>
+			<resource>admin/system/role</resource>
 		</menu>
 		<menu>
 			<title>员工管理</title>
-			<href>/system/employee</href>
-			<resource>user/employee</resource>
+			<href>/admin/system/employee</href>
+			<resource>admin/system/employee</resource>
 		</menu>
 		<menu>
 			<title>参数设置</title>
-			<href>/system/setting</href>
-			<resource>user/setting</resource>
-		</menu>
-		<menu>
-			<title>通知模版</title>
-			<href>/system/template</href>
-			<resource>user/template</resource>
+			<href>/admin/system/setting</href>
+			<resource>/admin/system/setting</resource>
 		</menu>
 	</menu>
 

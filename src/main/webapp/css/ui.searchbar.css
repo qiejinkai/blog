@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+/* 搜索栏 */
+
+
+.ui-searchbar {
+	table-layout: auto;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	margin-bottom: 12px;
+	display: inline-block;
+}
+
+.ui-searchbar thead {
+
+}
+
+.ui-searchbar thead td {
+	padding: 4px 6px 1px 0px;
+	font-size: 14px;
+	color: #69717c;
+}
+
+.ui-searchbar tbody {
+	
+}
+
+.ui-searchbar tbody td {
+	padding: 4px 6px 4px 0px;
+	font-size: 14px;
+}

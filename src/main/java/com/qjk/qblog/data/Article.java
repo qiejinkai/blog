@@ -24,6 +24,9 @@ public class Article implements Serializable{
 	public static final String ALIAS_INFORMATION="information";
 	public static final String ALIAS_DIARY="diary";
 	
+	public static final int HIDDEN_NONE = 0;
+	public static final int HIDDEN_HIDDEN = 1;
+	
 	/**
 	 * 
 	 */
@@ -32,13 +35,13 @@ public class Article implements Serializable{
 	private String title;
 	private String image;
 	private String alias;
-	private long grouId;
+	private long groupId;
 	private String tags;
 	private String content;
 	private String contentType;
 	private long ctime;
 	private long mtime;
-	private String summery;
+	private String summary;
 	private String author;
 	private String link;
 	private int hidden;
@@ -63,11 +66,11 @@ public class Article implements Serializable{
 	}
 	
 	
-	public long getGrouId() {
-		return grouId;
+	public long getGroupId() {
+		return groupId;
 	}
-	public void setGrouId(long grouId) {
-		this.grouId = grouId;
+	public void setGroupId(long groupId) {
+		this.groupId = groupId;
 	}
 	@Column(length=255)
 	public String getImage() {
@@ -112,11 +115,11 @@ public class Article implements Serializable{
 	}
 
 	@Column(length=512)
-	public String getSummery() {
-		return summery;
+	public String getSummary() {
+		return summary;
 	}
-	public void setSummery(String summery) {
-		this.summery = summery;
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
 	@Column(length=64)

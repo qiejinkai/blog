@@ -90,6 +90,8 @@
 
 
 
+
+
 		<!-- JSON -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -114,6 +116,11 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
 		</dependency>
 
 		<!-- 网站流量后台管理 -->
@@ -218,6 +225,12 @@
 			<groupId>org.jboss.logging</groupId>
 			<artifactId>jboss-logging</artifactId>
 			<version>3.3.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160212</version>
 		</dependency>
 
 

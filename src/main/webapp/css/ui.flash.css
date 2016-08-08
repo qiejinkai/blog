@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+
+/* 闪现提示 */
+
+.ui-flash {
+	display: block;
+	padding: 0 10px;
+	position: relative;
+	background-color: #fbf8e5;
+	color: #be9b68;
+	border-radius: 2px;
+	margin-bottom: 10px;
+	/*border: solid 1px #f7efd9;*/
+}
+
+.ui-flash .ui-icon {
+	position: absolute;
+	padding: 10px;
+	left: 0px;
+	top: 0px;
+	color: #fff;
+}
+
+.ui-dialog .window .ui-flash p {
+	margin: 0px;
+	font-size: 14px;
+	color:#ed5565;
+}
+
+.ui-flash.ui-yellow {
+	color: #be9b68;
+	background-color: #fbf8e5;
+	border: solid 1px #f7efd9;
+}
+
+.ui-flash.ui-red {
+	color: #eb5768;
+	background-color: #fbf0f1;
+	/*border: solid 1px #f6d0d4;*/
+}
+
+.ui-flash-anim {
+	animation: flash 800ms infinite alternate;
+	-webkit-animation: flash 800ms infinite alternate;
+	-moz-animation: flash 800ms infinite alternate;
+	-o-animation: flash 800ms infinite alternate;
+}
+
