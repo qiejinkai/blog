@@ -10,9 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.qjk.qblog.group.ValidateInArticlePost;
 import com.qjk.qblog.group.ValidateInPost;
+import com.qjk.qblog.util.Value;
 
 @Entity
 @Table(name="qblog_article")
@@ -23,6 +28,7 @@ public class Article implements Serializable{
 	public static final String ALIAS_FRIENDLINK ="friendlink";
 	public static final String ALIAS_INFORMATION="information";
 	public static final String ALIAS_DIARY="diary";
+	public static final String ALIAS_NOTICE="notice";
 	
 	public static final int HIDDEN_NONE = 0;
 	public static final int HIDDEN_HIDDEN = 1;
@@ -44,7 +50,7 @@ public class Article implements Serializable{
 	private String summary;
 	private String author;
 	private String link;
-	private int hidden;
+	private int hidden = HIDDEN_NONE;
 	private long indexNo;
 	private int pv;
 	
@@ -57,7 +63,7 @@ public class Article implements Serializable{
 		this.articleId = articleId;
 	}
 	@Column(length=64)
-	@NotNull(message="文章标题不能为空",groups={ValidateInPost.class})
+	@NotEmpty(message="标题不能为空",groups={ValidateInArticlePost.class,ValidateInPost.class})
 	public String getTitle() {
 		return title;
 	}
@@ -65,7 +71,7 @@ public class Article implements Serializable{
 		this.title = title;
 	}
 	
-	
+	@Min(value=1,groups={ValidateInArticlePost.class},message="未找到分组")
 	public long getGroupId() {
 		return groupId;
 	}
@@ -165,8 +171,18 @@ public class Article implements Serializable{
 		this.alias = alias;
 	} 
 	
-	
-	
+	public static boolean contains(String alias){
+		if(Value.isEmpty(alias)){
+			return false;
+		}
+		if(ALIAS_ARTICLE.equals(alias))return true;
+		if(ALIAS_BANNER.equals(alias))return true;
+		if(ALIAS_DIARY.equals(alias))return true;
+		if(ALIAS_FRIENDLINK.equals(alias))return true;
+		if(ALIAS_INFORMATION.equals(alias))return true;
+		if(ALIAS_NOTICE.equals(alias))return true;
+		return false;
+	}
 	
 	
 }

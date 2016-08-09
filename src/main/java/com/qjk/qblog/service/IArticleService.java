@@ -7,8 +7,16 @@ import com.qjk.qblog.data.Pager;
 
 @Transactional
 public interface IArticleService {
-	
-	Pager<Article> getArticles(int pageIndex,long groupId);
+
+	Pager<Article> getArticlesPager(int pageIndex, long groupId);
+
+	Pager<Article> getArticlesPager(int pageIndex,String alias);
 
 	Article findArticleById(long id);
+
+	Article saveOrUpdateArticle(Article article);
+
+	void deleteArticleById(long id);
+
+	void hiddenArticleById(long id);
 }

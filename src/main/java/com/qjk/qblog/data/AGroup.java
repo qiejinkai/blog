@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.qjk.qblog.group.ValidateInPost;
 
 /**
@@ -40,7 +42,7 @@ public class AGroup implements Serializable{
 	}
 	
 	@Column(length=64)
-	@NotNull(message="分组名称不能为空",groups={ValidateInPost.class})
+	@NotEmpty(message="分组名称不能为空",groups={ValidateInPost.class})
 	public String getName() {
 		return name;
 	}

@@ -42,7 +42,7 @@ public abstract class BaseDaoImpl<T> {
 	}
 
 	protected void update(T t) {
-		this.getSession().update(t);
+		this.getSession().saveOrUpdate(t);
 	}
 
 	protected T findById(Serializable id) {
@@ -98,6 +98,7 @@ public abstract class BaseDaoImpl<T> {
 				.append(" where 1=1");
 
 		if (pager != null) {
+			
 			Map<String, Object> fieldParamsMap = pager.getFieldParams();
 
 			if (fieldParamsMap != null && fieldParamsMap.size() > 0) {
@@ -131,13 +132,15 @@ public abstract class BaseDaoImpl<T> {
 			if (pager.isCounter()) {
 				int totalRows = (int) count(hql.toString(), params.toArray());
 				pager.setTotalRows(totalRows).calculate();
+				if (totalRows > 0) {
 
-				if (!Value.isEmpty(pager.getOrder())) {
-					hql.append(" ").append(pager.getOrder());
+					if (!Value.isEmpty(pager.getOrder())) {
+						hql.append(" ").append(pager.getOrder());
+					}
+
+					list = findListByHQLLimit(hql.toString(), params.toArray(),
+							pager.getFistRowNum(), pager.getPageSize());
 				}
-
-				list = findListByHQLLimit(hql.toString(), params.toArray(),
-						pager.getFistRowNum(), pager.getPageSize());
 			} else {
 
 				if (!Value.isEmpty(pager.getOrder())) {

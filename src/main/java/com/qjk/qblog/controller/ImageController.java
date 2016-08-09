@@ -102,7 +102,7 @@ public class ImageController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
-	public Object create3(@RequestParam("image") MultipartFile file,
+	public Object create(@RequestParam("image") MultipartFile file,
 			HttpServletRequest request) {
 
 		Map<String, String> result = new HashMap<String, String>();
@@ -134,6 +134,8 @@ public class ImageController {
 					FileUtils.copyInputStreamToFile(file.getInputStream(), f);
 
 					url = "/img/upload/" + fileName;
+					
+					result.put("url", url);
 
 				} catch (Exception e) {
 
@@ -145,8 +147,5 @@ public class ImageController {
 		return result;
 	}
 
-	public static void main(String[] args) {
-		String filename = "123.txt";
-		System.out.println(filename.substring(filename.lastIndexOf(".")));
-	}
+
 }

@@ -10,4 +10,6 @@ import com.qjk.qblog.data.AGroup;
 public interface IAGroupSerivce {
 	
 	List<AGroup> findGroupList();
+	
+	AGroup addAGroup(AGroup aGroup);
 }
