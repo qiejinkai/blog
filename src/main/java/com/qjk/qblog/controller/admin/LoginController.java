@@ -67,4 +67,12 @@ public class LoginController {
 
 		return "redirect:/admin";
 	}
+	@RequestMapping(value = "/admin/logout", method = RequestMethod.GET)
+	public String logout( HttpServletRequest req){
+
+		req.getSession(true).removeAttribute("admin");
+		req.getSession(true).removeAttribute("menu");
+
+		return "redirect:/admin";
+	}
 }

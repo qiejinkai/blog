@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Pager<T> {
+	
+	private static final int DEFAULT_SIZE = 5;
 
 	/**
 	 * 属性筛选条件
@@ -87,7 +89,7 @@ public class Pager<T> {
 	}
 
 	public Pager<T> setPageSize(int pageSize) {
-		this.pageSize = pageSize == 0 ? 20 : pageSize;
+		this.pageSize = pageSize == 0 ? DEFAULT_SIZE : pageSize;
 		return this;
 	}
 
@@ -133,21 +135,21 @@ public class Pager<T> {
 	public Pager<T> openCounter() {
 		this.counter = true;
 		this.pageIndex = 1;
-		this.pageSize = 20;
+		this.pageSize = DEFAULT_SIZE;
 		return this;
 	}
 
 	public Pager<T> openCounter(int pageIndex, int pageSize) {
 		this.counter = true;
 		this.pageIndex = pageIndex == 0 ? 1 : pageIndex;
-		this.pageSize = pageSize == 0 ? 20 : pageSize;
+		this.pageSize = pageSize == 0 ? DEFAULT_SIZE : pageSize;
 		return this;
 	}
 
 	public Pager<T> openCounter(int pageIndex) {
 		this.counter = true;
 		this.pageIndex = pageIndex == 0 ? 1 : pageIndex;
-		this.pageSize = 20;
+		this.pageSize = DEFAULT_SIZE;
 		return this;
 	}
 

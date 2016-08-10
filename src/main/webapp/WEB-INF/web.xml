@@ -86,9 +86,9 @@
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
-	<welcome-file-list>
-		<welcome-file>/index.jsp</welcome-file>
-	</welcome-file-list>
+<!-- 	<welcome-file-list>
+		<welcome-file>/WEB-INF/jsp/home.jsp</welcome-file>
+	</welcome-file-list> -->
 
 	<!-- Spring Session -->
 	<filter>
@@ -138,7 +138,7 @@
 	<!-- Tag -->
 	<jsp-config>  
         <taglib>  
-            <taglib-uri>/admin/pager</taglib-uri>  
+            <taglib-uri>/qjk/core</taglib-uri>  
             <taglib-location>/WEB-INF/tags/qjk_core.tld</taglib-location>  
         </taglib>  
     </jsp-config> 

@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -33,6 +34,9 @@ public class Article implements Serializable{
 	public static final int HIDDEN_NONE = 0;
 	public static final int HIDDEN_HIDDEN = 1;
 	
+	public static final int HOME_SHOW_FALSE = 0;
+	public static final int HOME_SHOW_TRUE = 1;
+	
 	/**
 	 * 
 	 */
@@ -41,7 +45,7 @@ public class Article implements Serializable{
 	private String title;
 	private String image;
 	private String alias;
-	private long groupId;
+	private AGroup group;
 	private String tags;
 	private String content;
 	private String contentType;
@@ -53,6 +57,7 @@ public class Article implements Serializable{
 	private int hidden = HIDDEN_NONE;
 	private long indexNo;
 	private int pv;
+	private int homeShow = HOME_SHOW_FALSE;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -71,12 +76,19 @@ public class Article implements Serializable{
 		this.title = title;
 	}
 	
-	@Min(value=1,groups={ValidateInArticlePost.class},message="未找到分组")
-	public long getGroupId() {
-		return groupId;
+	public int getHomeShow() {
+		return homeShow;
 	}
-	public void setGroupId(long groupId) {
-		this.groupId = groupId;
+	public void setHomeShow(int homeShow) {
+		this.homeShow = homeShow;
+	}
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	public AGroup getGroup() {
+		return group;
+	}
+	public void setGroup(AGroup group) {
+		this.group = group;
 	}
 	@Column(length=255)
 	public String getImage() {

@@ -13,7 +13,7 @@ public interface IAGroupDao {
 
 	void updateAGroup(AGroup aGroup);
 	
-	void refreshCount(long id);
+	void refreshCount();
 
 	AGroup findAGroupById(long id);
 	

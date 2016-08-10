@@ -1,5 +1,7 @@
 package com.qjk.qblog.service;
 
+import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qjk.qblog.data.Article;
@@ -19,4 +21,14 @@ public interface IArticleService {
 	void deleteArticleById(long id);
 
 	void hiddenArticleById(long id);
+
+	void homeShowArticleById(long id);
+
+	List<Article> getHomeShowArticles();
+	
+	List<Article> getLastestArticles(int size);
+	
+	List<Article> getMostPvArticles(int size);
+	
+	List<Article> getArticles(int pageIndex,int size,String alias);
 }

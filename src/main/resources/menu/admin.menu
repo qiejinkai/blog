@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <menu>
 	<name>admin</name>
-	<version>1.0.1</version>
+	<version>1.0.3</version>
 	<title>系统管理目录</title>
 
 	<menu>
@@ -36,6 +36,11 @@
 			<title>日记管理</title>
 			<href>/admin/content/diary</href>
 			<resource>admin/content/diary</resource>
+		</menu>
+		<menu>
+			<title>资讯管理</title>
+			<href>/admin/content/information</href>
+			<resource>admin/content/information</resource>
 		</menu>
 	</menu>
 

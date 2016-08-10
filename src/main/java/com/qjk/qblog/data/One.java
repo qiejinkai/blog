@@ -4,13 +4,15 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-//@Entity
-//@Table(name="test_one")
+@Entity
+@Table(name="test_one")
 public class One implements Serializable{
 
 	/**
@@ -20,7 +22,7 @@ public class One implements Serializable{
 	
 	private long id;
 	private String name;
-	private Set<Many>manys= new HashSet<Many>();
+//	private Set<Many>manys= new HashSet<Many>();
 
 	
 	@Id
@@ -38,14 +40,13 @@ public class One implements Serializable{
 		this.name = name;
 	}
 	
-	@OneToMany(mappedBy="one")
-	public Set<Many> getManys() {
-		return manys;
-	}
-
-	public void setManys(Set<Many> manys) {
-		this.manys = manys;
-	}
+//	public Set<Many> getManys() {
+//		return manys;
+//	}
+//
+//	public void setManys(Set<Many> manys) {
+//		this.manys = manys;
+//	}
 
 	
 	

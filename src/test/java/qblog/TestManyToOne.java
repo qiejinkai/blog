@@ -12,55 +12,74 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import com.qjk.qblog.data.Many;
 import com.qjk.qblog.data.One;
 
-
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class TestManyToOne extends AbstractJUnit4SpringContextTests {
-	
+
 	@Resource
 	SessionFactory sf;
-	
-//	@BeforeClass
-//	public void beforeTest(){
-//		One one = new One();
-//		one.setName("");
-//	}
-	
-	@Test
-	public void testSelectOne(){
-		Session session = sf.openSession();
-		Transaction ts = session.beginTransaction();
-		
-		One one = null;
-		
-		one = session.get(One.class, 1L);
-		
-		System.out.println(one);
-		
-		ts.commit();
-		session.close();
-		
-		sf.close();
-		
-	}
-	
+
+	// @BeforeClass
+	// public void beforeTest(){
+	// One one = new One();
+	// one.setName("");
+	// }
 
 	@Test
-	public void testSelectMany(){
+	public void testSelectOne() {
 		Session session = sf.openSession();
 		Transaction ts = session.beginTransaction();
-		
+
 		One one = null;
-		
+
+		one = session.get(One.class, 1L);
+
+		System.out.println(one);
+
+		ts.commit();
+		session.close();
+
+		sf.close();
+
+	}
+
+	@Test
+	public void testSelectMany() {
+		Session session = sf.openSession();
+		Transaction ts = session.beginTransaction();
+
+		One one = null;
+
 		Many many = session.get(Many.class, 1L);
-		
-//		String hql = " from Many where  one_oneId = ";
-		
+
+		// String hql = " from Many where  one_oneId = ";
+
 		System.out.println(many.getOne().getName());
+
+		ts.commit();
+		session.close();
+
+		sf.close();
+
+	}
+
+	@Test
+	public void testSave() {
+
+		Session session = sf.openSession();
+		Transaction ts = session.beginTransaction();
+		One one = new One();
+		one.setId(1);
+		Many many = new Many();
+		
+		many.setName("dududu");
+
+		//session.save(one);
+		many.setOne(one);
+		session.save(many);
 		
 		ts.commit();
 		session.close();
-		
+
 		sf.close();
-		
 	}
 }

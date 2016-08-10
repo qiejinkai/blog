@@ -42,6 +42,8 @@
     <mvc:resources location="/img/"  mapping="/img/**" />  
     <mvc:resources location="/font/"  mapping="/font/**" />  
     <mvc:resources location="/ueditor/"  mapping="/ueditor/**" />  
+    <mvc:resources location="/html/"  mapping="/html/**" />  
+    <mvc:resources location="/home/"  mapping="/home/**" />  
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">

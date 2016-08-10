@@ -24,6 +24,7 @@ import com.qjk.qblog.group.ValidateInArticlePost;
 import com.qjk.qblog.group.ValidateInPost;
 import com.qjk.qblog.service.IAGroupSerivce;
 import com.qjk.qblog.service.IArticleService;
+import com.sun.tools.doclets.internal.toolkit.util.Group;
 
 @Controller
 @RequestMapping("/admin/content")
@@ -85,13 +86,15 @@ public class ContentController {
 			article = new Article();
 			article.setAlias(Article.ALIAS_ARTICLE);
 			article.setHidden(Article.HIDDEN_NONE);
-			article.setGroupId(groupId);
+			AGroup group = new AGroup();
+			group.setGroupId(groupId);
+			article.setGroup(group);
 
 		} else {
 			try {
 
 				article = articleService.findArticleById(id);
-				
+
 				Assert.notNull(article);
 
 			} catch (Exception e) {
@@ -108,7 +111,7 @@ public class ContentController {
 	@RequestMapping(value = "article/{id}/{groupId}/set", method = RequestMethod.POST)
 	public String articleSet(
 			@Validated(ValidateInArticlePost.class) Article article,
-			BindingResult br, Model model) {
+			BindingResult br, Model model,@PathVariable long groupId) {
 
 		if (br.hasErrors()) {
 			List<ObjectError> errors = br.getAllErrors();
@@ -116,6 +119,9 @@ public class ContentController {
 		} else {
 
 			try {
+				AGroup group= new AGroup();
+				group.setGroupId(groupId);
+				article.setGroup(group);
 				articleService.saveOrUpdateArticle(article);
 				model.addAttribute("success", "操作成功");
 			} catch (Exception e) {
@@ -141,6 +147,15 @@ public class ContentController {
 			@PathVariable long groupId) {
 
 		articleService.hiddenArticleById(id);
+
+		return "redirect:/admin/content/article/" + groupId + "/1";
+	}
+
+	@RequestMapping(value = "article/{id}/{groupId}/homeshow", method = RequestMethod.GET)
+	public String articleHomeShow(@PathVariable long id,
+			@PathVariable long groupId) {
+
+		articleService.homeShowArticleById(id);
 
 		return "redirect:/admin/content/article/" + groupId + "/1";
 	}
@@ -172,131 +187,134 @@ public class ContentController {
 		return "admin/content/group_add";
 	}
 
-//	@RequestMapping(value = "banner", method = RequestMethod.GET)
-//	public String bannerTo(Model model) {
-//
-//		Pager<Article> pager = articleService.getArticlesPager(1,
-//				Article.ALIAS_BANNER);
-//
-//		model.addAttribute("pager", pager);
-//
-//		return "admin/content/banner";
-//	}
-//
-//
-//	@RequestMapping(value = "banner/{p}", method = RequestMethod.GET)
-//	public String bannerTo(Model model, @PathVariable int p) {
-//
-//		Pager<Article> pager = articleService.getArticlesPager(p,
-//				Article.ALIAS_BANNER);
-//
-//		model.addAttribute("pager", pager);
-//
-//		return "admin/content/banner";
-//	}
-//
-//	@RequestMapping(value = "banner/{id}/set", method = RequestMethod.GET)
-//	public String bannerToSet(@PathVariable long id, Model model, Article article) {
-//
-//		try {
-//
-//			article = articleService.findArticleById(id);
-//
-//		} catch (Exception e) {
-//			logger.error(e.getMessage(), e);
-//			return "redirect:/admin/content/banner/1";
-//		}
-//
-//		if (article != null && !Article.ALIAS_BANNER.equals(article.getAlias())) {
-//			return "redirect:/admin/content/banner/1";
-//
-//		} else if (article == null) {
-//
-//			article = new Article();
-//			article.setAlias(Article.ALIAS_BANNER);
-//			article.setHidden(Article.HIDDEN_NONE);
-//
-//		}
-//
-//		model.addAttribute("article", article);
-//
-//		return "admin/content/banner_set";
-//	}
-//
-//	@RequestMapping(value = "banner/{id}/set", method = RequestMethod.POST)
-//	public String bannerSet(
-//			@Validated(ValidateInPost.class) Article article,
-//			BindingResult br, Model model) {
-//
-//		if (br.hasErrors()) {
-//			List<ObjectError> errors = br.getAllErrors();
-//			model.addAttribute("error", errors.get(0).getDefaultMessage());
-//		} else {
-//
-//			try {
-//				articleService.saveOrUpdateArticle(article);
-//				model.addAttribute("success", "操作成功");
-//			} catch (Exception e) {
-//				model.addAttribute("error", e.getMessage());
-//			}
-//
-//		}
-//
-//		return "admin/content/banner_set";
-//	}
-	
+	// @RequestMapping(value = "banner", method = RequestMethod.GET)
+	// public String bannerTo(Model model) {
+	//
+	// Pager<Article> pager = articleService.getArticlesPager(1,
+	// Article.ALIAS_BANNER);
+	//
+	// model.addAttribute("pager", pager);
+	//
+	// return "admin/content/banner";
+	// }
+	//
+	//
+	// @RequestMapping(value = "banner/{p}", method = RequestMethod.GET)
+	// public String bannerTo(Model model, @PathVariable int p) {
+	//
+	// Pager<Article> pager = articleService.getArticlesPager(p,
+	// Article.ALIAS_BANNER);
+	//
+	// model.addAttribute("pager", pager);
+	//
+	// return "admin/content/banner";
+	// }
+	//
+	// @RequestMapping(value = "banner/{id}/set", method = RequestMethod.GET)
+	// public String bannerToSet(@PathVariable long id, Model model, Article
+	// article) {
+	//
+	// try {
+	//
+	// article = articleService.findArticleById(id);
+	//
+	// } catch (Exception e) {
+	// logger.error(e.getMessage(), e);
+	// return "redirect:/admin/content/banner/1";
+	// }
+	//
+	// if (article != null && !Article.ALIAS_BANNER.equals(article.getAlias()))
+	// {
+	// return "redirect:/admin/content/banner/1";
+	//
+	// } else if (article == null) {
+	//
+	// article = new Article();
+	// article.setAlias(Article.ALIAS_BANNER);
+	// article.setHidden(Article.HIDDEN_NONE);
+	//
+	// }
+	//
+	// model.addAttribute("article", article);
+	//
+	// return "admin/content/banner_set";
+	// }
+	//
+	// @RequestMapping(value = "banner/{id}/set", method = RequestMethod.POST)
+	// public String bannerSet(
+	// @Validated(ValidateInPost.class) Article article,
+	// BindingResult br, Model model) {
+	//
+	// if (br.hasErrors()) {
+	// List<ObjectError> errors = br.getAllErrors();
+	// model.addAttribute("error", errors.get(0).getDefaultMessage());
+	// } else {
+	//
+	// try {
+	// articleService.saveOrUpdateArticle(article);
+	// model.addAttribute("success", "操作成功");
+	// } catch (Exception e) {
+	// model.addAttribute("error", e.getMessage());
+	// }
+	//
+	// }
+	//
+	// return "admin/content/banner_set";
+	// }
+
 	@RequestMapping(value = "{alias}/{id}/delete", method = RequestMethod.GET)
-	public String delete(@PathVariable long id,
-			@PathVariable String alias) {
-		if(!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)){
+	public String delete(@PathVariable long id, @PathVariable String alias) {
+		if (!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)) {
 			return "redirect:/admin";
 		}
 		articleService.deleteArticleById(id);
 
-		return "redirect:/admin/content/"+alias+"/1";
+		return "redirect:/admin/content/" + alias + "/1";
 	}
-	@RequestMapping(value = "{alias}/{id}/hidden", method = RequestMethod.GET)
-	public String hidden(@PathVariable long id,
-			@PathVariable String alias) {
 
-		if(!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)){
+	@RequestMapping(value = "{alias}/{id}/hidden", method = RequestMethod.GET)
+	public String hidden(@PathVariable long id, @PathVariable String alias) {
+
+		if (!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)) {
 			return "redirect:/admin";
 		}
 		articleService.hiddenArticleById(id);
 
-		return "redirect:/admin/content/"+alias+"/1";
+		return "redirect:/admin/content/" + alias + "/1";
 	}
-	
+
 	@RequestMapping(value = "{alias}", method = RequestMethod.GET)
-	public String to(Model model,@PathVariable String alias) {
-		
-		if(!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)){
+	public String to(Model model, @PathVariable String alias) {
+
+		if (!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)) {
 			return "redirect:/admin";
 		}
-		Pager<Article> pager = articleService.getArticlesPager(1,
-				alias);
+		Pager<Article> pager = articleService.getArticlesPager(1, alias);
 
 		model.addAttribute("pager", pager);
 
-		return "admin/content/"+alias;
+		return "admin/content/" + alias;
 	}
+
 	@RequestMapping(value = "{alias}/{p}", method = RequestMethod.GET)
-	public String to(Model model,@PathVariable String alias,@PathVariable int p) {
-		
-		if(!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)){
+	public String to(Model model, @PathVariable String alias,
+			@PathVariable int p) {
+
+		if (!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)) {
 			return "redirect:/admin";
 		}
-		Pager<Article> pager = articleService.getArticlesPager(p,
-				alias);
+		Pager<Article> pager = articleService.getArticlesPager(p, alias);
 
 		model.addAttribute("pager", pager);
 
-		return "admin/content/"+alias;
+		return "admin/content/" + alias;
 	}
-	@RequestMapping(value = "{alias}/{id}/set", method = RequestMethod.GET)
-	public String toSet(@PathVariable long id,@PathVariable String  alias, Model model, Article article) {
 
-		if(!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)){
+	@RequestMapping(value = "{alias}/{id}/set", method = RequestMethod.GET)
+	public String toSet(@PathVariable long id, @PathVariable String alias,
+			Model model, Article article) {
+
+		if (!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)) {
 			return "redirect:/admin";
 		}
 		try {
@@ -305,11 +323,11 @@ public class ContentController {
 
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			return "redirect:/admin/content/"+alias+"/1";
+			return "redirect:/admin/content/" + alias + "/1";
 		}
 
 		if (article != null && !alias.equals(article.getAlias())) {
-			return "redirect:/admin/content/"+alias+"/1";
+			return "redirect:/admin/content/" + alias + "/1";
 
 		} else if (article == null) {
 
@@ -321,15 +339,15 @@ public class ContentController {
 
 		model.addAttribute("article", article);
 
-		return "admin/content/"+alias+"_set";
+		return "admin/content/" + alias + "_set";
 	}
-	
+
 	@RequestMapping(value = "{alias}/{id}/set", method = RequestMethod.POST)
 	public String set(@PathVariable String alias,
-			@Validated(ValidateInPost.class) Article article,
-			BindingResult br, Model model) {
-		
-		if(!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)){
+			@Validated(ValidateInPost.class) Article article, BindingResult br,
+			Model model) {
+
+		if (!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)) {
 			return "redirect:/admin";
 		}
 		if (br.hasErrors()) {
@@ -346,7 +364,7 @@ public class ContentController {
 
 		}
 
-		return "admin/content/"+alias+"_set";
+		return "admin/content/" + alias + "_set";
 	}
 
 }

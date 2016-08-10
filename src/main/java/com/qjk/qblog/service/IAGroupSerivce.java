@@ -12,4 +12,6 @@ public interface IAGroupSerivce {
 	List<AGroup> findGroupList();
 	
 	AGroup addAGroup(AGroup aGroup);
+
+	AGroup findGroupById(long groupId);
 }

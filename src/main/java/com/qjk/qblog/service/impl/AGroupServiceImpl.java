@@ -39,4 +39,12 @@ public class AGroupServiceImpl implements IAGroupSerivce {
 		return aGroup;
 	}
 
+	@Cacheable(cacheNames = "artilceConfig",key="'group:id:'+#groupId")
+	public AGroup findGroupById(long groupId) {
+		if(groupId != 0){
+			return groupDao.findAGroupById(groupId);
+		}
+		return null;
+	}
+
 }
