@@ -31,4 +31,14 @@ public interface IArticleService {
 	List<Article> getMostPvArticles(int size);
 	
 	List<Article> getArticles(int pageIndex,int size,String alias);
+
+	Pager<Article> getArticlesPager(int pageIndex, long groupId, String keywords);
+
+	Article getPrevArticle(long ctime, String alias);
+
+	Article getNextArticle(long ctime, String alias);
+
+	List<Article> getLastestArticles(int i, String aliasDiary);
+
+	List<Article> getMostPvArticles(int i, String aliasDiary);
 }

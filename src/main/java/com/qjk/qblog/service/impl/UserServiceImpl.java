@@ -28,8 +28,6 @@ public class UserServiceImpl implements IUserService {
 		}
 
 		userDao.addUser(user);
-		
-
 
 	}
 
@@ -80,7 +78,7 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	public User joinEmail(String email, String password) throws UserException {
-		
+
 		if (Value.isEmpty(email)) {
 			throw new UserException("请输入email");
 		}
@@ -95,12 +93,12 @@ public class UserServiceImpl implements IUserService {
 		if (user != null) {
 			throw new UserException("email已被使用");
 		}
-		
+
 		user = new User();
 		user.setEmail(email);
 		user.setPassword(DigestUtil.encodePassword(password));
 		user.setNick(email);
-		
+
 		userDao.addUser(user);
 
 		return user;
@@ -108,7 +106,7 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	public User joinPhone(String phone, String password) throws UserException {
-		
+
 		if (Value.isEmpty(phone)) {
 			throw new UserException("请输入手机号");
 		}
@@ -123,12 +121,12 @@ public class UserServiceImpl implements IUserService {
 		if (user != null) {
 			throw new UserException("手机号已被使用");
 		}
-		
+
 		user = new User();
 		user.setPhone(phone);
 		user.setPassword(DigestUtil.encodePassword(password));
 		user.setNick(phone);
-		 userDao.addUser(user);
+		userDao.addUser(user);
 
 		return user;
 	}

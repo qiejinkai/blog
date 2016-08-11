@@ -21,7 +21,7 @@ public class HomeController {
 		model.addAttribute("articles",articles);		
 		List<Article> lastestArticles = articleService.getLastestArticles(5);
 		model.addAttribute("lastest",lastestArticles);
-		List<Article> mostPvArticles = articleService.getMostPvArticles(5);
+		List<Article> mostPvArticles = articleService.getMostPvArticles(4);
 		model.addAttribute("mostpv",mostPvArticles);
 		List<Article> notice = articleService.getArticles(1, 1, Article.ALIAS_NOTICE);
 		model.addAttribute("notice",notice);

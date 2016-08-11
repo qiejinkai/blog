@@ -30,6 +30,7 @@ public class Article implements Serializable{
 	public static final String ALIAS_INFORMATION="information";
 	public static final String ALIAS_DIARY="diary";
 	public static final String ALIAS_NOTICE="notice";
+	public static final String ALIAS_MOOD = "mood";
 	
 	public static final int HIDDEN_NONE = 0;
 	public static final int HIDDEN_HIDDEN = 1;
@@ -193,6 +194,7 @@ public class Article implements Serializable{
 		if(ALIAS_FRIENDLINK.equals(alias))return true;
 		if(ALIAS_INFORMATION.equals(alias))return true;
 		if(ALIAS_NOTICE.equals(alias))return true;
+		if(ALIAS_MOOD.equals(alias))return true;
 		return false;
 	}
 	

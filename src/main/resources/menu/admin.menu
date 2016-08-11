@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <menu>
 	<name>admin</name>
-	<version>1.0.3</version>
+	<version>1.0.5</version>
 	<title>系统管理目录</title>
 
 	<menu>
@@ -14,32 +14,37 @@
 		<icon>bg_2</icon>
 		<menu>
 			<title>banner管理</title>
-			<href>/admin/content/banner</href>
+			<href>/admin/content/banner/</href>
 			<resource>admin/content/banner</resource>
 		</menu>
 		<menu>
 			<title>友情链接管理</title>
-			<href>/admin/content/friendlink</href>
+			<href>/admin/content/friendlink/</href>
 			<resource>admin/content/friendlink</resource>
 		</menu>
 		<menu>
 			<title>公告管理</title>
-			<href>/admin/content/notice</href>
+			<href>/admin/content/notice/</href>
 			<resource>admin/content/notice</resource>
 		</menu>
 		<menu>
 			<title>文章管理</title>
-			<href>/admin/content/article</href>
+			<href>/admin/content/article/</href>
 			<resource>admin/content/article</resource>
 		</menu>
 		<menu>
 			<title>日记管理</title>
-			<href>/admin/content/diary</href>
+			<href>/admin/content/diary/</href>
 			<resource>admin/content/diary</resource>
 		</menu>
 		<menu>
+			<title>说说管理</title>
+			<href>/admin/content/mood/</href>
+			<resource>admin/content/mood</resource>
+		</menu>
+		<menu>
 			<title>资讯管理</title>
-			<href>/admin/content/information</href>
+			<href>/admin/content/information/</href>
 			<resource>admin/content/information</resource>
 		</menu>
 	</menu>
@@ -49,17 +54,17 @@
 		<icon>bg_3</icon>
 		<menu>
 			<title>角色管理</title>
-			<href>/admin/system/role</href>
+			<href>/admin/system/role/</href>
 			<resource>admin/system/role</resource>
 		</menu>
 		<menu>
 			<title>员工管理</title>
-			<href>/admin/system/employee</href>
+			<href>/admin/system/employee/</href>
 			<resource>admin/system/employee</resource>
 		</menu>
 		<menu>
 			<title>参数设置</title>
-			<href>/admin/system/setting</href>
+			<href>/admin/system/setting/</href>
 			<resource>/admin/system/setting</resource>
 		</menu>
 	</menu>

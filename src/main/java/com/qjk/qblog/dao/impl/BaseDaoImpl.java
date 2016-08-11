@@ -147,7 +147,8 @@ public abstract class BaseDaoImpl<T> {
 					hql.append(" ").append(pager.getOrder());
 				}
 
-				list = findListByHQL(hql.toString(), params.toArray());
+				list = findListByHQLLimit(hql.toString(), params.toArray(),
+						pager.getFistRowNum(), pager.getPageSize());
 			}
 
 			pager.setList(list);

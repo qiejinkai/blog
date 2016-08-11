@@ -19,6 +19,7 @@ import com.qjk.qblog.data.AGroup;
 import com.qjk.qblog.data.Article;
 import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.service.IArticleService;
+import com.qjk.qblog.util.Value;
 import com.sun.tools.doclets.internal.toolkit.util.Group;
 
 @Service
@@ -43,11 +44,33 @@ public class ArticleServiceImpl implements IArticleService {
 	}
 
 	@Override
+	public Pager<Article> getArticlesPager(int pageIndex, long groupId,
+			String keywords) {
+		Pager<Article> pager = new Pager<Article>().openCounter(pageIndex);
+		Map<String, Object> sqlParams = new HashMap<String, Object>();
+		sqlParams.put(" AND alias=?", Article.ALIAS_ARTICLE);
+		if (groupId != 0) {
+			sqlParams.put(" AND group.groupId=?", groupId);
+		}
+		if (!Value.isEmpty(keywords)) {
+
+			sqlParams.put(" AND ( title like ? ", "%" + keywords + "%");
+			sqlParams.put(" OR tags like ?) ", "%" + keywords + "%");
+		}
+		pager.setSqlParams(sqlParams).setOrder(" ORDER BY ctime DESC");
+		pager = articleDao.selectPager(pager);
+
+		return pager;
+	}
+
+	@Override
 	public Article findArticleById(long id) {
 		Article article = articleDao.findArticleById(id);
 
 		return article;
 	}
+	
+	
 
 	@Override
 	public Article saveOrUpdateArticle(Article article) {
@@ -79,7 +102,7 @@ public class ArticleServiceImpl implements IArticleService {
 		object.setHomeShow(article.getHomeShow());
 
 		articleDao.updateArticle(object);
-		
+
 		groupDao.refreshCount();
 
 		return object;
@@ -164,11 +187,52 @@ public class ArticleServiceImpl implements IArticleService {
 	@Override
 	public List<Article> getLastestArticles(int size) {
 
+		return getLastestArticles(size, Article.ALIAS_ARTICLE);
+	}
+
+	@Override
+	public List<Article> getMostPvArticles(int size) {
+		return getMostPvArticles(size, Article.ALIAS_ARTICLE);
+	}
+
+	@Override
+	public Article getNextArticle(long ctime, String alias) {
+		Pager<Article> pager = new Pager<Article>().openCounter(1, 1)
+				.closeCounter();
+		Map<String, Object> sqlParams = new HashMap<String, Object>();
+		sqlParams.put(" AND hidden=?", Article.HIDDEN_NONE);
+		sqlParams.put(" AND alias=?", alias);
+		sqlParams.put(" AND ctime > ?", ctime);
+		pager.setSqlParams(sqlParams).setOrder(" ORDER BY ctime DESC");
+		pager = articleDao.selectPager(pager);
+
+		return pager != null && pager.getList() != null  && pager.getList().size()>0 ? pager.getList()
+				.get(0) : null;
+
+	}
+
+	@Override
+	public Article getPrevArticle(long ctime, String alias) {
+		Pager<Article> pager = new Pager<Article>().openCounter(1, 1)
+				.closeCounter();
+		Map<String, Object> sqlParams = new HashMap<String, Object>();
+		sqlParams.put(" AND hidden=?", Article.HIDDEN_NONE);
+		sqlParams.put(" AND alias=?", alias);
+		sqlParams.put(" AND ctime < ?", ctime);
+		pager.setSqlParams(sqlParams).setOrder(" ORDER BY ctime DESC");
+		pager = articleDao.selectPager(pager);
+
+		return pager != null && pager.getList() != null && pager.getList().size()>0 ? pager.getList()
+				.get(0) : null;
+	}
+
+	@Override
+	public List<Article> getLastestArticles(int size, String alias) {
 		Pager<Article> pager = new Pager<Article>().openCounter(1, size)
 				.closeCounter();
 		Map<String, Object> sqlParams = new HashMap<String, Object>();
 		sqlParams.put(" AND hidden=?", Article.HIDDEN_NONE);
-		sqlParams.put(" AND alias=?", Article.ALIAS_ARTICLE);
+		sqlParams.put(" AND alias=?", alias);
 		pager.setSqlParams(sqlParams).setOrder(" ORDER BY ctime DESC");
 		pager = articleDao.selectPager(pager);
 
@@ -176,12 +240,12 @@ public class ArticleServiceImpl implements IArticleService {
 	}
 
 	@Override
-	public List<Article> getMostPvArticles(int size) {
-		Pager<Article> pager = new Pager<Article>().openCounter(1, size)
+	public List<Article> getMostPvArticles(int i, String alias) {
+		Pager<Article> pager = new Pager<Article>().openCounter(1, i)
 				.closeCounter();
 		Map<String, Object> sqlParams = new HashMap<String, Object>();
 		sqlParams.put(" AND hidden=?", Article.HIDDEN_NONE);
-		sqlParams.put(" AND alias=?", Article.ALIAS_ARTICLE);
+		sqlParams.put(" AND alias=?", alias);
 		pager.setSqlParams(sqlParams).setOrder(" ORDER BY pv DESC");
 		pager = articleDao.selectPager(pager);
 
