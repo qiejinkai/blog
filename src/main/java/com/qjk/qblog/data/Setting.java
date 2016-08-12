@@ -51,6 +51,7 @@ public class Setting implements Serializable{
 	private String version;
 	private long ctime;
 	private long mtime;
+	private String title;
 	private List<SettingOption>options = new ArrayList<SettingOption>();
 	
 	@Id
@@ -75,6 +76,14 @@ public class Setting implements Serializable{
 	}
 	public void setSummary(String summary) {
 		this.summary = summary;
+	}
+	
+	@Column(length=32)
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public long getTypes() {
 		return types;
@@ -102,7 +111,7 @@ public class Setting implements Serializable{
 	public void setMtime(long mtime) {
 		this.mtime = mtime;
 	}
-	@OneToMany(mappedBy="setting",cascade={CascadeType.ALL},fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="setting",cascade={CascadeType.ALL},fetch=FetchType.LAZY)
 	public List<SettingOption> getOptions() {
 		return options;
 	}

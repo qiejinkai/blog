@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -38,10 +40,12 @@ public class SettingServiceImpl implements ISettingService {
 		
 	}
 
-	@Override
+	@CacheEvict(cacheNames="systemConfig",key="T(com.qjk.qblog.util.RedisUtil).getKey('setting',#setting.name)")
 	public Setting updateSetting(Setting setting) {
-		// TODO Auto-generated method stub
-		return null;
+		if(setting != null){
+			settingDao.updateSetting(setting);
+		}
+		return setting;
 	}
 
 	@Override
@@ -53,7 +57,13 @@ public class SettingServiceImpl implements ISettingService {
 	@Override
 	public List<Setting> getSettings() {
 		// TODO Auto-generated method stub
-		return null;
+		return settingDao.selectSettingList();
+	}
+	
+	@Override
+	public Setting getSettingById(long id) {
+		
+		return settingDao.getSettingById(id);
 	}
 
 }

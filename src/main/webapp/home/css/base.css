@@ -64,7 +64,7 @@ header {
 
 #logo a {
 	width: 260px;
-	height: 60px;
+	height: 100%;
 	margin: 10px 0 0 0;
 	position: absolute;
 	background: url(../images/logo.png) no-repeat;

@@ -20,5 +20,7 @@ public interface ISettingService {
 	Setting addSetting(Setting setting);
 	
 	List<Setting> getSettings();
+
+	Setting getSettingById(long id);
 	
 }

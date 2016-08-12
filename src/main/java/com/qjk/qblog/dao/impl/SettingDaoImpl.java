@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.qjk.qblog.dao.ISettingDao;
 import com.qjk.qblog.data.Setting;
+import com.qjk.qblog.data.SettingOption;
 import com.qjk.qblog.util.RedisUtil;
 
 @Repository
@@ -68,7 +69,14 @@ public class SettingDaoImpl extends BaseDaoImpl<Setting> implements ISettingDao 
 
 		if (setting == null) {
 			setting = this.findOneByHQL("from Setting where name=?", name);
+			
 			if (setting != null) {
+				List<SettingOption> options = setting.getOptions();
+				if(options != null && options.size()>0){
+					for (SettingOption settingOption : options) {
+						settingOption.getName();
+					}
+				}
 				this.add2Redis(
 						RedisUtil.getKey("setting", setting.getName()),
 						setting);

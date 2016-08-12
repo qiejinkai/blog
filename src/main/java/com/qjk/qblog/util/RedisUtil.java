@@ -29,6 +29,7 @@ public final class RedisUtil {
 			key = MENU_PREFIX + id;
 		}
 
+//		System.out.println("key : "+ key);
 		return key;
 	}
 	

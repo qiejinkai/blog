@@ -120,6 +120,7 @@ public class InitDataServletContextListener implements ServletContextListener {
 						setting.setCtime(new Date().getTime() / 1000);
 						setting.setSummary(root.elementText("summary"));
 						setting.setTypes(Value.longValue(root.elementText("types"), 0));
+						setting.setTitle(Value.stringValue(root.elementText("title"), ""));
 
 						List<Element> els = root.elements("option");
 
