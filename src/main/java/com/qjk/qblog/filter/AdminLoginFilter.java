@@ -38,7 +38,7 @@ public class AdminLoginFilter implements Filter {
 		HttpSession session = req.getSession(true);
 		String path = req.getRequestURI();
 
-		if (!Value.isEmpty(path) && path.startsWith("/admin")) {
+		if (!Value.isEmpty(path) && (path.startsWith("/admin")||path.startsWith("/druid"))) {
 
 			if (path.indexOf("/admin/login") >= 0) {
 
@@ -78,11 +78,5 @@ public class AdminLoginFilter implements Filter {
 
 	}
 	
-	public static void main(String[] args) {
-		String string = "/login/admin";
-		String string2 = "/login/admin";
-		
-		System.out.println(string.indexOf(string2));
-	}
 
 }
