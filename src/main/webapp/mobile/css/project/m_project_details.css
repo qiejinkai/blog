@@ -1,0 +1,149 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-06
+* 张展
+*项目详情
+*/
+/* more*/
+
+.content_wrap{
+	padding:1.5rem 1rem;
+	margin-top:1.5rem;
+	background:#fff;
+}
+.content_wrap h1{
+	font-size:1.6rem;
+	color:#666;
+	padding-bottom:1rem;
+}
+.m_content_attach{
+	padding-bottom:1rem;
+	border-bottom:1px dashed #eee;
+}
+.m_content_attach span{
+	line-height:2.5rem;
+	font-size:1.4rem;
+	display:block;
+}
+.m_content_attach span a{
+	color:#44b1f1;
+}
+.artic_wrap{
+	width:100%;
+	padding:2rem 0;
+
+}
+.artic_wrap img{
+	max-width:100%;
+}
+.artic_wrap h2{
+	height:auto !important;
+	line-height:26px !important;
+	padding:8px 12px !important;
+}
+.artic_wrap span{
+	line-height:2.5rem;
+	font-size:1.4rem;
+	color:#333;
+	display:block;
+}
+/**********  项目动态  ***************/
+.user_id{
+	width:100%;
+	padding-bottom:2rem;
+}
+.user_id_img{
+	float:left;
+	width:5rem;
+	height:5rem;
+	overflow:hidden;
+	border-radius:50%;
+}
+.user_id_img img{
+	width:100%;
+}
+.user_id_txt{
+	padding-left:6rem;
+}
+.user_id_txt h2{
+	font-size:1.2em;
+	line-height:3rem;
+}
+.user_id_txt p{
+	color:#999;
+}
+.user_id_txt .user_img_list{
+	width:105%;
+	height:auto;
+	overflow:hidden;
+	display:block;
+	padding-top:1.5rem;
+}
+.user_id_txt .user_viod_img{
+	width:7.4rem;
+	height:4.9rem;
+	display:block;
+	float:left;
+	margin-right:0.5rem;
+}
+.user_id_txt .user_viod_img img{
+	width:100%;
+}
+.user_id_txt .fujian{
+	padding-top:1rem;
+}
+.user_id_txt .fujian span{
+	margin-right:4rem;
+	display:inline;
+}
+
+/***********  Q&A  ******************/
+
+.inp_box{
+	width:100%;
+	overflow:hidden;
+	padding-bottom:2rem;
+}
+.inp_box .txt{
+	width:97.5%;
+	height:6.5rem;
+	padding:0.5rem 0 0 0.5rem;
+	border:1px solid #e5e5e5;
+	margin-bottom:1rem;
+}
+.inp_box .txt:hover, .inp_box .txt:focus{
+	border:1px solid #44b1f1;
+}
+.inp_box .code_img{
+	width:6.9rem;
+	height:2.5rem;
+	display:block;
+	float:left;
+}
+.inp_box img{
+	width:100%;
+}
+.inp_box .text{
+	width:8rem;
+	height:2.5rem;
+	margin-left:0.5rem;
+	border:1px solid #e5e5e5;
+	padding-left:0.5rem;
+}
+.inp_box .text:hover, .inp_box .text:focus{
+	border:1px solid #44b1f1;
+}
+.inp_box .btn{
+	width:8rem;
+	height:2.6rem;
+	display:block;
+	float:right;
+	background:#44b1f1;
+	border:0.1rem solid #44b1f1;
+	color:#fff;
+}
+i{
+	float:right;
+	color:#999;
+	font-size:1.2rem;
+}

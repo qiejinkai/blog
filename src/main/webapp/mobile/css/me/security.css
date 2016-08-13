@@ -1,0 +1,84 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-06
+* 张龙
+* 账户安全
+*/
+/* more*/
+
+.m_account ul{
+	/*-webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+    -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+    border-image: url("/m/img/border_line.png") 2 stretch;
+    border-bottom-width:0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 1px;
+    border-top:1px solid #e5e5e5;
+    margin-bottom:1.5rem;*/
+	overflow:hidden;
+	background:url(../img/border_grey.png) repeat-y center top;
+}
+.m_account{
+	background-color:#fff;
+	margin:1.5rem 0;
+	overflow:hidden;
+}
+.m_account li{
+	height:12rem;
+	width:50%;
+	float:left;
+	text-align:center;
+	border-bottom:1px solid #f2f2f2;
+}
+.m_account li:last-child{
+	border-bottom:none;
+}
+.m_account li:focus{
+	background:#eaeaea;
+}
+.m_account li:hover{
+	background:#eaeaea;
+}
+.m_account li div{
+    display:block;
+    margin: 2rem auto 0;
+    height:3rem;
+	width:3.4rem;
+    background:url(../../m/img/account_aq_icon.png) no-repeat;
+    background-size:8.75rem 10.55rem;
+
+}
+.m_account li div.account_tradepwd_icon1{
+	 background:url(../../m/img/account_tradepwd_icon.png) no-repeat;
+    background-size:100% 100%;
+	
+	
+	}
+.m_account li p{
+	line-height:1.6rem;
+	font-size:1.4rem;
+	color:#333;
+	padding-top:1.5rem;
+}
+.m_account li small{
+	color:#999;
+}
+.m_account li div.account_aq_icon1{
+	background-position:-0.5rem 0rem;
+	}
+.m_account li div.account_aq_icon2{
+	background-position:-5.5rem -7rem;
+	}
+.m_account li div.account_aq_icon3{
+	background-position:-0.6rem -3.5rem;
+	}
+.m_account li div.account_aq_icon4{
+	background-position:-5.7rem -3.5rem;
+	}
+.m_account li div.account_aq_icon5{
+	background-position:-0.3rem -7rem;
+	}
+.m_account li div.account_aq_icon6{
+	background-position:-5.5rem 0;
+	}

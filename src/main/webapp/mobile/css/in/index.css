@@ -1,0 +1,98 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-06
+* 张龙
+*/
+
+/*m_launch_title*/
+.m_launch_title{
+	
+	text-align: center;
+	padding: 1.5rem 1rem;
+}
+.m_launch_title span{
+	width:8.1rem;
+	height:8.1rem;
+	background:url(/m/img/security_no_rz.png) center top no-repeat;
+	background-position:0 -40rem;
+	background-size:8.1rem 50rem;
+	display:block;
+	margin:1rem auto;
+		
+}
+.m_launch_title span.m_launch_title_ok{
+	background-position:0px -30rem;
+	}
+.m_launch_title p{
+	line-height:1.6rem;
+	font-size:1.2rem;
+	color:#999;
+    padding: 1rem 1.5rem;
+}
+.m_launch_form dd{
+	  width: 100%;
+  background-color: #fff;
+  -webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+  -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+  border-image: url("/m/img/border_line.png") 2 stretch;
+  border-bottom-width: 1px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-top-width: 0px;
+  border-bottom: 1px solid #e5e5e5;
+  position: relative;
+  overflow:hidden;
+}
+.m_launch_form dd label{
+	  width: 9rem;
+  position: absolute;
+  height: 4.4rem;
+  line-height: 4.4rem;
+  display: inline-block;
+  left: 0px;
+  top: 0px;
+  color: #333;
+  font-size: 1.4rem;
+  text-indent: 1.5rem;
+}
+.m_launch_form dd .m_launch_text {
+ padding: 0 0 0 9rem;
+  height: 4rem;
+  border: 0px;
+  line-height: 2rem;
+  -webkit-appearance: none;
+  width: 17rem;
+  outline: none;
+  color: #999;
+  font-size: 1.2rem;
+ }
+.m_launch_form dd .m_launch_textarea{
+	 height:12rem;
+	}
+.m_launch_button {
+	height:4.4rem;
+	padding:0 1rem;
+	margin-top:1.5rem;
+}
+.m_launch_button .button{
+	  height: 4.4rem;
+  width: 100%;
+  border: 0px;
+  -webkit-appearance: none;
+  color: #fff;
+  font-size: 2rem;
+  background-color: #44b1f1;
+  outline: none;
+  line-height: 4.4rem;
+  text-align: center;
+  display: inline-block;
+ }
+.m_launch_link{
+	text-align:center;
+	line-height:2.2rem;
+	color:#999;
+	font-size:1.2rem;
+}
+.m_launch_link em{
+	color:#999;
+}

@@ -1,0 +1,128 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-07
+* 张展
+*基本信息
+*/
+/* more*/
+
+
+
+/**************  education_info  **********************/
+.education_info{
+	padding:1.5rem 1rem 3rem;
+	background:#fff;
+	margin-top:1.5rem;
+}
+.base_info_item{
+	font-size:1.4rem;
+	padding:0.5rem 0;
+	display:block;
+	line-height:3rem;
+	overflow:hidden;
+}
+.base_info_item label{
+	float:left;
+}
+.base_info_item label.lb_m{
+    width: 100px;
+}
+.base_info_item .me_select{
+	width:10.6rem;
+	height:3rem;
+	border:1px solid #eee;
+	outline:none;
+	padding-left:0.5rem;
+	margin-right:0.5rem;
+	background:url(/m/img/select_icon.png) no-repeat right center;
+	background-size:3.8rem 0.9rem;
+	float:left;
+}
+.base_info_item .edu_time{
+	width:9.9rem;
+	height:3rem;
+	line-height:3rem;
+	border:1px solid #eee;
+	outline:none;
+	display:inline-block;
+	padding-left:0.5rem;
+	margin-right:0.5rem;
+	background:url(/m/img/select_icon.png) no-repeat right center;
+	background-size:3.8rem 0.9rem;
+	float:left;
+}
+.base_info_item .inp{
+	width:21rem;
+	height:3rem;
+	border:1px solid #eee;
+	outline:none;
+	padding-left:0.5rem;
+	float:left;
+}
+
+/*****************  work_info  ************************/
+
+.work_info{
+	padding:1.5rem 1rem 3rem;
+	background:#fff;
+	margin-top:1.5rem;
+}
+.base_info_list{
+	overflow:hidden;
+}
+.base_info_list h2{
+	padding:2rem 0 1rem;
+	font-size:1.4rem;
+}
+.base_info_list ul li{
+	float:left;
+	min-width:6.9rem;
+	height:3rem;
+	line-height:3rem;
+	position:relative;
+	font-size:1.4rem;
+	padding-left:2rem;
+}
+.base_info_list ul li .pro_check{
+	width:1.4rem;
+	height:1.4rem;
+	display:block;
+	position:absolute;
+	left:0;
+	top:0.8rem;
+    border: 1px solid #e5e5e5;
+    -webkit-appearance: none;
+}
+.base_info_list ul li .pro_check:checked{
+	border:1px solid #44b1f1;
+	background:url(/m/img/check.png) left top no-repeat;
+	background-size:100% 100%;
+	}
+
+
+
+/***************  invest_info  *********************/
+.invest_info{
+	padding:1.5rem 1rem 3rem;
+	background:#fff;
+	margin-top:1.5rem;
+}
+.base_info_txt{
+    padding: 0 1rem;
+}
+.base_info_txt h2{
+	padding:2rem 0 1rem;
+	font-size:1.4rem;
+}
+.base_info_txt .txt{
+	width:27rem;
+	height:8rem;
+	border:1px solid #eaeaea;
+	outline:none;
+	padding:0.5rem;
+	line-height:2rem;
+}
+
+a.btn{
+    margin-bottom: 1.5rem;
+}

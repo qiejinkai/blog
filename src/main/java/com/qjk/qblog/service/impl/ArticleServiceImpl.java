@@ -3,6 +3,7 @@ package com.qjk.qblog.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,38 +30,47 @@ public class ArticleServiceImpl implements IArticleService {
 	IArticleDao articleDao;
 	@Resource
 	IAGroupDao groupDao;
-
-	public Pager<Article> getArticlesPager(int pageIndex, long groupId) {
+	
+	private Pager<Article> articlesPager(int pageIndex,String alias, long groupId,int hidden,String keywords) {
 		Pager<Article> pager = new Pager<Article>().openCounter(pageIndex);
-		Map<String, Object> sqlParams = new HashMap<String, Object>();
-		sqlParams.put(" AND alias=?", Article.ALIAS_ARTICLE);
-		if (groupId != 0) {
-			sqlParams.put(" AND group.groupId=?", groupId);
+		Map<String, Object> sqlParams = new LinkedHashMap<String, Object>();
+		if(!Value.isEmpty(alias)){
+			sqlParams.put(" AND alias=?",alias);
 		}
-		pager.setSqlParams(sqlParams).setOrder(" ORDER BY ctime DESC");
-		pager = articleDao.selectPager(pager);
-
-		return pager;
-	}
-
-	@Override
-	public Pager<Article> getArticlesPager(int pageIndex, long groupId,
-			String keywords) {
-		Pager<Article> pager = new Pager<Article>().openCounter(pageIndex);
-		Map<String, Object> sqlParams = new HashMap<String, Object>();
-		sqlParams.put(" AND alias=?", Article.ALIAS_ARTICLE);
+		if(hidden != Article.HIDDEN_ALL){
+			sqlParams.put(" AND hidden=?", hidden);
+		}
 		if (groupId != 0) {
 			sqlParams.put(" AND group.groupId=?", groupId);
 		}
 		if (!Value.isEmpty(keywords)) {
 
 			sqlParams.put(" AND ( title like ? ", "%" + keywords + "%");
-			sqlParams.put(" OR tags like ?) ", "%" + keywords + "%");
+			sqlParams.put(" OR tags like ? ) ", "%" + keywords + "%");
 		}
 		pager.setSqlParams(sqlParams).setOrder(" ORDER BY ctime DESC");
 		pager = articleDao.selectPager(pager);
-
 		return pager;
+	}
+
+	public Pager<Article> getArticlesPager(int pageIndex, long groupId) {
+		
+
+		return articlesPager(pageIndex, Article.ALIAS_ARTICLE, groupId, Article.HIDDEN_NONE, "");
+	}
+
+	public Pager<Article> getAllArticlesPager(int pageIndex, long groupId) {
+		return articlesPager(pageIndex,Article.ALIAS_ARTICLE ,groupId, Article.HIDDEN_ALL, "");
+	}
+	public Pager<Article> getAllArticlesPager(int pageIndex, String alias) {
+		return articlesPager(pageIndex,alias, 0, Article.HIDDEN_ALL, "");
+	}
+
+	@Override
+	public Pager<Article> getArticlesPager(int pageIndex, long groupId,
+			String keywords) {
+		
+		return articlesPager(pageIndex,Article.ALIAS_ARTICLE, groupId, Article.HIDDEN_NONE, keywords);
 	}
 
 	@Override
@@ -68,11 +78,9 @@ public class ArticleServiceImpl implements IArticleService {
 		Article article = articleDao.findArticleById(id);
 
 		return article;
-	}
-	
-	
+	}	
 
-	@Override
+	@CacheEvict(cacheNames = "artilceConfig", key = "'home_show_article'")
 	public Article saveOrUpdateArticle(Article article) {
 
 		Assert.notNull(article, "未找到文章对象");
@@ -110,16 +118,11 @@ public class ArticleServiceImpl implements IArticleService {
 
 	@Override
 	public Pager<Article> getArticlesPager(int pageIndex, String alias) {
-		Pager<Article> pager = new Pager<Article>().openCounter(pageIndex);
-		Map<String, Object> sqlParams = new HashMap<String, Object>();
-		sqlParams.put(" AND alias=?", alias);
-		pager.setSqlParams(sqlParams).setOrder(" ORDER BY ctime DESC");
-		pager = articleDao.selectPager(pager);
 
-		return pager;
+		return articlesPager(pageIndex, alias, 0, Article.HIDDEN_NONE, "");
 	}
 
-	@Override
+	@CacheEvict(cacheNames = "artilceConfig", key = "'home_show_article'")
 	public void deleteArticleById(long id) {
 
 		if (id != 0) {
@@ -129,7 +132,7 @@ public class ArticleServiceImpl implements IArticleService {
 
 	}
 
-	@Override
+	@CacheEvict(cacheNames = "artilceConfig", key = "'home_show_article'")
 	public void hiddenArticleById(long id) {
 		if (id != 0) {
 
@@ -176,8 +179,8 @@ public class ArticleServiceImpl implements IArticleService {
 		Pager<Article> pager = new Pager<Article>()
 				.openCounter(pageIndex, size).closeCounter();
 		Map<String, Object> sqlParams = new HashMap<String, Object>();
-		sqlParams.put(" AND hidden=?", Article.HIDDEN_NONE);
 		sqlParams.put(" AND alias=?", alias);
+		sqlParams.put(" AND hidden=?", Article.HIDDEN_NONE);
 		pager.setSqlParams(sqlParams).setOrder(" ORDER BY ctime DESC");
 		pager = articleDao.selectPager(pager);
 
@@ -203,7 +206,7 @@ public class ArticleServiceImpl implements IArticleService {
 		sqlParams.put(" AND hidden=?", Article.HIDDEN_NONE);
 		sqlParams.put(" AND alias=?", alias);
 		sqlParams.put(" AND ctime > ?", ctime);
-		pager.setSqlParams(sqlParams).setOrder(" ORDER BY ctime DESC");
+		pager.setSqlParams(sqlParams).setOrder(" ORDER BY ctime");
 		pager = articleDao.selectPager(pager);
 
 		return pager != null && pager.getList() != null  && pager.getList().size()>0 ? pager.getList()
@@ -251,5 +254,6 @@ public class ArticleServiceImpl implements IArticleService {
 
 		return pager != null ? pager.getList() : new ArrayList<Article>();
 	}
+
 
 }

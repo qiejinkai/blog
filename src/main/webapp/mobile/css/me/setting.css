@@ -1,0 +1,100 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-06
+* 张龙
+* 我的账户
+*/
+/* more*/
+
+.m_user_list ul{
+	-webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+    -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+    border-image: url("/m/img/border_line.png") 2 stretch;
+    border-bottom-width:0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 1px;
+    border-top:1px solid #e5e5e5;
+    margin-top:1.5rem;
+}
+
+
+.m_user_list li{
+    line-height:4.4rem;
+    background-color:#fff;
+	-webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+    -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+    border-image: url("/m/img/border_line.png") 2 stretch;
+    border-bottom-width:1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom:1px solid #e5e5e5;
+    position:relative;
+    height:4.4rem;
+	padding:0 1.5rem;
+
+}
+.m_user_list li i{
+	color:#999;
+}
+.m_user_list li a{
+    display:block;
+    margin: 0 auto;
+    height:4.4rem;
+	padding-right:1.5rem;
+    background:url(../../m/img/right_row.png) right center no-repeat;
+    background-size:0.9rem 1.7rem;
+
+}
+.m_user_list .m_image_select em{
+	width:3.4rem;
+	height:3.4rem;
+	display:inline-block;
+	float:right;
+	overflow:hidden;
+	border-radius:50%;
+	margin-top:0.5rem;
+	
+	}
+.m_user_list .m_image_select em img{
+	max-width:100%;
+}
+.m_user_list li label{
+    height:4.4rem;
+    display:inline-block;
+	float:left;
+    left:0px;
+    top:0px;
+    color:#666;
+    font-size:1.4rem;
+	 
+}
+.m_user_list li span{
+    height:4.4rem;
+    display:inline-block;
+	float:right;
+    left:0px;
+    top:0px;
+    color:#ccc;
+    font-size:1.4rem;
+	 
+}
+
+.personal_button {
+    padding: 0 1.5rem;
+    margin-top: 1.5rem;
+}
+.personal_button .button {
+  height: 4.4rem;
+  width: 100%;
+  border: 0px;
+  -webkit-appearance: none;
+  color: #fff;
+  font-size: 2rem;
+  background-color: #44b1f1;
+  outline: none;
+  display: inline-block;
+  text-align: center;
+  line-height: 4.4rem;
+}

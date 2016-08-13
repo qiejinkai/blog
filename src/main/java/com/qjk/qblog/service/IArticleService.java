@@ -41,4 +41,8 @@ public interface IArticleService {
 	List<Article> getLastestArticles(int i, String aliasDiary);
 
 	List<Article> getMostPvArticles(int i, String aliasDiary);
+
+	Pager<Article> getAllArticlesPager(int pageIndex, long groupId);
+
+	Pager<Article> getAllArticlesPager(int pageIndex, String alias);
 }

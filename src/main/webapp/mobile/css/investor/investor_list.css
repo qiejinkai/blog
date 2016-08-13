@@ -1,0 +1,129 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-06
+* 张展
+*投资人列表
+*/
+/* more*/
+
+
+/*investor_nav*/
+.investor_nav{
+	padding-bottom:0.5rem;
+	padding:1.5rem 1rem;
+	background:#fff;
+	margin:1.5rem  0px;
+	
+}
+.investor_nav div{
+	position:relative;
+	font-size:1.4rem;
+	line-height:2.2rem;
+	padding:0.5rem 0 0.5rem 6rem;
+	text-align:justify;
+	overflow:hidden;
+}
+.investor_nav div label{
+	position:absolute;
+	top:0.5rem;
+	left:0px;
+	width:8rem;
+	font-size:1.4rem;
+	color:#999;
+}
+.investor_nav div a{
+	display:inline-block;
+	padding:0 0.4rem;
+	color:#333;
+	font-size:1.2rem;
+	margin:0.2rem 0.3rem;
+	float:left;
+	line-height:1.8rem;
+}
+.investor_nav div a.selected{
+	background:#44b1f1;
+	color:#fff;
+}
+/*investor_list*/
+.investor_list{
+	padding:1.5rem 1rem;
+	background-color:#fff;
+}
+.investor_list_item{
+	padding:1rem 0;
+	-webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+    -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+    border-image: url("/m/img/border_line.png") 2 stretch;
+    border-bottom-width:1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+	border-bottom:1px solid #e5e5e5;
+}
+.investor_list_item:last-child{
+	border-bottom:0px;
+}
+.investor_list_item_img{
+	float:left;
+	width:4rem;
+	height:4rem;
+	display:block;
+	overflow:hidden;
+	border-radius:50%;
+}
+.investor_list_item_img img{
+	width:100%;
+}
+.investor_list_item_info{
+	padding-left:5rem;
+}
+.investor_list_item_info h2{
+	padding-bottom:0.5rem;
+	font-size:1.6rem;
+	color:#333;
+}
+.investor_list_item_info em{
+	font-size:1.3rem;
+	width:100%;
+	height:2rem;
+	display:block;
+	overflow:hidden;
+}
+.investor_list_item_info em span{
+	float:left;
+	font-size:1.4rem;
+	color:#666;
+	padding-top:0.1rem;
+}
+.investor_list_item_info i{
+	background:url(/m/img/investor_ico.png) no-repeat;
+	background-size:2rem 100rem;
+	display:inline-block;
+	width:2rem;
+	height:2rem;
+	float:left;
+	margin:0 0.8rem 0 0.2rem;
+	}
+.investor_list_item_info i.investor_user_1{
+	background-position:0 -41.67rem;
+}
+.investor_list_item_info i.investor_user_2{
+	background-position:0 -50rem;
+}
+.investor_list_item_info i.investor_user_4{
+	background-position:0 -66.67rem;
+}
+.investor_list_item_info i.investor_user_5{
+	background-position:0 -75rem;
+}
+.investor_list a.more{
+	width:100%;
+	height:3rem;
+	line-height:3rem;
+	text-align:center;
+	background:#44b1f1;
+	border-top:1px solid #3196d2;
+	margin:1rem 0 0;
+	font-size:1.4rem;
+	color:#fff;
+}

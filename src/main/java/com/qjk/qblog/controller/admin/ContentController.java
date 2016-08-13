@@ -47,7 +47,7 @@ public class ContentController {
 		model.addAttribute("groups", groups);
 		model.addAttribute("groupId", groupId);
 		if (groupId != 0 && groups != null && groups.size() > 0) {
-			Pager<Article> pager = articleService.getArticlesPager(pageIndex,
+			Pager<Article> pager = articleService.getAllArticlesPager(pageIndex,
 					groupId);
 
 			model.addAttribute("pager", pager);
@@ -289,7 +289,7 @@ public class ContentController {
 		if (!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)) {
 			return "redirect:/admin";
 		}
-		Pager<Article> pager = articleService.getArticlesPager(1, alias);
+		Pager<Article> pager = articleService.getAllArticlesPager(1, alias);
 
 		model.addAttribute("pager", pager);
 
@@ -303,7 +303,7 @@ public class ContentController {
 		if (!Article.contains(alias) || Article.ALIAS_ARTICLE.equals(alias)) {
 			return "redirect:/admin";
 		}
-		Pager<Article> pager = articleService.getArticlesPager(p, alias);
+		Pager<Article> pager = articleService.getAllArticlesPager(p, alias);
 
 		model.addAttribute("pager", pager);
 

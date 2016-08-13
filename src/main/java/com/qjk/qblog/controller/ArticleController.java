@@ -68,13 +68,11 @@ public class ArticleController {
 			model.addAttribute("keywords", keywords);
 		}
 		if (RequestUtil.isMobile(request)) {
-
-			List<AGroup> groups = groupSerivce.findGroupList();
-			model.addAttribute("groups", groups);
 			Pager<Article> pager = articleService.getArticlesPager(pageIndex,
 					groupId, keywords);
-			model.addAttribute("articles", pager.getList());
-			model.addAttribute("title", "文章");
+			if (pager != null) {
+				model.addAttribute("articles", pager.getList());
+			}
 			return "mobile/article";
 		} else {
 
@@ -92,19 +90,20 @@ public class ArticleController {
 			return "article";
 		}
 	}
-	
-	@RequestMapping(value = { "/","" }, method = RequestMethod.POST,params={"json"})
+
+	@RequestMapping(value = { "/", "" }, method = RequestMethod.POST, params = { "json" })
 	@ResponseBody
-	public Object article_more( long groupId,
-			 int pageIndex, String keywords,HttpServletRequest request){
-		Map<String,Object> result = new HashMap<String, Object>();
+	public Object article_more(long groupId, int pageIndex, String keywords,
+			HttpServletRequest request) {
+		Map<String, Object> result = new HashMap<String, Object>();
 		Pager<Article> pager = articleService.getArticlesPager(pageIndex,
 				groupId, keywords);
-		if(pager == null || pager.getList() ==null || pager.getList().size() == 0){
+		if (pager == null || pager.getList() == null
+				|| pager.getList().size() == 0) {
 			result.put("ismore", "no");
-		}else{
+		} else {
 			result.put("articles", pager.getList());
-			if(pager.getList().size()<= pager.getPageSize()){
+			if (pager.getList().size() <= pager.getPageSize()) {
 				result.put("ismore", "no");
 			}
 		}
@@ -112,7 +111,8 @@ public class ArticleController {
 	}
 
 	@RequestMapping(value = "/detail/{id}")
-	public String article_detail(@PathVariable long id, Model model) {
+	public String article_detail(@PathVariable long id, Model model,
+			HttpServletRequest request) {
 
 		Article article = articleService.findArticleById(id);
 
@@ -121,8 +121,20 @@ public class ArticleController {
 			return "404";
 		} else {
 
+			Article prev = articleService.getPrevArticle(article.getCtime(),
+					article.getAlias());
+			model.addAttribute("prev", prev);
+			Article next = articleService.getNextArticle(article.getCtime(),
+					article.getAlias());
+			model.addAttribute("next", next);
+			model.addAttribute("article", article);
+			if (RequestUtil.isMobile(request)) {
+				return "mobile/article_detail";
+			}
+
 			List<AGroup> groups = groupSerivce.findGroupList();
 			model.addAttribute("groups", groups);
+
 			List<Article> lastestArticles = articleService
 					.getLastestArticles(10);
 			model.addAttribute("lastest", lastestArticles);
@@ -130,14 +142,7 @@ public class ArticleController {
 			model.addAttribute("mostpv", mostPvArticles);
 
 			model.addAttribute("curr_group", article.getGroup());
-			model.addAttribute("article", article);
 
-			Article prev = articleService.getPrevArticle(article.getCtime(),
-					article.getAlias());
-			model.addAttribute("prev", prev);
-			Article next = articleService.getNextArticle(article.getCtime(),
-					article.getAlias());
-			model.addAttribute("next", next);
 		}
 
 		return "article_detail";

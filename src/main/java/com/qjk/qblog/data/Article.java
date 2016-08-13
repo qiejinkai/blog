@@ -31,7 +31,8 @@ public class Article implements Serializable{
 	public static final String ALIAS_DIARY="diary";
 	public static final String ALIAS_NOTICE="notice";
 	public static final String ALIAS_MOOD = "mood";
-	
+
+	public static final int HIDDEN_ALL = 2;
 	public static final int HIDDEN_NONE = 0;
 	public static final int HIDDEN_HIDDEN = 1;
 	

@@ -27,16 +27,15 @@ public class HomeController {
 	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
 
+		List<Article> bannerList = articleService.getArticles(1, 10,
+				Article.ALIAS_BANNER);
 		if (RequestUtil.isMobile(request)) {
 
 			List<AGroup> groups = groupSerivce.findGroupList();
 			model.addAttribute("groups", groups);
 			List<Article> articles = articleService.getHomeShowArticles();
 			model.addAttribute("articles", articles);
-			List<Article> bannerList = articleService.getArticles(1, 10,
-					Article.ALIAS_BANNER);
 			model.addAttribute("bannerList", bannerList);
-			model.addAttribute("title", "首页");
 			return "mobile/home";
 		} else {
 			List<Article> articles = articleService.getHomeShowArticles();
@@ -52,7 +51,10 @@ public class HomeController {
 			List<Article> friendLinks = articleService.getArticles(1, 1,
 					Article.ALIAS_FRIENDLINK);
 			model.addAttribute("friendlinks", friendLinks);
-
+			if(bannerList != null && bannerList.size()>0){
+				
+				model.addAttribute("banner", bannerList.get(0));
+			}
 			return "home";
 		}
 	}

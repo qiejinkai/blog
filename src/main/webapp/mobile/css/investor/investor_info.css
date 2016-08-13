@@ -1,0 +1,124 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-06
+* 张展
+*约谈
+*/
+/* more*/
+
+
+.investor_info_wrap{
+	padding:0 1rem 1.5rem;
+	background:#fff;
+}
+.investor_info_base{
+	padding:1.5rem 1rem;
+	background:#fff;
+}
+.investor_info_base_img{
+	width:5rem;
+	height:5rem;
+	display:block;
+	overflow:hidden;
+	float:left;
+	border-radius:50%;
+}
+.investor_info_base_img img{
+	width:100%;
+}
+.investor_info_base_tent{
+	padding-left:6rem;
+}
+.investor_info_base_tent h1{
+	font-size:1.6rem;
+	padding-bottom:1.2rem;
+}
+.investor_info_base_tent h1 i{
+	display: inline-block;
+    width: 20px;
+    margin-left: 4px;
+    height: 16px;
+    background: url(../../m/img/me_basec_ico.png) no-repeat;
+}
+.investor_info_base_tent h3{
+	font-size:1.2rem;
+	padding:0.5rem 0 1.5rem;
+
+}
+.investor_info_base_tent h3 em{
+	color:#666;
+	margin-right:1rem;
+}
+.investor_info_cite span{
+	font-size:1.4rem;
+	display:block;
+	line-height:2.3rem;
+	color:#999;
+	
+}
+.investor_info_cite span i{
+	margin-right:2rem;
+	color:#999;
+}
+.investor_info_cite span em{
+	color:#333;
+}
+.investor_info_wrap h2{
+	padding:1.5rem 0 0.5rem;
+	font-size:1.6rem;
+	margin-top:1.5rem;
+}
+.investor_info_box{
+	border-top:1px dashed #eee;
+	padding:1rem 0;
+	margin-top:1rem;
+}
+.investor_info_box span{
+	width:100%;
+	font-size:1.4rem;
+	display:block;
+	padding:0 0 1rem;
+	color:#999;
+	overflow:hidden;
+}
+.investor_info_box span em{
+	font-size:1.4rem;
+	padding:0 0.5rem;
+	margin-left:1rem;
+	color:#333;
+}
+.investor_info_box span label{
+	float:left;
+	color:#999;
+}
+.investor_info_box span i{
+	font-size:1.4rem;
+	padding:0 0.5rem;
+	color:#333;
+	float:left;
+	display:block;
+	width:70%;
+}
+.investor_info_box p{
+	font-size:1.4rem;
+	line-height:2.5rem;
+}
+.invest_item{
+	min-height:6.2rem;
+	padding:1.5rem 0 0;
+}
+.invest_item_img{
+	width:9rem;
+	height:6.2rem;
+	float:left;
+	display:block;
+	overflow:hidden;
+}
+.invest_item_img img{
+	width:100%;
+}
+.invest_item_txt{
+	padding:0 2rem 0 10rem;
+	font-size:1.4rem;
+	line-height:2rem;
+}

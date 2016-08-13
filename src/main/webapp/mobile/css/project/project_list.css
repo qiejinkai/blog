@@ -1,0 +1,92 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-02
+* 张龙
+*/
+/* more*/
+.m_project_list_nav{
+	padding:1rem;
+	background-color:#fff;
+	margin-bottom:1.5rem;
+	margin-top: 1.5rem;
+}
+.m_project_list_search{
+	-webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+    -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+    border-image: url("/m/img/border_line.png") 2 stretch;
+    border-width: 1px;
+    border: 1px solid #e5e5e5;
+	position:relative;
+	overflow:hidden;
+	margin-bottom:0.5rem;
+	height:2.4rem;
+}
+.m_project_list_nav .m_project_list_text{
+	padding-left:0.7rem;
+	height:2.4rem;
+	font-size:1.4rem;
+	color:#333;
+	width:100%;
+	float:left;
+	border:0px;
+	-webkit-appearance:none;
+	appearance:none;
+}
+.m_project_list_nav .m_project_list_btn{
+	position:absolute;
+	top:0.4rem;
+	right:0.2rem;
+	width:2rem;
+	height:2rem;
+	background:url(/m/img/search_ico.png)  top center no-repeat; 
+	border:0px;
+	-webkit-appearance:none;
+	appearance:none;
+	
+	}
+.m_project_list_item{
+	position:relative;
+	font-size:1.4rem;
+	line-height:2.2rem;
+	padding:0.5rem 0 0.5rem 6rem;
+	text-align:justify;
+	overflow:hidden;
+}
+.m_project_list_item label{
+	
+	position:absolute;
+	top:0.5rem;
+	left:0px;
+	width:8rem;
+	font-size:1.4rem;
+	color:#999;
+	}
+.m_project_list_item a{
+	display:inline-block;
+	padding:0 0.4rem;
+	color:#333;
+	font-size:1.2rem;
+	margin:0.2rem 0.3rem;
+	float:left;
+	line-height:1.8rem;
+	}
+.m_project_list_item a.selected{
+	color:#fff;
+	background-color:#44b1f1;
+}
+/*project_list_main_no*/
+#project_list_main_no{
+	
+	padding:5rem 0px;
+	background-color:#fff;
+	text-align:center;
+	color:#999;
+	font-size:1.4rem;
+	width: 100%;
+}
+#project_list_main_no p{
+	background:url(/m/img/project_list_ico_n.png)  top center no-repeat;
+	padding-top:4rem;
+	background-size:3rem 3.2rem;
+	
+	}

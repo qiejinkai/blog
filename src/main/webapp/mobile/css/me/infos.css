@@ -1,0 +1,182 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-06
+* 张龙
+* 我的账户
+*/
+/* more*/
+
+.m_user_list ul{
+	-webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+    -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+    border-image: url("/m/img/border_line.png") 2 stretch;
+    border-bottom-width:0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 1px;
+    border-top:1px solid #e5e5e5;
+    margin-top:1.5rem;
+}
+.m_user_list ul .m_user_news{
+	padding:1.5rem;
+}
+
+.m_user_news .m_user_news_img{
+    display: inline-block;
+    border-radius: 50%;
+    height: 4.5rem;
+    width: 4.5rem;
+    overflow: hidden;
+	float:left;
+}
+.m_user_news .m_user_news_img img{
+    width: 100%;
+   
+}
+.m_user_news .m_user_news_right{
+    width: 80%;
+	float:left;
+	line-height:2.2rem;
+}
+.m_user_news ul .li2 a{
+    height: 7.4rem;
+    width:100%;
+}
+.m_user_news ul .li2 a .left{
+    line-height:2.6rem;
+    margin-top: 1rem;
+}
+
+
+.m_user_list li{
+    width:100%;
+    line-height:4.4rem;
+    background-color:#fff;
+	-webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+    -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+    border-image: url("/m/img/border_line.png") 2 stretch;
+    border-bottom-width:1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom:1px solid #e5e5e5;
+    position:relative;
+    height:4.4rem;
+
+}
+.m_user_list li i{
+	color:#999;
+}
+.m_user_list li a{
+    display:block;
+    width:90%;
+    margin: 0 auto;
+    height:4.4rem;
+    background:url(../../m/img/right_row.png) right center no-repeat;
+    background-size:0.9rem 1.7rem;
+
+}
+.m_user_list li label{
+    width:9rem;
+    position:absolute;
+    height:4.4rem;
+    display:inline-block;
+    left:0px;
+    top:0px;
+    color:#333;
+    font-size:1.4rem;
+    text-indent:1.5rem;
+	 padding-left: 4rem;
+	  background: url(../../m/img/m_user_icon.png) no-repeat;
+	  background-size: 2.2rem 35rem;
+}
+.m_user_list li .user_icon1 {
+    
+    
+     background-position: 1.5rem -5rem;
+    
+}
+.m_user_list li .user_icon2 {
+   
+     background-position: 1.5rem -10rem;
+   
+}
+.m_user_list li .user_icon3 {
+ 
+     background-position: 1.5rem -15rem;
+    
+}
+.m_user_list li .user_icon4 {
+   
+    background-position: 1.5rem -20rem;
+    
+}
+.m_user_list li .user_icon5 {
+    
+     background-position: 1.5rem -25rem;
+    
+}
+.m_user_list li .user_icon6 {
+    
+     background-position: 1.5rem 0;
+   
+}
+.m_user_list li .user_icon7 {
+    
+     background-position: 1.5rem -30rem;
+   
+}
+.m_user_list li label.user_icon_wallet{
+	 background: url(../../m/img/wallet_ico_44x44.png) no-repeat;
+	  background-size: 2.2rem 2.2rem;
+	  background-position: 1.5rem center;
+}
+.m_user_list li em{
+    /*width:3.4rem;*/
+    height:3.4rem;
+    display:block;
+    overflow:hidden;
+    border-radius:50%;
+    float:right;
+    margin:0.5rem 3.7rem 0px 0px;
+}
+.m_user_list li em img{
+    width:100%;
+}
+.m_user_list li span{
+    color:#ccc;
+    font-size:1.2rem;
+    float:right;
+    text-align:right;
+    padding-right:3.7rem;
+}
+.m_user_list li .m_user_block{
+    display: block;
+    width: 2.5rem;
+    height: 1.5rem;
+    background: #44b1f1;
+    padding: 0;
+    margin-right: 3.7rem;
+    margin-top: 1.5rem;
+    border-radius: 3rem;
+    color: #fff;
+    text-align: center;
+    line-height: 1.5rem;
+}
+.personal_button {
+    padding: 0 1.5rem;
+    margin-top: 1.5rem;
+}
+.personal_button .button {
+  height: 4.4rem;
+  width: 100%;
+  border: 0px;
+  -webkit-appearance: none;
+  color: #fff;
+  font-size: 2rem;
+  background-color: #44b1f1;
+  outline: none;
+  display: inline-block;
+  text-align: center;
+  line-height: 4.4rem;
+}

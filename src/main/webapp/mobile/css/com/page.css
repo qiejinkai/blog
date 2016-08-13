@@ -1,0 +1,66 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-01
+* 张龙
+*/
+/* more*/
+
+.m_jzmore{
+	width:100%;
+	
+	height: 36px;
+    text-align: center;
+    line-height: 36px;
+	margin: 12px 0px;
+}
+.m_jzmore a{
+	width:120px;
+	height: 36px;
+	display: inline-block;
+	background: #c0c0c0;
+	border-radius: 18px;
+	color: #ffffff;
+	text-align: center;
+	line-height:36px;
+}
+/*m_page*/
+.m_page{
+	line-height:4.4rem;
+	padding:0 1rem;
+	position:relative;
+	text-align:center;
+	
+}
+.m_page a{
+	position:absolute;
+	font-size:1.4rem;
+	color:#333;
+	}
+.m_page_pre{
+	left:1rem;
+}
+.m_page_next{
+	right:1rem;
+}
+.m_page span{
+	font-size:1.4rem;
+	color:#333;
+	
+}
+.m_page span em{
+	color:#44b1f1;
+	font-style:normal;
+}
+
+.returnTop{
+	 width: 4rem; 
+	 height: 4rem; 
+	 position: fixed;
+	 background:url(/m/img/m_fhtop.png) left top no-repeat; 
+	 background-size: 100% 100%;
+	 bottom:6rem;
+	 right: 0px;
+	 display: none;
+}
+
+

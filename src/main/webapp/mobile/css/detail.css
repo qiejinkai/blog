@@ -1,0 +1,358 @@
+@CHARSET "UTF-8";
+/*
+* 2016-02-19
+* 张展
+*详情页
+*/
+
+html{
+    background: #fff;
+}
+/* 公共样式 */
+.float_btn{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4.5rem;
+    overflow: hidden;
+    z-index: 1000;
+}
+.float_btn a{
+    width: 50%;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    text-align: center;
+    float: left;
+    background: #765c99;
+    color: #fff;
+    font-size: 1.4rem;
+    margin: 0;
+}
+.float_btn a.detail_click_btn{
+    background: #166dd6;
+}
+.float_btn a.disabled{
+  background: #ccc;  
+}
+.detail_item_share{
+    position: absolute;
+    bottom: 1.5rem;
+    left: 0;
+    text-align: center;
+    width: 100%;
+}
+.detail_item_share a{
+    font-size: 1.2rem;
+    height: 1.6rem;
+    display: inline-block;
+    background: url("/mobile/img/item_share_icon.png") no-repeat;
+    background-size: 1.6rem 10rem;
+    margin: 0 1.5rem;
+}
+.detail_item_share a.left{
+    padding-left: 1.8rem;
+    background-position: 0 -7.5rem;
+    color: #999;
+}
+.detail_item_share a.left em{
+    float: left;
+}
+.detail_item_share a.right{
+    width: 1.6rem;
+}
+.detail_item_share a.r1{
+    background-position: 0 0rem;
+}
+.detail_item_share a.r2{
+    background-position: 0 -5rem;
+}
+.detail_item_share a.selected{
+    background-position: 0 -2.5rem;
+}
+.item_list{
+    border-radius: 0;
+    margin-top: 4.4rem;
+    border: 0;
+    background: #f5f5f5;
+}
+.item_img{
+    width: 100%;
+}
+.item_list_top{
+    background: none;
+}
+.item_bottom{
+    padding: 0 1rem 1.1rem;
+}
+.item_bottom_list{
+    padding: 0 0.4rem;
+    background: #fff;
+}
+.item_bottom .item_time{
+    background: #fff;
+}
+.detail_tab{
+    width: 100%;
+    height: 3.6rem;
+    border-bottom: 1px solid #166dd6;
+}
+.detail_tab>ul{
+    width: 100%;
+    display: table;
+    padding: 1rem 0;
+}
+.detail_tab>ul li{
+    display: table-cell;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #999;
+    position: relative;
+    line-height: 1.6rem;
+    border-right: 1px solid #e7e7e7;
+    box-sizing: border-box;
+}
+.detail_tab>ul li:last-child{
+    border-right: none;
+}
+.detail_tab>ul li a{
+    color: #999;
+}
+.detail_tab>ul li.selected a{
+    color: #166dd6;
+}
+.detail_tab>ul li a:active{
+    color: #166dd6;
+}
+.detail_tab>ul li.selected::after{
+    content: '';
+    width: 0;
+    height: 0;
+    display: block;
+    position: absolute;
+    bottom:-1rem;
+    left: 50%;
+    margin-left: -0.5rem;
+    border-bottom: 0.5rem solid #166dd6;
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+}
+.content{
+    padding: 1rem 1rem 5.5rem;
+    overflow: hidden;
+    background: #fff;
+}
+.detail_tit{
+    height: 1.6rem;
+    line-height: 1.6rem;
+    padding: 1rem 0 1rem 1rem;
+    overflow: hidden;
+    border-bottom: 1px dashed #999;
+    font-size: 1.4rem;
+    color: #333;
+    position: relative;
+}
+.detail_tit::before{
+    content: '';
+    width: 0.2rem;
+    height: 1.6rem;
+    display: block;
+    overflow: hidden;
+    background: #019cd9;
+    position: absolute;
+    top:1rem;
+    left: 0;
+}
+/* 项目概况 财务信息 */
+.container{
+    padding: 1rem 0;
+    line-height: 1.8rem;
+    font-size: 1.2rem;
+    color: #999;
+}
+.container img{
+    width: 100%;
+}
+.container p embed{
+    width: 100% !important;
+}
+.partner_wrap{
+    overflow: hidden;
+}
+.detail_partner{
+    padding: 1.5rem 0;
+    overflow: hidden;
+    border-bottom: 1px solid #e7e7e7;
+}
+.partner_wrap .detail_partner:last-child{
+    border-bottom: none;
+}
+.partner_img{
+    width: 3.6rem;
+    height: 3.6rem;
+    display: block;
+    float: left;
+    border-radius: 50%;
+}
+.partner_img img{
+    width: 100%;
+}
+.partner_info{
+    padding-left: 4.4rem;
+}
+.partner_info h2{
+    line-height: 1.6rem;
+    color: #333;
+    font-size: 1.2rem;
+    padding-top: 0.3rem;
+}
+.partner_info span{
+    display: block;
+    color: #999;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+}
+.partner_info span em.blue{
+    color: #019cd9;
+}
+.partner_info p{
+    padding-top: 1rem;
+    color: #999;
+    line-height: 1.6rem;
+    font-size: 1.2rem;
+}
+/* 投资互动 */
+ul.tz_tab{
+    width: 100%;
+    border-radius: 0.2rem;
+    overflow: hidden;
+}
+ul.tz_tab li{
+    width: 50%;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    float: left;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #999;
+}
+ul.tz_tab li a{
+    color: #999;
+}
+ul.tz_tab li:first-child{
+    border-right: none;
+}
+ul.tz_tab li:last-child{
+    border-left: none;
+}
+ul.tz_tab li.selected{
+    color: #fff;
+    background: #019cd9;
+    border-color: #019cd9;
+}
+ul.tz_tab li.selected a{
+    color: #fff;
+}
+.tz_wrap>div{
+    overflow: hidden;
+    display: none;
+}
+.tz_wrap .tz_text{
+    width: 100%;
+    height: 6.5rem;
+    padding: 0.5rem;
+    line-height: 1.6rem;
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    border: 1px solid #eee;
+    box-sizing: border-box;
+    outline: none;
+    -webkit-appearance: none;
+    word-break: break-all;
+}
+.tz_wrap>div .tz_text:focus{
+    border-color: #44b1f1;
+}
+.tz_inp{
+    overflow: hidden;
+    padding:1rem 0;
+    border-bottom: 1px solid #eee;
+}
+.tz_inp img{
+    width: 5.4rem;
+    height: 2.5rem;
+    display: block;
+    float: left;
+    box-sizing: border-box;
+    border: 1px solid #eee;
+}
+.tz_inp .inp{
+    width: 10rem;
+    height:2.5rem;
+    float: left;
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    outline: none;
+    margin-left: 0.5rem;
+    padding-left: 0.5rem;
+}
+.tz_inp .btn{
+    width: 6rem;
+    height: 2.5rem;
+    color: #fff;
+    background: #019cd9;
+    border: none;
+    border-radius: 0.2rem;
+    float: right;
+}
+.partner_info h2 i{
+    float: right;
+    color: #999;
+}
+.partner_info a.callback{
+    width: 6rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #019cd9;
+    border-radius: 0.2rem;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    margin-top: 1rem;
+    display: block;
+    float: right;
+}
+/* 项目分析 */
+.container h3{
+    font-size: 1.2rem;
+    line-height: 2rem;
+    overflow: hidden;
+    color: #333;
+}
+.container h3.blue{
+    color: #019cd9;
+}
+.container h3 a{
+    width: 60%;
+    height: 2rem;
+    display: block;overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
+}
+.container h3 em{
+    float: right;
+    color: #999;
+}
+.container h3.blue em{
+    color: #019cd9;
+}
+/* 未登录 */
+.m_product_login h2{
+    font-size: 1.4rem;
+    color: #999;
+    margin-bottom: 1rem;
+}

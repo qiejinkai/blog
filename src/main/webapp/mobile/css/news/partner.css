@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-06
+* 张龙
+*/
+/*news_list*/
+.m_partner_main{
+	clear:both;
+	padding:1.5rem 2rem;
+	overflow:hidden;
+}
+.m_partner_main li{
+	display:block;
+	width:26rem;
+	height:10rem;
+	overflow:hidden;
+	margin:0.5rem;
+	-webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+    -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+    border-image: url("/m/img/border_line.png") 2 stretch;
+  
+    border-width: 1px;
+	border:1px solid #e5e5e5;  
+	
+}
+.m_partner_main li img{
+	width:100%;
+}

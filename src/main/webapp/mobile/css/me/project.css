@@ -1,0 +1,74 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-02
+* 张龙
+* 我的项目
+*/
+/* more*/
+.m_me_project{
+	line-height:4.4rem;
+	background-color:#fff;
+	margin-bottom:1.5rem;
+	-webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+  -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+  border-image: url("/m/img/border_line.png") 2 stretch;
+  border-bottom-width: 1px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-top-width: 0px;
+  border-bottom: 1px solid #e5e5e5;
+	
+	
+}
+.m_me_project ul{
+	display:table;
+	width:100%;
+	}
+.m_me_project ul li{
+	display:table-cell;
+	text-indent:1rem;
+	text-align: center;
+}
+.m_me_project ul li.u_first{
+    width: 25%;
+}
+.m_me_project ul li a{
+	color:#333;
+	font-size:1.4rem;
+}
+.m_me_project ul li.selected a{
+	color:#44b1f1;
+}
+.m_me_project ul li.selected{
+    color: #44b1f1;
+}
+
+/****************************/
+.product_list_bottom ul{
+	width:100%;
+	height:auto;
+	display:table;
+	padding:1rem 0;
+}
+.product_list_bottom ul li{
+	display:table-cell;
+}
+.product_list_bottom ul li:first-child{
+	width:41%;
+}
+.product_list_bottom ul li:last-child{
+	text-align:right;
+}
+.product_list_bottom ul li span{
+	display:block;
+	font-size:1.2rem;
+	color:#999;
+}
+.product_list_bottom ul li span em{
+	color:#333;
+	font-size:2rem;
+}
+.product_list_bottom ul li span i{
+	color:#333;
+	font-size:1.3rem;
+}

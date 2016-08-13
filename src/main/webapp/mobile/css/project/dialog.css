@@ -1,0 +1,167 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-06
+* 张展
+*约谈
+*/
+/* more*/
+
+
+.dialog_wrap{
+	padding:1.5rem 1rem 2.5rem;
+	margin-top:1.5rem;
+	font-size:1.4rem;
+}
+.dialog_wrap_white{
+	background:#fff;
+	padding:1.5rem 1rem 0;
+}
+.dialog_list{
+	height:3.4rem;
+	width:100%;
+	display:block;
+	padding:0.5rem 0;
+}
+.dialog_list_text{
+	height:10rem;
+}
+.dialog_list .lab{
+	width:7.2rem;
+	height:3.4rem;
+	float:left;
+	line-height:3.4rem;
+}
+.dialog_list .inp{
+	width:21rem;
+	height:3.4rem;
+	outline:none;
+	-webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+    -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+    border-image: url("/m/img/border_line.png") 2 stretch;
+    border-width: 1px;
+    border: 1px solid #e5e5e5;
+	padding-left:0.5rem;
+}
+.dialog_list .txt{
+	width:20.5rem;
+	height:10rem;
+	padding:0.5rem 0.5rem 0 0.5rem;
+	-webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+    -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+    border-image: url("/m/img/border_line.png") 2 stretch;
+    border-width: 1px;
+    border: 1px solid #e5e5e5;
+}
+.dialog_tip{
+	width:100%;
+	height:4rem;
+	display:block;
+	border-top:1px dashed #ddd;
+	padding-bottom:0.5rem;
+	margin-top:2rem;
+}
+.dialog_tip p{
+	font-size:1.4rem;
+	color:#ff6600;
+	height:4rem;
+	line-height:4rem;
+	text-align:center;
+	background:#fff;
+}
+.blank{
+	width:100%;
+	height:5rem;
+	display:block;
+	background:#fff;
+}
+.btn1{
+	width:100%;
+	height:3rem;
+	display:block;
+	background:#44b1f1;
+	border:1px solid #44b1f1;
+	border-top-left-radius:0.4rem;
+	border-top-right-radius:0.4rem;
+	color:#fff;
+}
+
+/*************  约谈成功  ********************/
+.dialog_ok{
+    width:10rem;
+    height:10rem;
+    display:block;
+    margin:0 auto;
+    background:url(../img/security_no_rz.png) 1rem 0rem no-repeat;
+    background-size:8.1rem 50rem;
+}
+.dialog_err{
+    width:10rem;
+    height:10rem;
+    display:block;
+    margin:0 auto;
+    background:url(../img/security_no_rz.png) 1rem -10rem no-repeat;
+    background-size:8.1rem 50rem;
+}
+.dialog_no_pic{
+    width:10rem;
+    height:10rem;
+    display:block;
+    margin:0 auto;
+    background:url(../img/icon_160.png) no-repeat center center;
+    background-size: 8rem 8rem;
+}
+.dialog_succ{
+	width:10rem;
+	height:10rem;
+	display:block;
+	margin:0 auto;
+	background:url(../img/project_list_ico_n.png) no-repeat center center;
+}
+.dialog_wrap p.txt{
+	font-size:1.4rem;
+	line-height:2rem;
+	text-align:center;
+	color: #999;
+}
+
+.dialog_wrap .links{
+	padding:4rem 0;
+	text-align:center;
+}
+.dialog_wrap .links a{
+	min-width:8rem;
+	height:2.5rem;
+	line-height:2.5rem;
+	text-align:center;
+	display:inline-block;
+	margin:0 0.5rem;
+	background:#44b1f1;
+	color:#fff;
+    padding: 0 0.5rem;
+}
+
+
+.no_dialog{
+	width:8rem;
+	height:8rem;
+	display:block;
+	margin:0 auto;
+	background:url(../img/no_sec_bg.png) no-repeat center center;
+	background-size:8rem 8rem;
+	padding:2rem 0;
+}
+.m_no_project{
+	width:5.5rem;
+	height:6.5rem;
+	display:block;
+	margin:2rem auto;
+	background:url(../img/no_project_bg.png) no-repeat center center;
+	background-size:100% 100%;
+	
+	
+	}
+.dialog_wrap h1{
+	font-size:2.2rem;
+	text-align:center;
+	padding-bottom:2rem;
+}

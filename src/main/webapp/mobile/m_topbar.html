@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no, minimal-ui">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <link rel="stylesheet" type="text/css" href="/mobile/css/com/touch.css" />
+    <link rel="stylesheet" type="text/css" href="/mobile/css/com/head.css" />
+
+    <script type="text/javascript" src="/js/jquery.mini.js"></script>
+</head>
+<body>
+<div class="top_nav">
+    <a href="/" class="m_logo"></a>
+    <a class="m_menu"></a>
+</div>
+<div class="m_menu_box">
+    <div class="m_menu_list">
+        <div class="m_menu_section">
+            <a class="icon_1">文章</a>
+            <ul>
+                <li><a>Java</a></li>
+                <li><a>SpringMVC</a></li>
+            </ul>
+        </div>
+        <div class="m_menu_section">
+            <a class="icon_2">关于我</a>
+        </div>
+        <div class="m_menu_section">
+            <a class="icon_3">日记</a>
+            <!--<a class="tit" href="">登录</a>-->
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('.m_menu').click(function(){
+            $(".m_menu").toggleClass("m_menu_on");
+            if($(".m_menu_box").is(":hidden")){
+                $('.m_menu_box').show();
+            }else{
+                $('.m_menu_box').hide();
+            }
+        });
+        $(".m_menu_list>.m_menu_section>a").bind("click",function(e){
+
+            var el = $(this).parent();
+            var menu = el.parent();
+            var sections = $(".m_menu_section",menu);
+
+            if(! el.is(".selected")) {
+                for(var i=0;i<sections.size();i++) {
+                    var section = sections.eq(i);
+                    if(section.is(el)) {
+                        section.addClass("selected");
+                    }
+                    else {
+                        section.removeClass("selected");
+                    }
+                }
+            }
+
+        });
+    });
+</script>
+</body>
+</html>

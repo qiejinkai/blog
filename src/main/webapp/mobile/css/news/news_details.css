@@ -1,0 +1,64 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-06
+* 张龙
+*/
+/*news_list*/
+.m_news_main{
+	clear:both;
+	padding:0rem 1rem;
+	background-color:#fff;
+	margin-top: 1.5rem;
+	min-height: 40rem;
+	
+}
+.m_news_title{
+	 -webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+  -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+  border-image: url("/m/img/border_line.png") 2 stretch;
+  border-bottom-width: 1px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-top-width: 0px;
+  border-bottom: 1px solid #e5e5e5;
+  padding:1rem 0 0.5rem;
+  margin-bottom:1rem;
+  
+ }
+.m_news_title h1{
+	font-size:1.6rem;
+	line-height:1.8rem;
+	color:#333;	
+}
+.m_news_title p{
+	font-size:1.2rem;
+	line-height:2.2rem;
+	
+	overflow:hidden;
+}
+.m_news_title p span{
+	float:left;
+	color:#999;
+}
+.m_news_title p em{
+	float:right;
+	color:#999;
+}
+.m_news_img{
+	margin-top:0.5rem;
+	text-align:center;
+}
+.m_news_img img{
+	max-width:100%;
+}
+.m_news_content{
+	line-height:2.2rem;
+	font-size:1.4rem;
+	color:#666;
+	padding: 1rem 0px;
+}
+.m_news_content img{
+	max-width: 100%;
+	height: auto;
+}
+

@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-07
+* 张展
+*设置个人性别信息
+*/
+/* more*/
+
+.resize_sex_wrap{
+	padding:1.5rem;
+	background:#fff;
+}
+.resize_sex_wrap span{
+	font-size:1.4rem;
+	overflow:hidden;
+	height:1.6rem;
+	line-height:1.6rem;
+	display:block;
+	float:left;
+}
+.resize_sex_wrap span.inp_blank{
+	margin-left:5rem;
+}
+.resize_sex_wrap span input{
+	margin:0.35rem 0.5rem 0;
+	-webkit-appearance: none;
+	background:#ddd;
+	border-radius:50%;
+	width:1rem;
+	height:1rem;
+	outline:none;
+	border:none;
+}
+.resize_sex_wrap span input:checked{
+	background:#44b1f1;
+}

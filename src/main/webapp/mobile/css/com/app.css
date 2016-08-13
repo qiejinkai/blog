@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+/*
+* 2015-07-06
+* 张龙
+*/
+.tip{
+	top: 0px !important;
+}
+.content{
+	padding-top: 0px !important;
+	padding-bottom: 12px !important;
+}
+
+.topbar{
+	display: none;
+	bottom: 0px !important;
+	top: initial;
+	background-color: #fff !important;
+}
+
+.topbar a.topbar_back{
+	background:url(/mobile/img/topbar_back_b.png) left top no-repeat ;
+	background-size: 100% 100%;
+	
+
+}
+.topbar a.topbar_home{
+	background:url(/mobile/img/topbar_home_b.png) left top no-repeat ;
+	background-size: 100% 100%;
+	
+}
+.topbar a.topbar_user{
+	background:url(/mobile/img/topbar_user_b.png) left top no-repeat ;
+	background-size: 100% 100%;
+	
+}
+.topbar .title{
+	color:#333;
+}

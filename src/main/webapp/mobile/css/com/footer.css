@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+/*
+* 2015-07-06
+* 南艳丽
+*/
+
+/*footer*/
+.footer{
+	width: 100%;
+	background-color: #fff;
+	text-align: center;
+	padding: 15px 0px;
+}
+.footer p{
+	font-size: 12px;
+	line-height: 22px;
+	color: #999;
+	text-align: center;
+}
+.footer p a{
+	padding:0 5px;
+    color: #999;
+}
+.footer p a:hover{
+    color: #44b1f1;
+}

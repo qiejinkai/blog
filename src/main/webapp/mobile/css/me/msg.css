@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+/*
+* 2015-09-06
+* 张龙
+* 我的消息
+*/
+/* more*/
+
+.m_me_msg ul{
+	margin:1.5rem 0rem;
+}
+.m_me_msg ul li{
+	-webkit-border-image: url("/m/img/border_line.png") 2 stretch;
+    -moz-border-image: url("/m/img/border_line.png") 2 stretch;
+    border-image: url("/m/img/border_line.png") 2 stretch;
+    border-bottom-width:0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 1px;
+    border-top:1px solid #e5e5e5;
+	background-color:#fff;
+	padding:0.5rem 1rem;
+}
+.m_me_msg ul li p{
+	line-height:2.2rem;
+	font-size:1.4rem;
+	color:#333;
+}
+.m_me_msg ul li p strong{
+	color:#333;
+	font-weight:normal;
+	
+	}
+.m_me_msg ul li.selected p{
+	color:#999;
+}
+.m_me_msg ul li.selected p strong{
+	color:#999;
+}

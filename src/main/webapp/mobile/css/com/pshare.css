@@ -1,0 +1,94 @@
+@CHARSET "UTF-8";
+/*
+* 2015-07-11
+* 张龙
+* 项目分享
+*/
+
+.share_p{
+	width:5.2rem;
+	height:5.2rem;
+	position:fixed;
+	z-index:2;
+	right:0px;
+	bottom:8.7rem;	
+}
+.share_p_b{
+	width:9.2rem;
+	height:13.5rem;
+	bottom:4.4rem;
+}
+.share_p a{
+	width:5.2rem;
+	height:5.2rem;
+	display:inline-block;
+	background:url(/mobile/img/share_ico.png) left top no-repeat;
+	position:absolute;
+	color:#fff;
+	text-align:center;
+	line-height:5.2rem;
+	font-size:1.4rem;
+	display:none;
+}
+.share_p a.share_button{
+	background-size:5.2rem 45rem;
+	right:0rem;
+	top:0;
+	display:block;
+}
+.share_p_b a.share_button{
+	top:4rem;
+}
+.share_p a.active{
+	background-position:0 -10rem;
+	
+}
+.share_p a.share_fav{
+	background-size:5.2rem 45rem;
+	right:1.6rem;
+	top:0rem;
+	width:3.2rem;
+	height:3.2rem;
+	line-height:3.2rem;
+	font-size:1.2rem;
+	background-position:0rem -40rem;
+	
+}
+.share_p a.share_fav_a{
+	background-position:0rem -35rem;
+
+}
+.share_p a.share_qq{
+	background-size:5.2rem 45rem;
+	right:1.6rem;
+	bottom:0rem;
+	width:3.2rem;
+	height:3.2rem;
+	line-height:3.2rem;
+	font-size:1.2rem;
+	background-position:0rem -25rem;
+	
+}
+
+.share_p a.share_weacht{
+	background-size:5.2rem 45rem;
+	left:0.3rem;
+	top:2.6rem;
+	width:3.2rem;
+	height:3.2rem;
+	line-height:3.2rem;
+	font-size:1.2rem;
+	background-position:0px -30rem;
+	
+}
+.share_p a.share_xl{
+	background-size:5.2rem 45rem;
+	left:0rem;
+	top:5.1rem;
+	width:3.2rem;
+	height:3.2rem;
+	line-height:3.2rem;
+	font-size:1.2rem;
+	background-position:0rem -20rem;
+	
+}
