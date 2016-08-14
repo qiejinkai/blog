@@ -65,5 +65,12 @@ public class ArticleDaoImpl extends BaseDaoImpl<Article> implements IArticleDao 
 		return this.findListByHQL("from Article", null);
 	}
 	
+	@Override
+	public void addPv(long id) {
+		String hql = "update Article a set a.pv=a.pv+1 where a.articleId=?";
+		this.execHQL(hql, id);
+		
+	}
+	
 
 }

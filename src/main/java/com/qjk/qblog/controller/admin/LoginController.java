@@ -14,6 +14,7 @@ import com.qjk.qblog.data.Menu;
 import com.qjk.qblog.data.User;
 import com.qjk.qblog.service.IAdminService;
 import com.qjk.qblog.service.IMenuService;
+import com.qjk.qblog.util.RequestUtil;
 
 @Controller
 public class LoginController {
@@ -51,8 +52,8 @@ public class LoginController {
 			Object verifyCode = req.getSession(true).getAttribute("code");
 
 			Assert.isTrue(code.equals(verifyCode), "验证码错误");
-
-			Admin admin = adminService.login(account, password);
+			String ip = RequestUtil.getRealIpAddress(req);
+			Admin admin = adminService.login(account, password,ip);
 			Menu menu = menuService.getAdminMenu();
 
 			req.getSession(true).setAttribute("admin", admin);

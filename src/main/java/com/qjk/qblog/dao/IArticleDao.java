@@ -23,4 +23,6 @@ public interface IArticleDao {
 	
 	Article findArticleById(long id);
 	
+	void addPv(long id);
+	
 }

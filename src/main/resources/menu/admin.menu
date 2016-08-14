@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <menu>
 	<name>admin</name>
-	<version>1.0.5</version>
+	<version>1.0.6</version>
 	<title>系统管理目录</title>
 
 	<menu>
@@ -65,7 +65,12 @@
 		<menu>
 			<title>参数设置</title>
 			<href>/admin/system/setting/</href>
-			<resource>/admin/system/setting</resource>
+			<resource>admin/system/setting</resource>
+		</menu>
+		<menu>
+			<title>数据监控</title>
+			<href>/druid/</href>
+			<resource>druid</resource>
 		</menu>
 	</menu>
 

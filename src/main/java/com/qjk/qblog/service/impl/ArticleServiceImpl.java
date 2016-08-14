@@ -76,6 +76,9 @@ public class ArticleServiceImpl implements IArticleService {
 	@Override
 	public Article findArticleById(long id) {
 		Article article = articleDao.findArticleById(id);
+		if(article != null){
+			articleDao.addPv(id);
+		}
 
 		return article;
 	}	

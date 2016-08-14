@@ -8,5 +8,5 @@ import com.qjk.qblog.data.Admin;
 public interface IAdminService {
 
 	
-	Admin login(String account,String password) ;
+	Admin login(String account,String password,String ip) ;
 }
