@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.qjk.qblog.data.AGroup;
 import com.qjk.qblog.data.Article;
+import com.qjk.qblog.data.Message;
 import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.service.IArticleService;
+import com.qjk.qblog.service.IMessageService;
 import com.qjk.qblog.util.RequestUtil;
 
 @Controller
@@ -25,6 +26,7 @@ import com.qjk.qblog.util.RequestUtil;
 public class DiaryController {
 	
 	@Resource IArticleService articleService;
+	@Resource IMessageService messageService;
 	
 	
 	@RequestMapping(value={"","/"},method =RequestMethod.GET)
@@ -55,6 +57,12 @@ public class DiaryController {
 	@RequestMapping(value="/detail/{id}")
 	public String diary_detail(@PathVariable long id,Model model,HttpServletRequest request){
 		
+		return diary_detail(id, 1, model, request);
+	}
+	
+	@RequestMapping(value="/detail/{id}/{pageIndex}")
+	public String diary_detail(@PathVariable long id,@PathVariable int pageIndex,Model model,HttpServletRequest request){
+		
 		Article article = articleService.findArticleById(id);
 		
 		if(article == null || article.getHidden() == Article.HIDDEN_HIDDEN || !Article.ALIAS_DIARY.equals(article.getAlias())){
@@ -72,6 +80,8 @@ public class DiaryController {
 				return "mobile/diary_detail";
 			}
 
+			Pager<Message> pager = messageService.selectPager(id, 0, pageIndex);
+			model.addAttribute("messages", pager);
 			List<Article> lastestArticles = articleService.getLastestArticles(10,Article.ALIAS_DIARY);
 			model.addAttribute("lastest", lastestArticles);
 			List<Article> mostPvArticles = articleService.getMostPvArticles(4,Article.ALIAS_DIARY);

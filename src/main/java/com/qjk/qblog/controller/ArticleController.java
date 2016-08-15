@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qjk.qblog.data.AGroup;
 import com.qjk.qblog.data.Article;
+import com.qjk.qblog.data.Message;
 import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.service.IAGroupSerivce;
 import com.qjk.qblog.service.IArticleService;
+import com.qjk.qblog.service.IMessageService;
 import com.qjk.qblog.util.RequestUtil;
 import com.qjk.qblog.util.Value;
 
@@ -29,6 +31,8 @@ public class ArticleController {
 	IAGroupSerivce groupSerivce;
 	@Resource
 	IArticleService articleService;
+	@Resource
+	IMessageService messageService;
 
 	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
 	public String article(Model model, HttpServletRequest request) {
@@ -114,6 +118,13 @@ public class ArticleController {
 	public String article_detail(@PathVariable long id, Model model,
 			HttpServletRequest request) {
 
+		return article_detail(id, 1, model, request);
+	}
+
+	@RequestMapping(value = "/detail/{id}/{pageIndex}")
+	public String article_detail(@PathVariable long id,@PathVariable int pageIndex, Model model,
+			HttpServletRequest request) {
+
 		Article article = articleService.findArticleById(id);
 
 		if (article == null || article.getHidden() == Article.HIDDEN_HIDDEN
@@ -131,7 +142,10 @@ public class ArticleController {
 			if (RequestUtil.isMobile(request)) {
 				return "mobile/article_detail";
 			}
-
+			Pager<Message> pager = messageService.selectPager(id, 0, pageIndex);
+			pager.setTotalPages(20);
+			pager.setPageIndex(10);
+			model.addAttribute("messages", pager);
 			List<AGroup> groups = groupSerivce.findGroupList();
 			model.addAttribute("groups", groups);
 

@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import com.alibaba.druid.pool.DruidDataSource.CreateConnectionTask;
 import com.qjk.qblog.util.DigestUtil;
 import com.qjk.qblog.util.GraphicsUtil;
 import com.qjk.qblog.util.VerifyCodeUtil;

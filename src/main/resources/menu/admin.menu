@@ -47,6 +47,11 @@
 			<href>/admin/content/information/</href>
 			<resource>admin/content/information</resource>
 		</menu>
+		<menu>
+			<title>留言管理</title>
+			<href>/admin/content/message/</href>
+			<resource>admin/content/message</resource>
+		</menu>
 	</menu>
 
 	<menu>

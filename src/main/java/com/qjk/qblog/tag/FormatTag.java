@@ -52,7 +52,7 @@ public class FormatTag extends TagSupport {
 	@Override
 	public int doStartTag() throws JspException {
 		JspWriter out = pageContext.getOut();
-		Object outData= formatData();
+		Object outData = formatData();
 		try {
 			out.write(Value.stringValue(outData, ""));
 		} catch (IOException e) {
@@ -74,19 +74,42 @@ public class FormatTag extends TagSupport {
 
 			}
 
-		}
-
-		// if ("eval".equals(type)) {
-		//
-		// return Parser.parse(src.toString()).evaluate();
-		//
-		// }
-
-		if ("uuid".equals(type)) {
+		}else if ("uuid".equals(type)) {
 			return DigestUtil.md5(UUID.randomUUID().toString());
-		}
+		} else if ("datetime".equals(type)) {
 
-		if ("datetime".equals(type)) {
+			String fm = format;
+
+			if (Value.isEmpty(fm)) {
+				fm = "yyyy-MM-dd HH:mm:ss";
+			}
+			long now = new Date().getTime()/1000;
+			long time = Value.longValue(src, 0);
+
+			long a = now -time;
+			if(a > 24*60*60){
+
+				SimpleDateFormat dateFormat = new SimpleDateFormat(fm);
+
+				Date date = new Date(Value.longValue(src, 0) * 1000);
+				return dateFormat.format(date);
+			}else{
+
+				StringBuilder sb = new StringBuilder();
+				if(a < 60){
+					sb.append(a).append("秒前");
+				}else if(a < 60*60){
+					int minutes = (int)(a/60);
+					sb.append(minutes).append("分钟前");
+				}else{
+					int hour = (int)(a/60/60);
+					sb.append(hour).append("小时前");
+				}
+								
+				return sb.toString();
+			}
+
+		} else if ("dateformat".equals(type)) {
 
 			String fm = format;
 
@@ -95,8 +118,8 @@ public class FormatTag extends TagSupport {
 			}
 
 			SimpleDateFormat dateFormat = new SimpleDateFormat(fm);
-			
-			Date date = new Date(Value.longValue(src, 0)*1000);
+
+			Date date = new Date(Value.longValue(src, 0) * 1000);
 			return dateFormat.format(date);
 
 		} else if ("boolean".equals(type)) {

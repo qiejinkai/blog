@@ -24,6 +24,7 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private long uid;
+	private String account;
 	private String phone;
 	private String email;
 	private String logo;
@@ -34,6 +35,19 @@ public class User implements Serializable{
 	private String lastLoginIpAddress;
 	
 
+	
+	public User(){
+		
+	}
+	public User(long uid){
+		this.uid =uid;
+	}
+	public String getAccount() {
+		return account;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
 	@Column(length=20)
 	public long getCtime() {
 		return ctime;

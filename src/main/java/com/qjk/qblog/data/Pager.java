@@ -80,7 +80,7 @@ public class Pager<T> {
 	}
 
 	public Pager<T> setPageIndex(int pageIndex) {
-		this.pageIndex = pageIndex == 0 ? 1 : pageIndex;
+		this.pageIndex = pageIndex <= 0 ? 1 : pageIndex;
 		return this;
 	}
 
@@ -89,7 +89,7 @@ public class Pager<T> {
 	}
 
 	public Pager<T> setPageSize(int pageSize) {
-		this.pageSize = pageSize == 0 ? DEFAULT_SIZE : pageSize;
+		this.pageSize = pageSize <= 0 ? DEFAULT_SIZE : pageSize;
 		return this;
 	}
 
@@ -141,14 +141,14 @@ public class Pager<T> {
 
 	public Pager<T> openCounter(int pageIndex, int pageSize) {
 		this.counter = true;
-		this.pageIndex = pageIndex == 0 ? 1 : pageIndex;
-		this.pageSize = pageSize == 0 ? DEFAULT_SIZE : pageSize;
+		this.pageIndex = pageIndex <= 0 ? 1 : pageIndex;
+		this.pageSize = pageSize <= 0 ? DEFAULT_SIZE : pageSize;
 		return this;
 	}
 
 	public Pager<T> openCounter(int pageIndex) {
 		this.counter = true;
-		this.pageIndex = pageIndex == 0 ? 1 : pageIndex;
+		this.pageIndex = pageIndex <= 0 ? 1 : pageIndex;
 		this.pageSize = DEFAULT_SIZE;
 		return this;
 	}

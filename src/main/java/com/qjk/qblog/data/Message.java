@@ -1,19 +1,13 @@
 package com.qjk.qblog.data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,9 +21,6 @@ import javax.persistence.Table;
 @Table(name="qblog_message")
 public class Message implements Serializable {
 
-	private static final String TOPIC_ARTICLE = "article";
-	private static final String TOPIC_MESSAGE = "message";
-
 	/**
 	 * 
 	 */
@@ -37,28 +28,27 @@ public class Message implements Serializable {
 
 	private long messageId;
 	private String content;
-	private long uid;
-	private String topic;
+	private long articleId;
 	private long ctime;
-	private List<Message> answers = new ArrayList<Message>();
-	private Message parent;
+	private User user;
+	private Message quote;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="parent_id")
-	public Message getParent() {
-		return parent;
+	public Message() {
 	}
-	public void setParent(Message parent) {
-		this.parent = parent;
+	
+	public Message(long messageId){
+		this.messageId = messageId;
 	}
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public long getMessageId() {
 		return messageId;
 	}
 	public void setMessageId(long messageId) {
 		this.messageId = messageId;
 	}
+	
 	@Column(length=2048)
 	public String getContent() {
 		return content;
@@ -66,19 +56,12 @@ public class Message implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public long getUid() {
-		return uid;
+	
+	public long getArticleId() {
+		return articleId;
 	}
-	public void setUid(long uid) {
-		this.uid = uid;
-	}
-
-	@Column(length=16)
-	public String getTopic() {
-		return topic;
-	}
-	public void setTopic(String topic) {
-		this.topic = topic;
+	public void setArticleId(long articleId) {
+		this.articleId = articleId;
 	}
 	public long getCtime() {
 		return ctime;
@@ -86,14 +69,25 @@ public class Message implements Serializable {
 	public void setCtime(long ctime) {
 		this.ctime = ctime;
 	}
-	@OneToMany(mappedBy="parent",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	public List<Message> getAnswers() {
-		return answers;
+	
+	@ManyToOne
+	public User getUser() {
+		return user;
 	}
-	public void setAnswers(List<Message> answers) {
-		this.answers = answers;
+	public void setUser(User user) {
+		this.user = user;
+	}
+	@ManyToOne
+	public Message getQuote() {
+		return quote;
+	}
+	public void setQuote(Message quote) {
+		this.quote = quote;
 	}
 	
+	
+	
+
 	
 
 }

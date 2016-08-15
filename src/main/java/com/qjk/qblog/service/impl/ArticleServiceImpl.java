@@ -21,7 +21,6 @@ import com.qjk.qblog.data.Article;
 import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.service.IArticleService;
 import com.qjk.qblog.util.Value;
-import com.sun.tools.doclets.internal.toolkit.util.Group;
 
 @Service
 public class ArticleServiceImpl implements IArticleService {
@@ -110,7 +109,6 @@ public class ArticleServiceImpl implements IArticleService {
 		object.setTags(article.getTags());
 		object.setTitle(article.getTitle());
 		object.setLink(article.getLink());
-		object.setHomeShow(article.getHomeShow());
 
 		articleDao.updateArticle(object);
 

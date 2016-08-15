@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.qjk.qblog.data.AGroup;
 import com.qjk.qblog.data.Article;
-import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.service.IAGroupSerivce;
 import com.qjk.qblog.service.IArticleService;
 import com.qjk.qblog.util.RequestUtil;
