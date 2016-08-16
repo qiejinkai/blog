@@ -75,13 +75,13 @@ public class DiaryController {
 			model.addAttribute("prev", prev);
 			Article next = articleService.getNextArticle(article.getCtime(),article.getAlias());
 			model.addAttribute("next", next);
+			Pager<Message> pager = messageService.selectPager(id, 0, pageIndex);
+			model.addAttribute("messages", pager);
 			if(RequestUtil.isMobile(request)){
 				model.addAttribute("title", "日记");
 				return "mobile/diary_detail";
 			}
 
-			Pager<Message> pager = messageService.selectPager(id, 0, pageIndex);
-			model.addAttribute("messages", pager);
 			List<Article> lastestArticles = articleService.getLastestArticles(10,Article.ALIAS_DIARY);
 			model.addAttribute("lastest", lastestArticles);
 			List<Article> mostPvArticles = articleService.getMostPvArticles(4,Article.ALIAS_DIARY);

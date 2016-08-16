@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -77,7 +78,7 @@ public class Message implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	public Message getQuote() {
 		return quote;
 	}

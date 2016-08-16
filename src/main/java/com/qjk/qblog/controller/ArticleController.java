@@ -139,13 +139,11 @@ public class ArticleController {
 					article.getAlias());
 			model.addAttribute("next", next);
 			model.addAttribute("article", article);
+			Pager<Message> pager = messageService.selectPager(id, 0, pageIndex);
+			model.addAttribute("messages", pager);
 			if (RequestUtil.isMobile(request)) {
 				return "mobile/article_detail";
 			}
-			Pager<Message> pager = messageService.selectPager(id, 0, pageIndex);
-			pager.setTotalPages(20);
-			pager.setPageIndex(10);
-			model.addAttribute("messages", pager);
 			List<AGroup> groups = groupSerivce.findGroupList();
 			model.addAttribute("groups", groups);
 

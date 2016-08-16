@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<title>qq互联</title>
+	<summary></summary>
+	<name>qq</name>
+	<version>1.0.0</version>
+	<types></types>
+	<indexId>5</indexId>
+	<option>
+		<summary>基础设置</summary>
+		<name>appid</name>
+		<value></value>
+		<title>应用ID</title>
+	</option>
+	<option>
+		<summary>基础设置</summary>
+		<name>secret</name>
+		<value></value>
+		<title>应用秘钥</title>
+	</option>
+	<option>
+		<summary>基础设置</summary>
+		<name>accountId</name>
+		<value></value>
+		<title>公众账号ID</title>
+	</option>
+	
+</settings>

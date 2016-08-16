@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.qjk.qblog.data.AGroup;
 import com.qjk.qblog.data.Article;
+import com.qjk.qblog.data.User;
 import com.qjk.qblog.service.IAGroupSerivce;
 import com.qjk.qblog.service.IArticleService;
+import com.qjk.qblog.service.IUserService;
 import com.qjk.qblog.util.RequestUtil;
 
 @Controller
@@ -22,12 +24,16 @@ public class HomeController {
 	IArticleService articleService;
 	@Resource
 	IAGroupSerivce groupSerivce;
+	
+	@Resource IUserService userService;
 
 	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
 
 		List<Article> bannerList = articleService.getArticles(1, 10,
 				Article.ALIAS_BANNER);
+		User user = userService.findUserById(2);
+		request.getSession(true).setAttribute("user", user);
 		if (RequestUtil.isMobile(request)) {
 
 			List<AGroup> groups = groupSerivce.findGroupList();

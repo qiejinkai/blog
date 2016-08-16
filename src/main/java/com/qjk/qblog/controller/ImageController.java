@@ -23,6 +23,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.qjk.qblog.util.DigestUtil;
 import com.qjk.qblog.util.GraphicsUtil;
+import com.qjk.qblog.util.Value;
 import com.qjk.qblog.util.VerifyCodeUtil;
 
 @Controller
@@ -63,8 +64,10 @@ public class ImageController {
 				if (!file.isEmpty()) {
 
 					try {
+						String uploadPath = request.getServletContext().getInitParameter("uploadPath");
+						uploadPath = Value.isEmpty(uploadPath)?"/web/image":uploadPath;
 						String path = request.getSession().getServletContext()
-								.getRealPath("/img/upload");
+								.getRealPath(uploadPath);
 						String fileName = file.getOriginalFilename();
 
 						Assert.isTrue(fileName.indexOf(".") >= 0, "未找到图片后缀名");
@@ -84,7 +87,7 @@ public class ImageController {
 
 						FileUtils.copyInputStreamToFile(file.getInputStream(), f);
 
-						url = "/img/upload/" + fileName;
+						url = uploadPath+"/" + fileName;
 						result.put("url", url);
 						
 					} catch (Exception e) {
@@ -111,8 +114,10 @@ public class ImageController {
 			if (!file.isEmpty()) {
 
 				try {
+					String uploadPath = request.getServletContext().getInitParameter("uploadPath");
+					uploadPath = Value.isEmpty(uploadPath)?"/web/image":uploadPath;
 					String path = request.getSession().getServletContext()
-							.getRealPath("/img/upload");
+							.getRealPath(uploadPath);
 					String fileName = file.getOriginalFilename();
 
 					Assert.isTrue(fileName.indexOf(".") >= 0, "未找到图片后缀名");
@@ -132,7 +137,7 @@ public class ImageController {
 
 					FileUtils.copyInputStreamToFile(file.getInputStream(), f);
 
-					url = "/img/upload/" + fileName;
+					url = uploadPath+"/" + fileName;
 					
 					result.put("url", url);
 
