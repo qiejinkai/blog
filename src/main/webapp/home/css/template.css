@@ -46,7 +46,8 @@ a.n1, a.n2,a.n3 {
 	width: 740px;
 	overflow: hidden;
 	background: url(../images/r_line.jpg) repeat-y right;
-	margin: 10px 0
+	margin: 10px 0;
+	color: initial
 }
 
 .c_titile {
@@ -79,7 +80,7 @@ ul.infos {
 }
 
 ul.infos p {
-	margin-bottom: 20px
+	
 }
 
 ul.infos p img {

@@ -1,12 +1,18 @@
 package com.qjk.qblog.controller.admin;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import javax.annotation.Resource;
+import javax.persistence.Index;
 
+import org.hibernate.jpa.criteria.Renderable;
+import org.hibernate.loader.custom.Return;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,7 +71,7 @@ public class SystemController {
 		if (setting == null) {
 			return "redirect:/admin/system/setting";
 		}
-		buildOptions(setting, names, values, summarys);
+		buildOptions2(setting, names, values, summarys);
 		settingService.updateSetting(setting);
 
 		return "redirect:/admin/system/setting/" + setting.getSettingId();
@@ -77,7 +83,8 @@ public class SystemController {
 		if (setting == null || names == null || names.length == 0) {
 
 		} else {
-			List<SettingOption> list = new ArrayList<SettingOption>(names.length);
+			List<SettingOption> list = new ArrayList<SettingOption>(
+					names.length);
 
 			for (int i = 0; i < names.length; i++) {
 				String name = names[i];
@@ -86,8 +93,10 @@ public class SystemController {
 					continue;
 				}
 				Stream<SettingOption> stream = setting.getOptions().stream();
-				SettingOption option = stream.filter(o -> o.getName().equals(name)).findFirst().get();
-				if(option == null){
+				SettingOption option = stream
+						.filter(o -> o.getName().equals(name)).findFirst()
+						.get();
+				if (option == null) {
 					option = new SettingOption();
 				}
 				option.setName(Value.stringValue(names[i], ""));
@@ -104,6 +113,47 @@ public class SystemController {
 			}
 			setting.setOptions(list);
 
+		}
+
+	}
+
+	private void buildOptions2(Setting setting, String[] names,
+			String[] values, String[] summarys) {
+
+		if (setting == null || names == null || names.length == 0) {
+
+		} else {
+			
+			Stream<String> nameStream = Arrays.stream(names);
+			int[] index = { -1 };
+			List<SettingOption> list = nameStream
+					.filter((name) -> {
+						index[0]++;
+						return !Value.isEmpty(name);
+					})
+					.map((name) -> {
+						Stream<SettingOption> optionStream = setting.getOptions().stream();
+						SettingOption option = optionStream.filter(o -> {
+							return o.getName().equals(name);
+						}).findFirst().get();
+						if (option == null) {
+							option = new SettingOption();
+						}
+						option.setName(Value.stringValue(name, ""));
+						if (values != null && values.length > index[0]) {
+							option.setValue(Value.stringValue(values[index[0]],
+									""));
+						}
+						if (summarys != null && summarys.length > index[0]) {
+							option.setSummary(Value.stringValue(
+									summarys[index[0]], ""));
+						}
+						option.setSetting(setting);
+
+						return option;
+					}).collect(Collectors.toList());
+
+			setting.setOptions(list);
 		}
 
 	}

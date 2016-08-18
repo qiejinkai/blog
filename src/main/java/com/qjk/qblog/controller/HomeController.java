@@ -32,8 +32,8 @@ public class HomeController {
 
 		List<Article> bannerList = articleService.getArticles(1, 10,
 				Article.ALIAS_BANNER);
-		User user = userService.findUserById(2);
-		request.getSession(true).setAttribute("user", user);
+		List<Article> infomationList = articleService.getArticles(1, 10,
+				Article.ALIAS_INFORMATION);
 		if (RequestUtil.isMobile(request)) {
 
 			List<AGroup> groups = groupSerivce.findGroupList();
@@ -41,8 +41,10 @@ public class HomeController {
 			List<Article> articles = articleService.getHomeShowArticles();
 			model.addAttribute("articles", articles);
 			model.addAttribute("bannerList", bannerList);
+			model.addAttribute("infomationList", infomationList);
 			return "mobile/home";
 		} else {
+			model.addAttribute("infomationList", infomationList);
 			List<Article> articles = articleService.getHomeShowArticles();
 			model.addAttribute("articles", articles);
 			List<Article> lastestArticles = articleService

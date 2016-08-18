@@ -34,9 +34,9 @@ import com.qjk.qblog.util.Value;
  * @author qiejinkai
  *
  */
-public class InitDataServletContextListener implements ServletContextListener {
+public class InitDataServletContextListener_bak implements ServletContextListener {
 
-	Logger logger = Logger.getLogger(InitDataServletContextListener.class);
+	Logger logger = Logger.getLogger(InitDataServletContextListener_bak.class);
 
 	private static final String MENUFILELOCATION = "menuFileLocation";
 	private static final String SETTINGFILELOCATION = "settingFileLocation";
@@ -89,7 +89,7 @@ public class InitDataServletContextListener implements ServletContextListener {
 
 				Arrays.stream(path.listFiles())
 						.filter(file -> file.getName().endsWith(".setting"))
-						.forEach(file -> {
+						.peek(file -> {
 							try {
 								Document document = reader.read(file);
 
@@ -143,14 +143,105 @@ public class InitDataServletContextListener implements ServletContextListener {
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-						});
+						}).collect(Collectors.toList());
 
 			}
 
 		}
 	}
 
+	private void initSetting2(ServletContext servletContext, String filePath) {
+		ISettingDao settingDao = (ISettingDao) getDefaulApplicationContext(
+				servletContext).getBean("settingDaoImpl");
+		if (settingDao != null) {
+			List<File> files = new ArrayList<File>(4);
+			File path = new File(filePath);
+
+			if (path.isDirectory()) {
+
+				for (File f : path.listFiles(new FilenameFilter() {
+
+					@Override
+					public boolean accept(File dir, String name) {
+						return name.endsWith(".setting");
+					}
+				})) {
+					files.add(f);
+				}
+			}
+
+			SAXReader reader = new SAXReader();
+
+			try {
+				for (File file : files) {
+
+					Document document = reader.read(file);
+
+					Element root = document.getRootElement();
+					String name = root.elementText("name");
+					String version = root.elementText("version");
+
+					if (!Value.isEmpty(name) && !Value.isEmpty(version)) {
+						Setting setting = settingDao.getSettingByName(name);
+						if (setting != null) {
+							if (version.equals(setting.getVersion())) {
+								continue;
+							} else {
+								settingDao
+										.deleteSetting(setting.getSettingId());
+							}
+						}
+						setting = new Setting();
+						setting.setName(name);
+						setting.setVersion(version);
+						setting.setCtime(new Date().getTime() / 1000);
+						setting.setSummary(root.elementText("summary"));
+						setting.setTypes(Value.longValue(
+								root.elementText("types"), 0));
+						setting.setTitle(Value.stringValue(
+								root.elementText("title"), ""));
+
+						List<Element> els = root.elements("option");
+						for (Element el : els) {
+							SettingOption option = new SettingOption();
+							option.setName(el.elementText("name"));
+							option.setValue(el.elementText("value"));
+							option.setSummary(el.elementText("summary"));
+							option.setSetting(setting);
+							setting.getOptions().add(option);
+						}
+
+						settingDao.addSetting(setting);
+					}
+
+				}
+			} catch (Throwable e) {
+				e.printStackTrace();
+				logger.error(e);
+			} finally {
+			}
+		}
+	}
+
 	private Menu makeMenu(Menu menu, Element root) {
+		// if (root != null && menu != null) {
+		// List<Element> children = root.elements("menu");
+		//
+		// for (Element el : children) {
+		// Menu child = new Menu();
+		// child.setName(el.elementText("name"));
+		// child.setTitle(el.elementText("title"));
+		// child.setIcon(el.elementText("icon"));
+		// child.setHref(el.elementText("href"));
+		// child.setResource(el.elementText("resource"));
+		// child.setParent(menu);
+		// child = makeMenu(child, el);
+		// menu.getChilden().add(child);
+		// }
+		//
+		// return menu;
+		//
+		// }
 
 		if (root != null && menu != null) {
 			List<Element> els = root.elements("menu");
@@ -223,6 +314,66 @@ public class InitDataServletContextListener implements ServletContextListener {
 						}).collect(Collectors.toList());
 			}
 
+		}
+	}
+
+	private void initMenu2(ServletContext servletContext, String filePath) {
+		IMenuDao menuDao = (IMenuDao) getDefaulApplicationContext(
+				servletContext).getBean("menuDaoImpl");
+		if (menuDao != null) {
+			List<File> files = new ArrayList<File>(4);
+
+			File path = new File(filePath);
+			if (path.isDirectory()) {
+				for (File f : path.listFiles(new FilenameFilter() {
+
+					@Override
+					public boolean accept(File dir, String name) {
+						return name.endsWith(".menu");
+					}
+				})) {
+					files.add(f);
+				}
+			}
+
+			SAXReader reader = new SAXReader();
+
+			try {
+				for (File file : files) {
+					Document document = reader.read(file);
+
+					Element el = document.getRootElement();
+
+					String name = el.elementText("name");
+					String title = el.elementText("title");
+					String version = el.elementText("version");
+
+					if (!Value.isEmpty(name) && !Value.isEmpty(version)) {
+
+						Menu menu = menuDao.findRootMenuByName(name);
+
+						if (menu != null) {
+							if (version.equals(menu.getVersion())) {
+								continue;
+							} else {
+								menuDao.deleteMenu(menu.getMenuId());
+							}
+						}
+						menu = new Menu();
+						menu.setName(name);
+						menu.setTitle(title);
+						menu.setVersion(version);
+						menu = makeMenu(menu, el);
+						menuDao.addMenu(menu);
+						// logger.info(menu.getChilden().size());
+
+					}
+				}
+			} catch (Throwable e) {
+				logger.error(e.getMessage(), e);
+			} finally {
+
+			}
 		}
 	}
 
