@@ -1,6 +1,7 @@
 package com.qjk.qblog.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,5 +23,7 @@ public interface ISettingService {
 	List<Setting> getSettings();
 
 	Setting getSettingById(long id);
+
+	Map<String, String> getOptionsByName(String string);
 	
 }

@@ -20,7 +20,7 @@ public interface IUserService {
 	
 	void deleteUser(User user);
 	
-	User login(String account,String password) throws UserException;
+	User login(String account,String password,String ip) throws UserException;
 	
 	User findUserById(long id);
 	

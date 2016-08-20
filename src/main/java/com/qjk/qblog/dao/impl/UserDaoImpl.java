@@ -1,5 +1,6 @@
 package com.qjk.qblog.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -45,5 +46,17 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements IUserDao {
 	protected Class<User> getDataClass() {
 		
 		return User.class;
+	}
+
+	@Override
+	public User join(String nick, String logo) {
+		User user = new User();
+		user.setAccount(nick);
+		user.setNick(nick);
+		user.setLogo(logo);
+		user.setCtime(new Date().getTime()/1000);
+		this.save(user);
+		return user;
+		
 	}
 }

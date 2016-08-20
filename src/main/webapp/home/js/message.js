@@ -79,5 +79,11 @@ $(function() {
 		submiting = false;
 		return ;
 	});
+	
+	$(".ds-qq").bind('click',function(){
+		var uri = window.location.pathname;
+		var A=window.open("/qquser/login/?r="+uri,"TencentLogin", 
+				   "width=450,height=320,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+	});
 
 });

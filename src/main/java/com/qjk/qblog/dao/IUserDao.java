@@ -10,6 +10,8 @@ import com.qjk.qblog.data.User;
 @Transactional(propagation=Propagation.SUPPORTS)
 public interface IUserDao {
 	
+	public User join(String nick,String logo);
+	
 	public void addUser(User user);
 	
 	public void deleteUser(long id);

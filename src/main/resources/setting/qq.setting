@@ -3,18 +3,18 @@
 	<title>qq互联</title>
 	<summary></summary>
 	<name>qq</name>
-	<version>1.0.0</version>
+	<version>1.0.3</version>
 	<types></types>
 	<indexId>5</indexId>
 	<option>
-		<summary>基础设置</summary>
+		<summary>应用ID</summary>
 		<name>appid</name>
 		<value></value>
 		<title>应用ID</title>
 	</option>
 	<option>
-		<summary>基础设置</summary>
-		<name>secret</name>
+		<summary>应用秘钥</summary>
+		<name>appkey</name>
 		<value></value>
 		<title>应用秘钥</title>
 	</option>
@@ -23,6 +23,42 @@
 		<name>accountId</name>
 		<value></value>
 		<title>公众账号ID</title>
+	</option>
+	<option>
+		<summary>获取Authorization Code</summary>
+		<name>api_code</name>
+		<value>https://graph.qq.com/oauth2.0/authorize?response_type=code&amp;client_id={appid}&amp;redirect_uri={redirect_uri}&amp;scope={scope}&amp;state={state}</value>
+		<title>获取Authorization Code</title>
+	</option>
+	<option>
+		<summary>获取Access Token</summary>
+		<name>api_token</name>
+		<value>https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&amp;client_id={appid}&amp;client_secret={appkey}&amp;code={code}&amp;state={state}&amp;redirect_uri={redirect_uri}</value>
+		<title>获取Access Token</title>
+	</option>
+	<option>
+		<summary>Access Token获取用户OpenId</summary>
+		<name>api_openId</name>
+		<value>https://graph.qq.com/oauth2.0/me?access_token={token}</value>
+		<title>Access Token获取用户OpenId</title>
+	</option>
+	<option>
+		<summary>Access Token获取用户信息</summary>
+		<name>api_userInfo</name>
+		<value>https://graph.qq.com/user/get_user_info?access_token={token}&amp;oauth_consumer_key={appid}&amp;openid={openId}</value>
+		<title>获取Access Token</title>
+	</option>
+	<option>
+		<summary>获取权限范围</summary>
+		<name>scope</name>
+		<value>get_user_info</value>
+		<title>获取权限范围</title>
+	</option>
+	<option>
+		<summary>回调地址</summary>
+		<name>redirect_uri</name>
+		<value>http://www.qiejinkai.com/qquser/callback/</value>
+		<title>回调地址</title>
 	</option>
 	
 </settings>

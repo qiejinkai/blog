@@ -19,84 +19,83 @@ import com.qjk.qblog.data.User;
 import com.qjk.qblog.group.ValidateInPost;
 import com.qjk.qblog.service.IUserService;
 
-
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	
+
 	@Resource
 	IUserService userService;
-	
-	@RequestMapping(value="/users",method=RequestMethod.GET)
-	public String users(Model model){
-		
-		List<User>list = userService.queryUser();
+
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public String users(Model model) {
+
+		List<User> list = userService.queryUser();
 		model.addAttribute("users", list);
-		
+
 		return "user/users";
 	}
-	
-	@RequestMapping(value="/add",method=RequestMethod.GET)
-	public String add(@ModelAttribute("user") User user){
-		
+
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String add(@ModelAttribute("user") User user) {
+
 		return "user/add";
 	}
-	
-	@RequestMapping(value="/add",method=RequestMethod.POST)
-	public String add(@Validated(value={ValidateInPost.class}) User user,BindingResult result){
-		if(result.hasErrors()){
+
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String add(@Validated(value = { ValidateInPost.class }) User user,
+			BindingResult result) {
+		if (result.hasErrors()) {
 			return "user/add";
 		}
 		userService.addUser(user);
 		return "redirect:/user/users";
 	}
-	
-	
-	
-	@RequestMapping(value="/{id}/update",method=RequestMethod.GET)
-	public String update(Model model,@PathVariable long id){
+
+	@RequestMapping(value = "/{id}/update", method = RequestMethod.GET)
+	public String update(Model model, @PathVariable long id) {
 		User user = userService.findUserById(id);
-		if(user == null){
+		if (user == null) {
 			return "redirect:/user/users";
 		}
 		model.addAttribute("user", user);
 		return "user/update";
 	}
-	
-	@RequestMapping(value="/{id}/update",method=RequestMethod.POST)
-	public String update(@Validated User user,BindingResult result){
-		if(result.hasErrors()){
+
+	@RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
+	public String update(@Validated User user, BindingResult result) {
+		if (result.hasErrors()) {
 			return "user/update";
 		}
 		userService.updateUser(user);
 		return "redirect:/user/users";
 	}
-	
-	@RequestMapping(value="/{id}/delete",method=RequestMethod.GET)
-	public String delete(@PathVariable long id){
+
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+	public String delete(@PathVariable long id) {
 		User u = new User();
 		u.setUid(id);
 		userService.deleteUser(u);
 		return "redirect:/user/users";
 	}
-	
-	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public String show(@PathVariable long id,Model model){
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String show(@PathVariable long id, Model model) {
 		model.addAttribute(userService.findUserById(id));
 		return "user/show";
 	}
 
-	@RequestMapping(value="/show",method=RequestMethod.GET)
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	@ModelAttribute
-	public User show(@RequestParam("id") long id){
-//		model.addAttribute(list.get(phone));
+	public User show(@RequestParam("id") long id) {
+		// model.addAttribute(list.get(phone));
 		return userService.findUserById(id);
 	}
-	@RequestMapping(value="/{id}",method=RequestMethod.GET,params={"json"})
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, params = { "json" })
 	@ResponseBody
-	public User show(@PathVariable long id,String json){
-		//model.addAttribute(list.get(phone));
+	public User show(@PathVariable long id, String json) {
+		// model.addAttribute(list.get(phone));
 		return userService.findUserById(id);
-}
-	
+	}
+
 }

@@ -1,6 +1,10 @@
 package com.qjk.qblog.data;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,14 +15,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="qblog_setting_option")
+@Table(name = "qblog_setting_option")
 public class SettingOption implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private long optionId;
 	private String name;
 	private String value;
@@ -26,46 +30,63 @@ public class SettingOption implements Serializable {
 	private Setting setting;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getOptionId() {
 		return optionId;
 	}
+
 	public void setOptionId(long optionId) {
 		this.optionId = optionId;
 	}
-	@Column(length=64)
+
+	@Column(length = 64)
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	@Column(length=64)
+	@Column(length = 1024)
 	public String getValue() {
 		return value;
 	}
+
 	public void setValue(String value) {
 		this.value = value;
 	}
 
-	@Column(length=255)
+	@Column(length = 255)
 	public String getSummary() {
 		return summary;
 	}
+
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
-	
+
 	@ManyToOne
 	public Setting getSetting() {
 		return setting;
 	}
+
 	public void setSetting(Setting setting) {
 		this.setting = setting;
 	}
-	
-	
-	
+
+	public static Map<String, String> convert(List<SettingOption> options) {
+
+		if (options != null) {
+			Map<String, String> settings = options.stream().collect(
+					Collectors.toMap(SettingOption::getName,
+							SettingOption::getValue));
+
+			return settings;
+
+		}
+
+		return null;
+	}
 
 }

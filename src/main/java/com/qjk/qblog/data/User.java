@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -32,16 +34,27 @@ public class User implements Serializable{
 	private String password;
 	private long ctime;
 	private long lastLoginTime;
-	private String lastLoginIpAddress;
+	private long loginTime;
+	private String lastLoginIp;
+	private String loginIp;
+	
+	private QQUser qqUser;
 	
 
-	
+	@OneToOne(fetch=FetchType.LAZY)
+	public QQUser getQqUser() {
+		return qqUser;
+	}
+	public void setQqUser(QQUser qqUser) {
+		this.qqUser = qqUser;
+	}
 	public User(){
 		
 	}
 	public User(long uid){
 		this.uid =uid;
 	}
+	@Column(length=255)
 	public String getAccount() {
 		return account;
 	}
@@ -63,13 +76,28 @@ public class User implements Serializable{
 	public void setLastLoginTime(long lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
 	}
-
-	@Column(length=32)
-	public String getLastLoginIpAddress() {
-		return lastLoginIpAddress;
+	
+	
+	@Column(length=20)
+	public long getLoginTime() {
+		return loginTime;
 	}
-	public void setLastLoginIpAddress(String lastLoginIpAddress) {
-		this.lastLoginIpAddress = lastLoginIpAddress;
+	public void setLoginTime(long loginTime) {
+		this.loginTime = loginTime;
+	}
+	@Column(length=32)
+	public String getLastLoginIp() {
+		return lastLoginIp;
+	}
+	public void setLastLoginIp(String lastLoginIp) {
+		this.lastLoginIp = lastLoginIp;
+	}
+	@Column(length=32)
+	public String getLoginIp() {
+		return loginIp;
+	}
+	public void setLoginIp(String loginIp) {
+		this.loginIp = loginIp;
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

@@ -274,7 +274,10 @@
 }
 
 #ds-reset .ds-qq {
-	background-position: 0 -192px
+	
+	background-image:
+		url("/img/qq_logo.png");
+	background-position: 0 0px
 }
 
 #ds-reset .ds-baidu {
@@ -725,7 +728,6 @@
 
 #ds-thread #ds-reset .ds-login-buttons .ds-social-links {
 	float: left;
-	width: 306px
 }
 
 #ds-thread #ds-reset .ds-login-buttons:after {
@@ -2202,8 +2204,10 @@
 	background-position: 0 -352px
 }
 
-#ds-share #ds-reset .ds-share-icons-32 .ds-qq {
-	background-position: 0 -384px
+#ds-share #ds-reset .ds-share-icons-32 .ds-qq {	
+	background-image:
+		url("/img/qq_logo.png");
+	background-position: 0 0px
 }
 
 #ds-share #ds-reset .ds-share-icons-32 .ds-baidu {

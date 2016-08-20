@@ -1,5 +1,6 @@
 package com.qjk.qblog.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -53,7 +54,7 @@ public class UserServiceImpl implements IUserService {
 		return userDao.selectUsers();
 	}
 
-	public User login(String account, String password) throws UserException {
+	public User login(String account, String password,String ip) throws UserException {
 
 		if (Value.isEmpty(account)) {
 			throw new UserException("请输入手机号或email");
@@ -72,6 +73,11 @@ public class UserServiceImpl implements IUserService {
 		if (!DigestUtil.encodePassword(password).equals(user.getPassword())) {
 			throw new UserException("密码不正确");
 		}
+		
+		user.setLastLoginIp(user.getLoginIp());
+		user.setLoginIp(ip);
+		user.setLastLoginTime(user.getLoginTime());
+		user.setLoginTime(new Date().getTime()/1000);
 
 		return user;
 
