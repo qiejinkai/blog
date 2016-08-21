@@ -29,6 +29,22 @@ public final class RequestUtil {
 	public final static String IPAD = "iPad";
 	public final static String IPHONE = "iPhone";
 	public final static String IPOD = "iPod";
+	
+	public final static boolean isWeixinClient(HttpServletRequest request) {
+		if (request == null) {
+			return false;
+		}
+		String userAgent = request.getHeader("User-Agent");
+
+		if (Value.isEmpty(userAgent)) {
+			return false;
+		}
+		if (regex(WEIXIN, userAgent)) {
+			return true;
+		}
+
+		return false;
+	}
 
 	public final static boolean isMobile(HttpServletRequest request) {
 		if (request == null) {

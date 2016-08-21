@@ -3,7 +3,7 @@
 	<title>qq互联</title>
 	<summary></summary>
 	<name>qq</name>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<types></types>
 	<indexId>5</indexId>
 	<option>
@@ -17,12 +17,6 @@
 		<name>appkey</name>
 		<value></value>
 		<title>应用秘钥</title>
-	</option>
-	<option>
-		<summary>基础设置</summary>
-		<name>accountId</name>
-		<value></value>
-		<title>公众账号ID</title>
 	</option>
 	<option>
 		<summary>获取Authorization Code</summary>

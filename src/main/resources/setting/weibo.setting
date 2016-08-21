@@ -3,7 +3,7 @@
 	<title>新浪微博</title>
 	<summary></summary>
 	<name>weibo</name>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<types></types>
 	<indexId>5</indexId>
 	<option>
@@ -17,12 +17,6 @@
 		<name>secret</name>
 		<value></value>
 		<title>应用秘钥</title>
-	</option>
-	<option>
-		<summary>基础设置</summary>
-		<name>accountId</name>
-		<value></value>
-		<title>公众账号ID</title>
 	</option>
 	
 </settings>

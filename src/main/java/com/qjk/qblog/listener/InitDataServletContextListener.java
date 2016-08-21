@@ -105,6 +105,8 @@ public class InitDataServletContextListener implements ServletContextListener {
 										if (version.equals(s.getVersion())) {
 											return;
 										} else {
+											System.out.println(s.getSettingId());
+											System.out.println(s.getName());
 											settingDao.deleteSetting(s
 													.getSettingId());
 										}

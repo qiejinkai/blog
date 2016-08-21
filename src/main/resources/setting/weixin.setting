@@ -3,26 +3,69 @@
 	<title>微信设置</title>
 	<summary></summary>
 	<name>weixin</name>
-	<version>1.0.0</version>
+	<version>1.0.3</version>
 	<types></types>
 	<indexId>5</indexId>
 	<option>
-		<summary>基础设置</summary>
+		<summary>应用ID</summary>
 		<name>appid</name>
-		<value></value>
+		<value>wx2bcb2408cb7481b9</value>
 		<title>应用ID</title>
 	</option>
 	<option>
-		<summary>基础设置</summary>
-		<name>secret</name>
-		<value></value>
+		<summary>应用秘钥</summary>
+		<name>appkey</name>
+		<value>ab19048e89034f6bc4c3c0e7b01341d5</value>
 		<title>应用秘钥</title>
 	</option>
 	<option>
-		<summary>基础设置</summary>
+		<summary>公众账号ID</summary>
 		<name>accountId</name>
 		<value></value>
 		<title>公众账号ID</title>
+	</option>
+	<option>
+		<summary>获取code</summary>
+		<name>api_code</name>
+		<value>https://open.weixin.qq.com/connect/oauth2/authorize?appid={appid}&amp;redirect_uri={redirect_uri}&amp;response_type=code&amp;scope={scope}&amp;state={state}#wechat_redirect</value>
+		<title>公众账号ID</title>
+	</option>	
+	<option>
+		<summary>获取code</summary>
+		<name>api_code_qr</name>
+		<value>https://open.weixin.qq.com/connect/qrconnect?appid={appid}&amp;redirect_uri={redirect_uri}&amp;response_type=code&amp;scope={scope}&amp;state={state}#wechat_redirect</value>
+		<title>公众账号ID</title>
+	</option>	
+	<option>
+		<summary>获取Access Token</summary>
+		<name>api_token</name>
+		<value>https://api.weixin.qq.com/sns/oauth2/access_token?appid={appid}&amp;secret={appkey}&amp;code={code}&amp;grant_type=authorization_code</value>
+		<title>获取Access Token</title>
+	</option>
+	<option>
+		<summary>刷新Access Token</summary>
+		<name>api_refresh</name>
+		<value>https://api.weixin.qq.com/sns/oauth2/refresh_token?appid={appid}&amp;grant_type=refresh_token&amp;refresh_token={refresh_token}</value>
+		<title>获取Access Token</title>
+	</option>
+	<option>
+		<summary>获取用户信息</summary>
+		<name>api_userInfo</name>
+		<value>https://api.weixin.qq.com/sns/userinfo?access_token={token}&amp;openid={openId}&amp;lang=zh_CN</value>
+		<title>获取Access Token</title>
+	</option>
+	<option>
+		<summary>获取权限范围</summary>
+		<name>scope</name>
+		<value>snsapi_userinfo</value>
+		<title>获取权限范围</title>
+	</option>
+	
+	<option>
+		<summary>回调地址</summary>
+		<name>redirect_uri</name>
+		<value>http://114.215.128.157/wxuser/callback/</value>
+		<title>回调地址</title>
 	</option>
 	
 </settings>

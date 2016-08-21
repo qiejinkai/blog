@@ -16,15 +16,15 @@ import org.hibernate.validator.constraints.Email;
 import com.qjk.qblog.group.ValidateInPost;
 
 @Entity
-@Table(name = "qblog_qquser")
-public class QQUser implements Serializable {
+@Table(name = "qblog_wxuser")
+public class WXUser implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private long qqid;
+	private long wxid;
 	private User user;
 	private String openid;
 	private String access_token;
@@ -38,18 +38,28 @@ public class QQUser implements Serializable {
 	private long loginTime;
 	private String lastLoginIp;
 	private String loginIp;
+	private String unionid;
+
+	@Column(length = 1024)
+	public String getUnionid() {
+		return unionid;
+	}
+
+	public void setUnionid(String unionid) {
+		this.unionid = unionid;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long getQqid() {
-		return qqid;
+	public long getWxid() {
+		return wxid;
 	}
 
-	public void setQqid(long qqid) {
-		this.qqid = qqid;
+	public void setWxid(long wxid) {
+		this.wxid = wxid;
 	}
-	
-	@OneToOne(mappedBy="qqUser")
+
+	@OneToOne(mappedBy = "wxUser")
 	public User getUser() {
 		return user;
 	}

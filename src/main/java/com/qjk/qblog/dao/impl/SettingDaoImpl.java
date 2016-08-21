@@ -45,8 +45,11 @@ public class SettingDaoImpl extends BaseDaoImpl<Setting> implements ISettingDao 
 
 	@Override
 	public void deleteSetting(long id) {
-
-		this.delete(id);
+		Setting setting  = this.findById(id);
+		if(setting != null){
+			this.deleteFromRedis(RedisUtil.getKey("setting", setting.getName()));
+			this.delete(id);
+		}
 	}
 
 	@Override
