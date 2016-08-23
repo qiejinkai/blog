@@ -1,13 +1,17 @@
 package com.qjk.qblog.service.impl;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.qjk.qblog.dao.IUserDao;
+import com.qjk.qblog.data.Article;
+import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.data.User;
 import com.qjk.qblog.exception.UserException;
 import com.qjk.qblog.service.IUserService;
@@ -54,7 +58,8 @@ public class UserServiceImpl implements IUserService {
 		return userDao.selectUsers();
 	}
 
-	public User login(String account, String password,String ip) throws UserException {
+	public User login(String account, String password, String ip)
+			throws UserException {
 
 		if (Value.isEmpty(account)) {
 			throw new UserException("请输入手机号或email");
@@ -73,11 +78,11 @@ public class UserServiceImpl implements IUserService {
 		if (!DigestUtil.encodePassword(password).equals(user.getPassword())) {
 			throw new UserException("密码不正确");
 		}
-		
+
 		user.setLastLoginIp(user.getLoginIp());
 		user.setLoginIp(ip);
 		user.setLastLoginTime(user.getLoginTime());
-		user.setLoginTime(new Date().getTime()/1000);
+		user.setLoginTime(new Date().getTime() / 1000);
 
 		return user;
 
@@ -135,6 +140,19 @@ public class UserServiceImpl implements IUserService {
 		userDao.addUser(user);
 
 		return user;
+	}
+
+	@Override
+	public Pager<User> getAllUser(int pageIndex, String keywords) {
+		Pager<User> pager = new Pager<User>().openCounter(pageIndex, 20);
+		Map<String, Object> sqlParams = new LinkedHashMap<String, Object>();
+		if (!Value.isEmpty(keywords)) {
+
+			sqlParams.put(" AND nick like ? ", "%" + keywords + "%");
+		}
+		pager.setSqlParams(sqlParams).setOrder(" ORDER BY ctime DESC");
+		pager = userDao.selectPager(pager);
+		return pager;
 	}
 
 }

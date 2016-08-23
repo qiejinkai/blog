@@ -3,7 +3,6 @@ package com.qjk.qblog.controller.admin;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +22,6 @@ import com.qjk.qblog.group.ValidateInArticlePost;
 import com.qjk.qblog.group.ValidateInPost;
 import com.qjk.qblog.service.IAGroupSerivce;
 import com.qjk.qblog.service.IArticleService;
-import com.sun.tools.doclets.internal.toolkit.util.Group;
 
 @Controller
 @RequestMapping("/admin/content")
@@ -47,8 +44,8 @@ public class ContentController {
 		model.addAttribute("groups", groups);
 		model.addAttribute("groupId", groupId);
 		if (groupId != 0 && groups != null && groups.size() > 0) {
-			Pager<Article> pager = articleService.getAllArticlesPager(pageIndex,
-					groupId);
+			Pager<Article> pager = articleService.getAllArticlesPager(
+					pageIndex, groupId);
 
 			model.addAttribute("pager", pager);
 		}
@@ -111,7 +108,7 @@ public class ContentController {
 	@RequestMapping(value = "article/{id}/{groupId}/set", method = RequestMethod.POST)
 	public String articleSet(
 			@Validated(ValidateInArticlePost.class) Article article,
-			BindingResult br, Model model,@PathVariable long groupId) {
+			BindingResult br, Model model, @PathVariable long groupId) {
 
 		if (br.hasErrors()) {
 			List<ObjectError> errors = br.getAllErrors();
@@ -119,7 +116,7 @@ public class ContentController {
 		} else {
 
 			try {
-				AGroup group= new AGroup();
+				AGroup group = new AGroup();
 				group.setGroupId(groupId);
 				article.setGroup(group);
 				articleService.saveOrUpdateArticle(article);

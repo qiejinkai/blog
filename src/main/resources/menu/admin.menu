@@ -1,12 +1,32 @@
 <?xml version="1.0"?>
 <menu>
 	<name>admin</name>
-	<version>1.0.7</version>
+	<version>1.0.9</version>
 	<title>系统管理目录</title>
 
 	<menu>
 		<title>用户管理</title>
 		<icon>bg_1</icon>
+		<menu>
+			<title>用户查询</title>
+			<href>/admin/user/users/</href>
+			<resource>admin/admin/users</resource>
+		</menu>
+		<menu>
+			<title>QQ用户查询</title>
+			<href>/admin/user/qqusers/</href>
+			<resource>admin/user/qqusers</resource>
+		</menu>
+		<menu>
+			<title>微信用户查询</title>
+			<href>/admin/user/wxusers/</href>
+			<resource>admin/user/wxusers</resource>
+		</menu>
+		<menu>
+			<title>留言管理</title>
+			<href>/admin/user/message/</href>
+			<resource>admin/user/message</resource>
+		</menu>
 	</menu>
 	
 	<menu>

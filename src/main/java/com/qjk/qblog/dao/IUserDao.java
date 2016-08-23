@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.data.User;
 
 @Transactional(propagation=Propagation.SUPPORTS)
@@ -25,5 +26,7 @@ public interface IUserDao {
 	public User findUserByAccount(String account);
 
 	public User findUserByWxid(long wxid);
+
+	public Pager<User> selectPager(Pager<User> pager);
 	
 }

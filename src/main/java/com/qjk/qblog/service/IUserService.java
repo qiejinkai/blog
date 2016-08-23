@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.qjk.qblog.data.Article;
+import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.data.User;
 import com.qjk.qblog.exception.UserException;
 
@@ -25,5 +27,7 @@ public interface IUserService {
 	User findUserById(long id);
 	
 	List<User> queryUser();
+
+	Pager<User> getAllUser(int pageIndex, String keywords);
 	
 }

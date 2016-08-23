@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.qjk.qblog.dao.IUserDao;
+import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.data.User;
 
 @Repository
@@ -63,5 +64,11 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements IUserDao {
 	@Override
 	public User findUserByWxid(long wxid) {
 		return this.findOneByHQL("from User u where wxUser.wxid =?", wxid);
+	}
+	
+	@Override
+	public Pager<User> selectPager(Pager<User> pager) {
+		
+		return this.queryPager(pager);
 	}
 }
