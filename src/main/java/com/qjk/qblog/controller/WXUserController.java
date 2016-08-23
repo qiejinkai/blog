@@ -21,6 +21,7 @@ import com.qjk.qblog.data.WXUser;
 import com.qjk.qblog.data.User;
 import com.qjk.qblog.service.IWXUserService;
 import com.qjk.qblog.service.ISettingService;
+import com.qjk.qblog.util.CacheManagerUtil;
 import com.qjk.qblog.util.JsonUtil;
 import com.qjk.qblog.util.WXLoginHelper;
 import com.qjk.qblog.util.RequestUtil;
@@ -36,6 +37,9 @@ public class WXUserController {
 	IWXUserService WXUserService;
 	@Resource
 	ISettingService settingService;
+	
+	@Resource
+	CacheManagerUtil cacheManagerUtil;
 
 	WXLoginHelper WXLoginHelper;
 
@@ -85,17 +89,29 @@ public class WXUserController {
 	public String callback(String state,String code,
 			HttpServletRequest request) {
 
-		if (Value.isEmpty(code)) {
-			logger.info("用户取消授权");
-			return "redirect:/";
-		}
+		logger.info("WXUserController callback()");
 		String r = "/";
 		try {
 			r = Value.isEmpty(state)?"/":URLDecoder.decode(state, "utf-8");
 		} catch (UnsupportedEncodingException e1) {
 			r="/";
 		}
+		
+		if (Value.isEmpty(code)) {
+			logger.info("用户取消授权");
+			return "redirect:"+r;
+		}
+		
+		Object cache= cacheManagerUtil.getOauthCodeCache("wx_public_code:"+code);
 
+		logger.info("WXUserController cache" +cache);
+		if(!Value.isEmpty(cache)){
+
+			logger.info("code已经使用");
+			return "redirect:"+r;
+		}
+		cacheManagerUtil.putOauthCodeCache("wx_public_code:"+code, code);
+		
 		WXLoginHelper WXLoginHelper = getWXLoginHelper();
 		try {
 			// 获取token
@@ -150,8 +166,7 @@ public class WXUserController {
 			request.getSession().setAttribute("user", u);
 
 		} catch (Throwable e) {
-			logger.error(e.getMessage());
-			return "redirect:"+r;
+			logger.error(e);
 		}
 
 		return "redirect:"+r;

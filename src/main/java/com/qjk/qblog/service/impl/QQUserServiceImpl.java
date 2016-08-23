@@ -52,7 +52,7 @@ public class QQUserServiceImpl implements IQQUserService {
 			u.setRefresh_token(qquser.getRefresh_token());
 			u.setNick(qquser.getNick());
 			u.setLogo(qquser.getLogo());
-			qqUserDao.updateQQUser(qquser);
+			qqUserDao.updateQQUser(u);
 
 			user = u.getUser();
 			user.setNick(qquser.getNick());

@@ -11,6 +11,7 @@ public final class CacheManagerUtil {
 
 	private static final String CAHCE_SYSTEM = "systemConfig";
 	private static final String CACHE_LOGIN = "loginConfig";
+	private static final String CACHE_OAUHT2_CODE = "oauthCodeConfig";
 
 	@Resource
 	private CacheManager cacheManager;
@@ -49,7 +50,10 @@ public final class CacheManagerUtil {
 
 		Cache cache = getCache(CAHCE_SYSTEM);
 		if (cache != null) {
-			return cache.get(key).get();
+			
+			if(cache.get(key) != null){
+				return cache.get(key).get();
+			}
 		}
 
 		return null;
@@ -64,12 +68,39 @@ public final class CacheManagerUtil {
 
 		return false;
 	}
+	
+
+	public Object getOauthCodeCache(String key) {
+
+		Cache cache = getCache(CACHE_OAUHT2_CODE);
+		if (cache != null) {
+			
+			if(cache.get(key) != null){
+				return cache.get(key).get();
+			}
+		}
+
+		return null;
+	}
+
+	public boolean putOauthCodeCache(String key, Object obj) {
+		Cache cache = getCache(CACHE_OAUHT2_CODE);
+		if (cache != null) {
+			cache.put(key, obj);
+			return true;
+		}
+
+		return false;
+	}
 
 	public Object getLoginCache(String key) {
 
 		Cache cache = getCache(CACHE_LOGIN);
 		if (cache != null) {
-			return cache.get(key).get();
+			
+			if(cache.get(key) != null){
+				return cache.get(key).get();
+			}
 		}
 
 		return null;

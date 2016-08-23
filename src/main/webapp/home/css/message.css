@@ -455,7 +455,9 @@
 	clear: both;
 	position: relative;
 	overflow: visible;
-	_zoom: 1
+	_zoom: 1;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 #ds-thread #ds-reset a {

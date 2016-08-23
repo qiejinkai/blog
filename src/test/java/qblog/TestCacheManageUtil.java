@@ -31,4 +31,10 @@ public class TestCacheManageUtil extends AbstractJUnit4SpringContextTests {
 		System.out.println(" u2 : "+ u2.getEmail()+" , " +u2.getNick());
 		
 	}
+	
+	@Test
+	public void testOauth(){
+		Object object = util.getOauthCodeCache("wx_oauth_pulic : "+"asjhdkajshdjkhasjkdhjkasd");
+		System.out.println(object);
+	}
 }

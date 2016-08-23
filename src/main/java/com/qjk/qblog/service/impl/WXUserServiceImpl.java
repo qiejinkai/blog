@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -15,6 +16,8 @@ import com.qjk.qblog.service.IWXUserService;
 
 @Service
 public class WXUserServiceImpl implements IWXUserService {
+	
+	Logger logger = Logger.getLogger(WXUserServiceImpl.class);
 
 	@Resource
 	IWXUserDao WXUserDao;
@@ -53,9 +56,9 @@ public class WXUserServiceImpl implements IWXUserService {
 			u.setNick(WXuser.getNick());
 			u.setLogo(WXuser.getLogo());
 			u.setGender(WXuser.getGender());
-			WXUserDao.updateWXUser(WXuser);
+			WXUserDao.updateWXUser(u);
 
-			user = u.getUser();
+			user = userDao.findUserByWxid(u.getWxid());
 			user.setNick(WXuser.getNick());
 			user.setLogo(WXuser.getLogo());
 			userDao.updateUser(user);
@@ -78,19 +81,21 @@ public class WXUserServiceImpl implements IWXUserService {
 		WXUser.setLoginIp(ip);
 		WXUser.setLoginTime(new Date().getTime() / 1000);
 
-		WXUserDao.updateWXUser(WXUser);
-
-		User user = WXUser.getUser();
-
+		User user = userDao.findUserByWxid(WXUser.getWxid());
+		
 		if (user == null) {
+			logger.info("login()   user is null");
 			user = new User();
 			user.setWxUser(WXUser);
+			user.setCtime(new Date().getTime()/1000);
 		}
 		user.setLastLoginIp(user.getLoginIp());
 		user.setLastLoginTime(user.getLoginTime());
 		user.setLoginIp(ip);
 		user.setLoginTime(new Date().getTime() / 1000);
 
+
+		WXUserDao.updateWXUser(WXUser);
 		userDao.updateUser(user);
 		return user;
 	}

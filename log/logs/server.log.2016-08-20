@@ -1,0 +1,16 @@
+2016-08-20 16:50:45  [ main:0 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2016-08-20 16:50:49  [ main:4115 ] - [ ERROR ]  HHH000346: Error during managed flush [object references an unsaved transient instance - save the transient instance before flushing: com.qjk.qblog.data.QQUser]
+2016-08-20 16:53:00  [ main:1 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2016-08-20 16:53:03  [ main:2900 ] - [ ERROR ]  Incorrect integer value: 'asdhjashdjkahjskdhajkhdkjasdasd' for column 'openid' at row 1
+2016-08-20 16:55:56  [ main:0 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2016-08-20 17:00:05  [ main:0 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2016-08-20 17:02:00  [ main:0 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2016-08-20 17:02:27  [ main:0 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2016-08-20 17:03:05  [ main:0 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2016-08-20 17:03:54  [ main:0 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2016-08-20 17:15:17  [ main:1 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2016-08-20 17:16:00  [ main:0 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2016-08-20 17:17:08  [ main:0 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2016-08-20 17:18:35  [ main:1 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2016-08-20 17:19:07  [ main:0 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2016-08-20 17:19:38  [ main:0 ] - [ DEBUG ]  Logging Provider: org.jboss.logging.Log4jLoggerProvider

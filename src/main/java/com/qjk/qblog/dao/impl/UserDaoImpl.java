@@ -59,4 +59,9 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements IUserDao {
 		return user;
 		
 	}
+
+	@Override
+	public User findUserByWxid(long wxid) {
+		return this.findOneByHQL("from User u where wxUser.wxid =?", wxid);
+	}
 }

@@ -4,16 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Email;
-
-import com.qjk.qblog.group.ValidateInPost;
 
 @Entity
 @Table(name = "qblog_wxuser")
@@ -59,7 +55,7 @@ public class WXUser implements Serializable {
 		this.wxid = wxid;
 	}
 
-	@OneToOne(mappedBy = "wxUser")
+	@OneToOne(mappedBy = "wxUser",fetch=FetchType.EAGER)
 	public User getUser() {
 		return user;
 	}

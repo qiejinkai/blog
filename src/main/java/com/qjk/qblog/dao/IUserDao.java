@@ -23,5 +23,7 @@ public interface IUserDao {
 	public List<User> selectUsers();
 
 	public User findUserByAccount(String account);
+
+	public User findUserByWxid(long wxid);
 	
 }

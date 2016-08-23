@@ -4,9 +4,13 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.qjk.qblog.http.CURL;
 
 public final class WXLoginHelper {
+	
+	Logger logger = Logger.getLogger(WXLoginHelper.class);
 
 	private Map<String, String> wx;
 
@@ -36,6 +40,8 @@ public final class WXLoginHelper {
 		api_code = api_code.replaceAll("\\{redirect_uri\\}", URLEncoder.encode(redirect_uri, "utf-8"));
 		api_code = api_code.replaceAll("\\{scope\\}",
 				Value.isEmpty(scope) ? "snsapi_userinfo" : scope);
+
+		logger.info("api_code : "+api_code);
 		return api_code;
 
 	}
@@ -60,14 +66,16 @@ public final class WXLoginHelper {
 		api_token = api_token.replaceAll("\\{code\\}", code);
 
 		try {
+			logger.info("api_token : "+api_token);
 			String result = CURL.get(new URL(api_token)).exec();
 
+			logger.info("api_token result : "+result);
 			validateResult(result);
 
 			return result;
 
 		} catch (Throwable e) {
-			throw new Exception("微信公众号获取token失败 : ", e);
+			throw new Exception("微信公众号获取token失败 : "+e.getMessage() +"   "+api_token, e);
 		}
 
 	}
@@ -88,7 +96,10 @@ public final class WXLoginHelper {
 		api_userInfo = api_userInfo.replaceAll("\\{openId\\}", openId);
 
 		try {
+
+			logger.info("api_userInfo : "+api_userInfo);
 			String result = CURL.get(new URL(api_userInfo)).exec();
+			logger.info("api_userInfo result : "+result);
 			validateResult(result);
 			return result;
 
