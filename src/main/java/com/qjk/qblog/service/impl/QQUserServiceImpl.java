@@ -1,6 +1,8 @@
 package com.qjk.qblog.service.impl;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -9,9 +11,11 @@ import org.springframework.util.Assert;
 
 import com.qjk.qblog.dao.IQQUserDao;
 import com.qjk.qblog.dao.IUserDao;
+import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.data.QQUser;
 import com.qjk.qblog.data.User;
 import com.qjk.qblog.service.IQQUserService;
+import com.qjk.qblog.util.Value;
 
 @Service
 public class QQUserServiceImpl implements IQQUserService {
@@ -101,5 +105,23 @@ public class QQUserServiceImpl implements IQQUserService {
 		}
 		return null;
 	}
+	
+	@Override
+	public Pager<QQUser> getAllQQUser(int pageIndex, String keywords) {
+		Pager<QQUser> pager = new Pager<QQUser>().openCounter(pageIndex, 20);
+		Map<String, Object> sqlParams = new LinkedHashMap<String, Object>();
+		if (!Value.isEmpty(keywords)) {
 
+			sqlParams.put(" AND nick like ? ", "%" + keywords + "%");
+		}
+		pager.setSqlParams(sqlParams).setOrder(" ORDER BY ctime DESC");
+		pager = qqUserDao.selectPager(pager);
+		return pager;
+	}
+	
+	@Override
+	public QQUser findQQUserById(long qqid) {
+		
+		return qqUserDao.findQQUserbyId(qqid);
+	}
 }

@@ -13,6 +13,8 @@ public interface IMessageService {
 	void deleteMessage(long id);
 	
 	Pager<Message> selectPager(long articleId,long uid ,int pageIndex);
+
+	Pager<Message> selectPager(int pageIndex, String keywords, long articleId, long uid);
 	
 	
 }

@@ -2,6 +2,7 @@ package com.qjk.qblog.service;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.data.WXUser;
 import com.qjk.qblog.data.User;
 
@@ -15,4 +16,8 @@ public interface IWXUserService {
 	User login(String openId,String ip);
 	
 	WXUser updateWXUser(WXUser user);
+
+	WXUser findWXUserById(long wxid);
+
+	Pager<WXUser> getAllWXUser(int pageIndex, String keywords);
 }

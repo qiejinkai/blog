@@ -154,5 +154,7 @@ public class UserServiceImpl implements IUserService {
 		pager = userDao.selectPager(pager);
 		return pager;
 	}
+	
+	
 
 }

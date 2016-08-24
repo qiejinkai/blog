@@ -15,6 +15,7 @@ import com.qjk.qblog.data.Message;
 import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.data.User;
 import com.qjk.qblog.service.IMessageService;
+import com.qjk.qblog.util.Value;
 
 @Service
 public class MessageServiceImpl implements IMessageService {
@@ -55,10 +56,18 @@ public class MessageServiceImpl implements IMessageService {
 
 	@Override
 	public Pager<Message> selectPager(long articleId, long uid, int pageIndex) {
+		return selectPager(pageIndex, "", articleId, uid);
+	}
 
+	@Override
+	public Pager<Message> selectPager(int pageIndex, String keywords,
+			long articleId, long uid) {
 		Pager<Message> pager = new Pager<Message>().openCounter(pageIndex, 10);
 		Map<String, Object> sqlParams = new LinkedHashMap<String, Object>();
 		sqlParams.put(" AND articleId=?", articleId);
+		if(!Value.isEmpty(keywords)){
+			sqlParams.put(" AND content like ?", "%"+keywords+"%");
+		}
 		if (uid != 0) {
 			sqlParams.put(" AND user.uid=?", uid);
 		}

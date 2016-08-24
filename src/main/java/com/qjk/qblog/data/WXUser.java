@@ -55,7 +55,7 @@ public class WXUser implements Serializable {
 		this.wxid = wxid;
 	}
 
-	@OneToOne(mappedBy = "wxUser",fetch=FetchType.EAGER)
+	@OneToOne(mappedBy = "wxUser")
 	public User getUser() {
 		return user;
 	}

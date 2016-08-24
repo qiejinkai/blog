@@ -1,6 +1,8 @@
 package com.qjk.qblog.service.impl;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,9 +12,12 @@ import org.springframework.util.Assert;
 
 import com.qjk.qblog.dao.IWXUserDao;
 import com.qjk.qblog.dao.IUserDao;
+import com.qjk.qblog.data.Pager;
+import com.qjk.qblog.data.QQUser;
 import com.qjk.qblog.data.WXUser;
 import com.qjk.qblog.data.User;
 import com.qjk.qblog.service.IWXUserService;
+import com.qjk.qblog.util.Value;
 
 @Service
 public class WXUserServiceImpl implements IWXUserService {
@@ -106,6 +111,25 @@ public class WXUserServiceImpl implements IWXUserService {
 			WXUserDao.updateWXUser(user);
 		}
 		return null;
+	}
+	
+	@Override
+	public WXUser findWXUserById(long wxid) {
+		
+		return WXUserDao.findWXUserbyId(wxid);
+	}
+	
+	@Override
+	public Pager<WXUser> getAllWXUser(int pageIndex, String keywords) {
+		Pager<WXUser> pager = new Pager<WXUser>().openCounter(pageIndex, 20);
+		Map<String, Object> sqlParams = new LinkedHashMap<String, Object>();
+		if (!Value.isEmpty(keywords)) {
+
+			sqlParams.put(" AND nick like ? ", "%" + keywords + "%");
+		}
+		pager.setSqlParams(sqlParams).setOrder(" ORDER BY ctime DESC");
+		pager = WXUserDao.selectPager(pager);
+		return pager;
 	}
 
 }
