@@ -17,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.qjk.qblog.data.AGroup;
 import com.qjk.qblog.data.Article;
+import com.qjk.qblog.data.Message;
 import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.group.ValidateInArticlePost;
 import com.qjk.qblog.group.ValidateInPost;
 import com.qjk.qblog.service.IAGroupSerivce;
 import com.qjk.qblog.service.IArticleService;
+import com.qjk.qblog.service.IMessageService;
+import com.qjk.qblog.util.Value;
 
 @Controller
 @RequestMapping("/admin/content")
@@ -34,6 +37,9 @@ public class ContentController {
 
 	@Resource
 	IArticleService articleService;
+
+	@Resource
+	IMessageService messageService;
 
 	@RequestMapping(value = "article/{groupId}/{pageIndex}", method = RequestMethod.GET)
 	public String articleTo(@PathVariable long groupId,
@@ -362,6 +368,45 @@ public class ContentController {
 		}
 
 		return "admin/content/" + alias + "_set";
+	}
+
+	@RequestMapping(value = {
+			"/{alias}/{articleId}/messages/{pageIndex}/{keywords}",
+			"/{alias}/{articleId}/messages/{pageIndex}/{keywords}/" }, method = RequestMethod.GET)
+	public String message_list(Model model, @PathVariable int pageIndex,
+			@PathVariable String alias, @PathVariable long articleId,
+			@PathVariable String keywords) {
+		if(articleId == 0){
+			alias = Value.isEmpty(alias)?"article":alias;
+			return "redirect:/admin/content/"+alias;
+		}
+		Article article = articleService.findArticleById(articleId);
+		Pager<Message> pager = messageService.selectPager(pageIndex, keywords,
+				articleId, 0);
+
+		model.addAttribute("pager", pager);
+		model.addAttribute("article", article);
+		model.addAttribute("keywords", keywords);
+
+		return "admin/content/message_list";
+	}
+
+	@RequestMapping(value = { "/{alias}/{articleId}/messages/{pageIndex}",
+			"/{alias}/{articleId}/messages/{pageIndex}/" }, method = RequestMethod.GET)
+	public String message_list(Model model, @PathVariable int pageIndex,
+			@PathVariable String alias, @PathVariable long articleId) {
+		
+
+		return message_list(model, pageIndex, alias, articleId, "");
+	}
+
+	@RequestMapping(value = { "/{alias}/{articleId}/messages/",
+			"/{alias}/{articleId}/messages/" }, method = RequestMethod.GET)
+	public String message_list(Model model, 
+			@PathVariable String alias, @PathVariable long articleId) {
+		
+
+		return message_list(model, 1, alias, articleId, "");
 	}
 
 }

@@ -51,6 +51,7 @@ public class UserManagerController {
 
 		model.addAttribute("pager", pager);
 
+		model.addAttribute("keywords", keywords);
 		return "admin/user/user_list";
 	}
 	@RequestMapping(value={"/users/{uid}/detail","/users/{uid}/detail/"},method=RequestMethod.GET)
@@ -91,6 +92,7 @@ public class UserManagerController {
 
 		model.addAttribute("pager", pager);
 
+		model.addAttribute("keywords", keywords);
 		return "admin/user/qquser_list";
 	}
 	@RequestMapping(value={"/qqusers/{qqid}/detail","/qqusers/{qqid}/detail/"},method=RequestMethod.GET)
@@ -130,6 +132,7 @@ public class UserManagerController {
 		Pager<WXUser> pager = wxUserService.getAllWXUser(pageIndex, keywords);
 
 		model.addAttribute("pager", pager);
+		model.addAttribute("keywords", keywords);
 
 		return "admin/user/wxuser_list";
 	}
@@ -169,7 +172,7 @@ public class UserManagerController {
 		Pager<Message> pager = messageService.selectPager(pageIndex, keywords,0,0);
 
 		model.addAttribute("pager", pager);
-
+		model.addAttribute("keywords", keywords);
 		return "admin/user/message_list";
 	}
 }

@@ -9,6 +9,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import sun.tools.tree.ThisExpression;
 
 import com.qjk.qblog.data.Pager;
+import com.qjk.qblog.util.Value;
 
 public class AdminPagerTag extends TagSupport {
 	/**
@@ -24,6 +25,9 @@ public class AdminPagerTag extends TagSupport {
 	}
 	public void setColumnSize(String columnSize) {
 		this.columnSize = columnSize;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	@Override
@@ -59,7 +63,7 @@ public class AdminPagerTag extends TagSupport {
 					} else if (Math.abs(i - pager.getPageIndex()) < 3 || i < 4
 							|| i > pager.getTotalPages() - 4) {
 
-						sb.append("<a href='").append(i).append("'>")
+						sb.append("<a href='").append(Value.isEmpty(url)?i:url.replaceAll("\\{pageIndex\\}", i+"")).append("'>")
 								.append(i).append("</a>");
 					} else if (i == 4 || i == (pager.getTotalPages() - 4)) {
 						sb.append("<li><span>...</span></li>");

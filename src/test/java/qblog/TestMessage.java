@@ -19,22 +19,22 @@ public class TestMessage extends AbstractJUnit4SpringContextTests {
 	
 	@Test
 	public void testAdd(){
-		
+		for(int i = 0 ;i<220;i++){
 		Message message = new Message();
 		message.setContent("lalalalalalal");
 		message.setCtime(new Date().getTime()/1000);
-		message.setArticleId(0);
+		message.setArticleId(25);
 		
 		User user = new User();
-		user.setUid(1);
-		message.setUser(new User(1));
-		Message quote = new Message();
-		quote.setMessageId(1);
+		user.setUid(12);
+		message.setUser(new User(12));
 //		message.setQuote( new Message(2));
 		
-		messageDao.addMessage(message);
 		
-		System.out.println(message.getMessageId());
+			message.setContent("ddd"+i);
+			messageDao.addMessage(message);
+		}
+		
 		
 	}
 }
