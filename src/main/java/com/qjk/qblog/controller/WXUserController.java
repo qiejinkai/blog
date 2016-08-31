@@ -141,7 +141,7 @@ public class WXUserController {
 				throw new Exception("微信 获取userInfo失败 userInfo为空");
 			}
 			Map<String, Object> info = JsonUtil.fromJson(infoString);
-
+			logger.info("userinfo : "+infoString);
 			String nick = Value.stringValueForKey(info, "nickname", "");
 			String logo = Value.stringValueForKey(info, "headimgurl", "");
 			String unionid = Value.stringValueForKey(info, "unionid", "");

@@ -28,5 +28,7 @@ public interface IUserDao {
 	public User findUserByWxid(long wxid);
 
 	public Pager<User> selectPager(Pager<User> pager);
+
+	public User findUserByQqid(long qqid);
 	
 }

@@ -41,7 +41,7 @@ public final class WXLoginHelper {
 		api_code = api_code.replaceAll("\\{scope\\}",
 				Value.isEmpty(scope) ? "snsapi_userinfo" : scope);
 
-		logger.info("api_code : "+api_code);
+//		logger.info("api_code : "+api_code);
 		return api_code;
 
 	}
@@ -66,10 +66,10 @@ public final class WXLoginHelper {
 		api_token = api_token.replaceAll("\\{code\\}", code);
 
 		try {
-			logger.info("api_token : "+api_token);
+//			logger.info("api_token : "+api_token);
 			String result = CURL.get(new URL(api_token)).exec();
 
-			logger.info("api_token result : "+result);
+//			logger.info("api_token result : "+result);
 			validateResult(result);
 
 			return result;
@@ -97,9 +97,9 @@ public final class WXLoginHelper {
 
 		try {
 
-			logger.info("api_userInfo : "+api_userInfo);
+//			logger.info("api_userInfo : "+api_userInfo);
 			String result = CURL.get(new URL(api_userInfo)).exec();
-			logger.info("api_userInfo result : "+result);
+//			logger.info("api_userInfo result : "+result);
 			validateResult(result);
 			return result;
 
@@ -129,11 +129,11 @@ public final class WXLoginHelper {
 
 	}
 
-	public static void main(String[] args) {
-		String a = "https://graph.wx.com/oauth2.0/authorize?response_type=code&client_id={appid}&redirect_uri={redirect_uri}&scope={scope}&state={state}&display={display}";
-
-		a = a.replaceAll("\\{appid\\}", "123123");
-		System.out.println(a);
-	}
+//	public static void main(String[] args) {
+//		String a = "https://graph.wx.com/oauth2.0/authorize?response_type=code&client_id={appid}&redirect_uri={redirect_uri}&scope={scope}&state={state}&display={display}";
+//
+//		a = a.replaceAll("\\{appid\\}", "123123");
+//		System.out.println(a);
+//	}
 
 }

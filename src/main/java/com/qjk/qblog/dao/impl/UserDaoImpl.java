@@ -67,6 +67,11 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements IUserDao {
 	}
 	
 	@Override
+	public User findUserByQqid(long qqid) {
+		return this.findOneByHQL("from User u where qqUser.qqid =?", qqid);
+	}
+	
+	@Override
 	public Pager<User> selectPager(Pager<User> pager) {
 		
 		return this.queryPager(pager);

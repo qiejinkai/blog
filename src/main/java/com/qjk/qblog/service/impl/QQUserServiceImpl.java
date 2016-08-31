@@ -45,6 +45,7 @@ public class QQUserServiceImpl implements IQQUserService {
 			qquser.setCtime(new Date().getTime() / 1000);
 			qqUserDao.addQQUser(qquser);
 			user = new User();
+			user.setCtime(new Date().getTime() / 1000);
 			user.setAccount(qquser.getOpenid());
 			user.setNick(qquser.getNick());
 			user.setLogo(qquser.getLogo());
@@ -58,7 +59,7 @@ public class QQUserServiceImpl implements IQQUserService {
 			u.setLogo(qquser.getLogo());
 			qqUserDao.updateQQUser(u);
 
-			user = u.getUser();
+			user = userDao.findUserByQqid(qquser.getQqid());
 			user.setNick(qquser.getNick());
 			user.setLogo(qquser.getLogo());
 			userDao.updateUser(user);
@@ -83,11 +84,14 @@ public class QQUserServiceImpl implements IQQUserService {
 
 		qqUserDao.updateQQUser(qqUser);
 
-		User user = qqUser.getUser();
+		User user = userDao.findUserByQqid(qqUser.getQqid());
 
 		if (user == null) {
 			user = new User();
+			user.setAccount(qqUser.getOpenid());
 			user.setQqUser(qqUser);
+			user.setCtime(new Date().getTime() / 1000);
+			user.setNick(qqUser.getNick());
 		}
 		user.setLastLoginIp(user.getLoginIp());
 		user.setLastLoginTime(user.getLoginTime());
@@ -105,7 +109,7 @@ public class QQUserServiceImpl implements IQQUserService {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public Pager<QQUser> getAllQQUser(int pageIndex, String keywords) {
 		Pager<QQUser> pager = new Pager<QQUser>().openCounter(pageIndex, 20);
@@ -118,10 +122,10 @@ public class QQUserServiceImpl implements IQQUserService {
 		pager = qqUserDao.selectPager(pager);
 		return pager;
 	}
-	
+
 	@Override
 	public QQUser findQQUserById(long qqid) {
-		
+
 		return qqUserDao.findQQUserbyId(qqid);
 	}
 }

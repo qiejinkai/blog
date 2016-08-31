@@ -117,6 +117,7 @@ public class QQUserController {
 			}
 			Map<String, Object> info = JsonUtil.fromJson(infoString);
 
+			logger.info("userinfo : "+infoString);
 			String nick = Value.stringValueForKey(info, "nickname", "");
 			String logo = Value.stringValueForKey(info, "figureurl_qq_1", "");
 
