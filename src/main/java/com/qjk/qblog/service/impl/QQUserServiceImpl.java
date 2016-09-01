@@ -59,7 +59,7 @@ public class QQUserServiceImpl implements IQQUserService {
 			u.setLogo(qquser.getLogo());
 			qqUserDao.updateQQUser(u);
 
-			user = userDao.findUserByQqid(qquser.getQqid());
+			user = userDao.findUserByQqid(u.getQqid());
 			user.setNick(qquser.getNick());
 			user.setLogo(qquser.getLogo());
 			userDao.updateUser(user);

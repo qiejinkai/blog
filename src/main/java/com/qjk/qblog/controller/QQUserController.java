@@ -1,6 +1,9 @@
 package com.qjk.qblog.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -86,10 +89,11 @@ public class QQUserController {
 
 		QQLoginHelper qqLoginHelper = getQQLoginHelper();
 		try {
-			//获取token
+			// 获取token
 			String result = qqLoginHelper.getToken(code, state);
 
-			Map<String, Object> token = JsonUtil.fromJson(result);
+			logger.info("token : " + result);
+			Map<String, Object> token = analysisToken(result);
 
 			String access_token = Value.stringValueForKey(token,
 					"access_token", "");
@@ -100,24 +104,27 @@ public class QQUserController {
 			if (Value.isEmpty(access_token)) {
 				throw new Exception("QQ互联 获取token失败 token为空");
 			}
-			//获取openId
-			Map<String, Object> open = JsonUtil.fromJson(qqLoginHelper
-					.getOpenId(access_token));
+			// 获取openId
+
+			String openResult = qqLoginHelper.getOpenId(access_token);
+			logger.info("open : " + openResult);
+			Map<String, Object> open = analysisOpenId(openResult);
 			String openId = Value.stringValueForKey(open, "openid", "");
 
 			if (Value.isEmpty(openId)) {
 				throw new Exception("QQ互联 获取openId失败 openId为空");
 			}
-			
-			//获取userInfo
+
+			// 获取userInfo
 			String infoString = qqLoginHelper.getUserInfo(openId, access_token);
 
+			logger.info("userinfo : " + infoString);
 			if (Value.isEmpty(openId)) {
 				throw new Exception("QQ互联 获取userInfo失败 userInfo为空");
 			}
 			Map<String, Object> info = JsonUtil.fromJson(infoString);
 
-			logger.info("userinfo : "+infoString);
+			logger.info("userinfo : " + infoString);
 			String nick = Value.stringValueForKey(info, "nickname", "");
 			String logo = Value.stringValueForKey(info, "figureurl_qq_1", "");
 
@@ -128,22 +135,73 @@ public class QQUserController {
 			user.setNick(nick);
 			user.setLogo(logo);
 			user.setRefresh_token(refresh_token);
-			//创建用户
+			// 创建用户
 			qqUserService.join(user);
-			
-			//登陆
+
+			// 登陆 
 			User u = qqUserService.login(openId,
 					RequestUtil.getRealIpAddress(request));
 
 			request.getSession().setAttribute("user", u);
 
 		} catch (Throwable e) {
-			logger.error(e.getMessage());
+			e.printStackTrace(); 
+			logger.trace(e.getMessage(), e);;
 			return "redirect:/";
 		}
 
 		return "redirect:/";
 
+	}
+
+	public static void main(String[] args) {
+		String string = "access_token=F884EE4A4A4AF1D5D1246F2A3358CDB0&expires_in=7776000&refresh_token=0B79A2242A479AC6A282B79A35F803CB";
+		String string2 = " callback( {123} )";
+		Map<String, Object> map = analysisOpenId(string2);
+
+		for (Entry<String, Object> entry : map.entrySet()) {
+			System.out.println(entry.getKey() + "   ,  " + entry.getValue());
+		}
+		
+	
+		
+		
+	}
+
+	private static Map<String, Object> analysisToken(String tokenStr) {
+
+		Map<String, Object> map = new HashMap<String, Object>(3);
+
+		if (!Value.isEmpty(tokenStr) && tokenStr.indexOf("&") >= 0) {
+
+			String[] sv = tokenStr.split("&");
+			Arrays.stream(sv).forEach(s -> {
+
+				if (!Value.isEmpty(s) && s.indexOf("=") >= 0) {
+					int index = s.lastIndexOf("=");
+					map.put(s.substring(0, index), s.substring(index + 1));
+				}
+
+			});
+
+		}
+
+		return map;
+	}
+
+	private static Map<String, Object> analysisOpenId(String openStr) {
+
+		Map<String, Object> map = new HashMap<String, Object>(3);
+
+		if (!Value.isEmpty(openStr) && openStr.replaceAll(" ", "").startsWith("callback") && openStr.indexOf("{")>=0 && openStr.indexOf("}") >=0) {
+			int begin = openStr.indexOf("{");
+			int end = openStr.indexOf("}")+1;
+			
+			String string = openStr.substring(begin, end);
+			map = JsonUtil.fromJson(string);
+		}
+
+		return map;
 	}
 
 }
