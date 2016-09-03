@@ -65,4 +65,9 @@ public class HomeController {
 			return "home";
 		}
 	}
+	
+	@RequestMapping(value={"/close","/close/"},method=RequestMethod.GET)
+	public String auto_close(){
+		return "auto_close";
+	}
 }

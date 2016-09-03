@@ -1,5 +1,7 @@
 package com.qjk.qblog.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +39,7 @@ public class QQUserController {
 
 	@RequestMapping(value = { "/login", "/login/" }, method = RequestMethod.GET)
 	public String login(String r, HttpServletRequest request) {
-
+		logger.info("QQ Login Begin");
 		if (RequestUtil.isUserLogin(request)) {
 			logger.info("用户已登录");
 			return "redirect:" + r;
@@ -52,6 +54,7 @@ public class QQUserController {
 			return "redirect:" + r;
 		}
 
+		logger.info("QQ Login redirect "+api_code);
 		return "redirect:" + api_code;
 	}
 
@@ -76,15 +79,22 @@ public class QQUserController {
 	public String callback(String state, String usercancel, String code,
 			HttpServletRequest request) {
 
+		logger.info("QQ Login callback ");
+		String r = "/";
+		try {
+			r = Value.isEmpty(state)?"/":URLDecoder.decode(state, "utf-8");
+		} catch (UnsupportedEncodingException e1) {
+			r="/";
+		}
 		if (!Value.isEmpty(usercancel) && "1".equals(usercancel)) {// 用户取消授权
 
 			logger.info("用户取消授权");
-			return "redirect:/";
+			return "redirect:"+r;
 		}
 
 		if (Value.isEmpty(code)) {
 			logger.info("未找到授权code");
-			return "redirect:/";
+			return "redirect:"+r;
 		}
 
 		QQLoginHelper qqLoginHelper = getQQLoginHelper();
@@ -117,8 +127,6 @@ public class QQUserController {
 
 			// 获取userInfo
 			String infoString = qqLoginHelper.getUserInfo(openId, access_token);
-
-			logger.info("userinfo : " + infoString);
 			if (Value.isEmpty(openId)) {
 				throw new Exception("QQ互联 获取userInfo失败 userInfo为空");
 			}
@@ -137,7 +145,6 @@ public class QQUserController {
 			user.setRefresh_token(refresh_token);
 			// 创建用户
 			qqUserService.join(user);
-
 			// 登陆 
 			User u = qqUserService.login(openId,
 					RequestUtil.getRealIpAddress(request));
@@ -147,10 +154,10 @@ public class QQUserController {
 		} catch (Throwable e) {
 			e.printStackTrace(); 
 			logger.trace(e.getMessage(), e);;
-			return "redirect:/";
+			return "redirect:"+r; 
 		}
 
-		return "redirect:/";
+		return "redirect:"+r;
 
 	}
 

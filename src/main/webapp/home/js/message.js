@@ -82,8 +82,18 @@ $(function() {
 	
 	$(".ds-qq").bind('click',function(){
 		var uri = window.location.pathname;
+		uri = "/close";
 		var A=window.open("/qquser/login/?r="+uri,"TencentLogin", 
 				   "width=450,height=320,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+		
+		var loop = setInterval(function() {     
+		    if(A.closed) {    
+
+				$.tip("登录成功", true);
+		        window.location.reload();  
+		    }    
+		}, 1000); 
+	
 	});
 	
 	$(".ds-weixin").bind('click',function(){

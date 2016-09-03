@@ -89,7 +89,6 @@ public class WXUserController {
 	public String callback(String state,String code,
 			HttpServletRequest request) {
 
-		logger.info("WXUserController callback()");
 		String r = "/";
 		try {
 			r = Value.isEmpty(state)?"/":URLDecoder.decode(state, "utf-8");

@@ -79,11 +79,18 @@ $(function() {
 		submiting = false;
 		return ;
 	});
-	
+
 	$(".ds-weixin").bind('click',function(){
 		var uri = window.location.pathname;
 		var A=window.open("/wxuser/login/?r="+uri,"WEIXINLogin", 
 				   "width=450,height=320,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1");
 	});
+//	$(".ds-qq").bind('click',function(){
+//		var uri = window.location.pathname;
+//		
+//		window.location.href = "/qquser/login/?r="+uri;
+////		var A=window.open("/qquser/login/?r="+uri,"WEIXINLogin", 
+////				   "width=450,height=320,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+//	});
 
 });
