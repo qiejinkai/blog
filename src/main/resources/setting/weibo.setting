@@ -3,7 +3,7 @@
 	<title>新浪微博</title>
 	<summary></summary>
 	<name>weibo</name>
-	<version>1.0.2</version>
+	<version>1.0.6</version>
 	<types></types>
 	<indexId>5</indexId>
 	<option>
@@ -21,7 +21,13 @@
 	<option>
 		<summary>获取code</summary>
 		<name>api_code</name>
-		<value>https://api.weibo.com/oauth2/authorize?client_id={appid}&amp;redirect_uri={redirect_uri}&amp;response_type=code&amp;scope={scope}&amp;state={state}&amp;display={display}</value>
+		<value>https://api.weibo.com/oauth2/authorize?client_id={appid}&amp;redirect_uri={redirect_uri}&amp;response_type=code&amp;scope={scope}&amp;state={state}&amp;display=default</value>
+		<title>获取code</title>
+	</option>
+	<option>
+		<summary>获取code 手机端</summary>
+		<name>api_code_mobile</name>
+		<value>https://open.weibo.cn/oauth2/authorize?client_id={appid}&amp;redirect_uri={redirect_uri}&amp;response_type=code&amp;scope={scope}&amp;state={state}&amp;display=mobile</value>
 		<title>获取code</title>
 	</option>		
 	<option>
@@ -43,9 +49,9 @@
 		<title>获取Access Token</title>
 	</option>
 	<option>
-		<summary>获取用户信息 post</summary>
+		<summary>获取用户信息 get</summary>
 		<name>api_userInfo</name>
-		<value>https://api.weibo.com/2/users/show.json</value>
+		<value>https://api.weibo.com/2/users/show.json?access_token={access_token}&amp;uid={uid}</value>
 		<title>获取Access Token</title>
 	</option>
 	<option>

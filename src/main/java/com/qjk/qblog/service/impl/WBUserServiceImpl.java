@@ -49,6 +49,7 @@ public class WBUserServiceImpl implements IWBUserService {
 			wbUser.setCtime(new Date().getTime() / 1000);
 			WBUserDao.addWBUser(wbUser);
 			user = new User();
+			user.setCtime(new Date().getTime() / 1000);
 			user.setAccount(wbUser.getOpenid());
 			user.setNick(wbUser.getNick());
 			user.setLogo(wbUser.getLogo());

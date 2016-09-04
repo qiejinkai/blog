@@ -12,10 +12,12 @@ import com.qjk.qblog.data.Message;
 import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.data.QQUser;
 import com.qjk.qblog.data.User;
+import com.qjk.qblog.data.WBUser;
 import com.qjk.qblog.data.WXUser;
 import com.qjk.qblog.service.IMessageService;
 import com.qjk.qblog.service.IQQUserService;
 import com.qjk.qblog.service.IUserService;
+import com.qjk.qblog.service.IWBUserService;
 import com.qjk.qblog.service.IWXUserService;
 
 @Controller
@@ -28,6 +30,8 @@ public class UserManagerController {
 	IQQUserService qqUserService;
 	@Resource
 	IWXUserService wxUserService;
+	@Resource
+	IWBUserService wbUserService;
 	@Resource
 	IMessageService messageService;
 
@@ -152,6 +156,48 @@ public class UserManagerController {
 		
 		model.addAttribute("user", user);
 		return "admin/user/wxuser_detail";
+	}
+
+	
+	@RequestMapping(value = { "/wbusers/", "/wbusers" }, method = RequestMethod.GET)
+	public String wbuser_list(Model model) {
+
+		return wbuser_list(model, 1, "");
+	}
+
+	@RequestMapping(value = { "/wbusers/{pageIndex}", "/wbusers/{pageIndex}/" }, method = RequestMethod.GET)
+	public String wbuser_list(Model model, @PathVariable int pageIndex) {
+
+		return wbuser_list(model, pageIndex, "");
+	}
+
+	@RequestMapping(value = { "/wbusers/{pageIndex}/{keywords}",
+			"/wbusers/{pageIndex}/{keywords}/" }, method = RequestMethod.GET)
+	public String wbuser_list(Model model, @PathVariable int pageIndex,
+			@PathVariable String keywords) {
+		Pager<WBUser> pager =wbUserService.getAllWBUser(pageIndex, keywords);
+
+		model.addAttribute("pager", pager);
+		model.addAttribute("keywords", keywords);
+
+		return "admin/user/wbuser_list";
+	}
+	@RequestMapping(value={"/wbusers/{wbid}/detail","/wbusers/{wbid}/detail/"},method=RequestMethod.GET)
+	public String wbuser_detail(Model model,@PathVariable long wbid){
+		
+		if(wbid == 0){
+			return "redirect:/admin/user/wbusers";
+		}
+		
+		WBUser user = wbUserService.findWBUserById(wbid);
+		
+		if(user == null){
+
+			return "redirect:/admin/user/wbusers";
+		}
+		
+		model.addAttribute("user", user);
+		return "admin/user/wbuser_detail";
 	}
 	@RequestMapping(value = { "/message/", "/message" }, method = RequestMethod.GET)
 	public String message_list(Model model) {

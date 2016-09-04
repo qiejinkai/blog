@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.qjk.qblog.http.CURL;
+import com.qjk.qblog.http.IGet;
 import com.qjk.qblog.http.IPost;
 
 /**
@@ -33,11 +34,10 @@ public final class WBHelper {
 			throw new Exception("微博参数尚未设置");
 		}
 
-		String api_code = wb.get("api_code");
+		String api_code = isMobileClient ?wb.get("api_code_mobile"):wb.get("api_code");
 		String appId = wb.get("appid");
 		String redirect_uri = wb.get("redirect_uri");
 		String scope = wb.get("scope");
-		String display = isMobileClient ? "wap" : "default";
 
 		if (Value.isEmpty(api_code) || Value.isEmpty(appId)
 				|| Value.isEmpty(redirect_uri)) {
@@ -50,7 +50,6 @@ public final class WBHelper {
 				URLEncoder.encode(redirect_uri, "utf-8"));
 		api_code = api_code.replaceAll("\\{scope\\}",
 				Value.isEmpty(scope) ? "snsapi_userinfo" : scope);
-		api_code = api_code.replaceAll("\\{display\\}", display);
 
 		// logger.info("api_code : "+api_code);
 		return api_code;
@@ -125,18 +124,18 @@ public final class WBHelper {
 		}
 
 		String api_userInfo = wb.get("api_userInfo");
-		String appId = wb.get("appid");
-
-		if (Value.isEmpty(api_userInfo) || Value.isEmpty(appId)) {
+		api_userInfo = api_userInfo.replaceAll("\\{access_token\\}", token);
+		api_userInfo = api_userInfo.replaceAll("\\{uid\\}", openId);
+		
+		if (Value.isEmpty(api_userInfo) ) {
 			throw new Exception("未配置微博参数");
 		}
 
 		try {
 
-			IPost post = CURL.post(new URL(api_userInfo));
-			post.addValue("access_token", token);
-			post.addValue("uid", openId);
-			String result = post.exec();
+			IGet get = CURL.get(new URL(api_userInfo));
+				
+			String result = get.exec();
 
 			validateResult(result);
 			return result;

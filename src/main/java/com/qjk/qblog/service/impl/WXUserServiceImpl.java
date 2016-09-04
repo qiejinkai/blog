@@ -49,6 +49,7 @@ public class WXUserServiceImpl implements IWXUserService {
 			WXuser.setCtime(new Date().getTime() / 1000);
 			WXUserDao.addWXUser(WXuser);
 			user = new User();
+			user.setCtime(new Date().getTime() / 1000);
 			user.setAccount(WXuser.getOpenid());
 			user.setNick(WXuser.getNick());
 			user.setLogo(WXuser.getLogo());
