@@ -96,6 +96,23 @@ $(function() {
 	
 	});
 	
+
+	$(".ds-wb").bind('click',function(){
+		var uri = window.location.pathname;
+		uri = "/close";
+		var A=window.open("/wbuser/login/?r="+uri,"SinaLogin", 
+				   "width=450,height=320,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+		
+		var loop = setInterval(function() {     
+		    if(A.closed) {    
+
+				$.tip("登录成功", true);
+		        window.location.reload();  
+		    }    
+		}, 1000); 
+	
+	});
+	
 	$(".ds-weixin").bind('click',function(){
 		var uri = window.location.pathname;
 		var A=window.open("/wxuser/login/?r="+uri,"WEIXINLogin", 

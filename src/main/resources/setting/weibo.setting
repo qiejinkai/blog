@@ -3,20 +3,63 @@
 	<title>新浪微博</title>
 	<summary></summary>
 	<name>weibo</name>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<types></types>
 	<indexId>5</indexId>
 	<option>
-		<summary>基础设置</summary>
+		<summary>应用ID</summary>
 		<name>appid</name>
-		<value></value>
+		<value>668417419</value>
 		<title>应用ID</title>
 	</option>
 	<option>
-		<summary>基础设置</summary>
-		<name>secret</name>
-		<value></value>
+		<summary>应用秘钥</summary>
+		<name>appkey</name>
+		<value>1627495bed287589fee1c061cf708686</value>
 		<title>应用秘钥</title>
+	</option>
+	<option>
+		<summary>获取code</summary>
+		<name>api_code</name>
+		<value>https://api.weibo.com/oauth2/authorize?client_id={appid}&amp;redirect_uri={redirect_uri}&amp;response_type=code&amp;scope={scope}&amp;state={state}&amp;display={display}</value>
+		<title>获取code</title>
+	</option>		
+	<option>
+		<summary>获取Access Token post</summary>
+		<name>api_token</name>
+		<value>https://api.weibo.com/oauth2/access_token</value>
+		<title>获取Access Token</title>
+	</option>
+	<option>
+		<summary>刷新Access Token</summary>
+		<name>api_refresh</name>
+		<value>https://api.weibo.com/oauth2/access_token?client_id={appid}&amp;client_secret={appkey}&amp;grant_type=refresh_token&amp;redirect_uri={redirect_uri}&amp;refresh_token={refresh_token}</value>
+		<title>获取Access Token</title>
+	</option>
+	<option>
+		<summary>获取用户uid post</summary>
+		<name>api_userId</name>
+		<value>https://api.weibo.com/2/account/get_uid.json</value>
+		<title>获取Access Token</title>
+	</option>
+	<option>
+		<summary>获取用户信息 post</summary>
+		<name>api_userInfo</name>
+		<value>https://api.weibo.com/2/users/show.json</value>
+		<title>获取Access Token</title>
+	</option>
+	<option>
+		<summary>获取权限范围</summary>
+		<name>scope</name>
+		<value>all</value>
+		<title>获取权限范围</title>
+	</option>
+	
+	<option>
+		<summary>回调地址</summary>
+		<name>redirect_uri</name>
+		<value>http://www.qiejinkai.com/wbuser/callback/</value>
+		<title>回调地址</title>
 	</option>
 	
 </settings>

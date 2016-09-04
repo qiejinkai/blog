@@ -280,6 +280,13 @@
 	background-position: 0 0px
 }
 
+#ds-reset .ds-wb {
+	
+	background-image:
+		url("/img/wb_logo.png");
+	background-position: 0 0px
+}
+
 #ds-reset .ds-baidu {
 	background-position: 0 -208px
 }

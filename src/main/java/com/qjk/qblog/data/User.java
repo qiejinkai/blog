@@ -2,7 +2,6 @@ package com.qjk.qblog.data;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,8 +40,19 @@ public class User implements Serializable {
 
 	private QQUser qqUser;
 	private WXUser wxUser;
+	private WBUser wbUser;
 
 	
+	
+
+	@OneToOne(fetch = FetchType.LAZY)
+	public WBUser getWbUser() {
+		return wbUser;
+	}
+
+	public void setWbUser(WBUser wbUser) {
+		this.wbUser = wbUser;
+	}
 
 	@OneToOne(fetch = FetchType.LAZY)
 	public QQUser getQqUser() {
