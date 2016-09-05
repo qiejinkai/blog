@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,9 @@ import com.qjk.qblog.data.User;
 import com.qjk.qblog.service.IAGroupSerivce;
 import com.qjk.qblog.service.IArticleService;
 import com.qjk.qblog.service.IUserService;
+import com.qjk.qblog.service.impl.UserServiceImpl;
 import com.qjk.qblog.util.RequestUtil;
+import com.qjk.qblog.util.Value;
 
 @Controller
 public class HomeController {
@@ -69,5 +72,39 @@ public class HomeController {
 	@RequestMapping(value={"/close","/close/"},method=RequestMethod.GET)
 	public String auto_close(){
 		return "auto_close";
+	}
+
+
+	@RequestMapping(value = { "/logout", "/logout/" })
+	public String logout(String r, HttpServletRequest request) {
+		
+		if (Value.isEmpty(r)) {
+			r = "/";
+		}
+
+		HttpSession session = request.getSession();
+		
+		if (session.getAttribute("user") != null) {
+
+			session.removeAttribute("user");
+
+		}
+
+		return "redirect:" + r;
+	}
+
+	public String login(String r, HttpServletRequest request) {
+		
+		if (Value.isEmpty(r)) {
+			r = "/";
+		}
+		
+		User user = userService.findUserById(12);
+
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("user", user);
+
+		return "redirect:" + r;
 	}
 }

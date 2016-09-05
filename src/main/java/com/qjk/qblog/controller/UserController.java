@@ -3,6 +3,8 @@ package com.qjk.qblog.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.qjk.qblog.data.User;
 import com.qjk.qblog.group.ValidateInPost;
 import com.qjk.qblog.service.IUserService;
+import com.qjk.qblog.util.Value;
 
 @Controller
 @RequestMapping("/user")
@@ -97,5 +100,6 @@ public class UserController {
 		// model.addAttribute(list.get(phone));
 		return userService.findUserById(id);
 	}
+
 
 }
