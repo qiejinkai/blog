@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<title>微信公众平台设置</title>
+	<summary></summary>
+	<name>wxmp</name>
+	<version>1.0.1</version>
+	<types></types>
+	<indexId>5</indexId>
+	<option>
+		<summary>应用ID</summary>
+		<name>appid</name>
+		<value>wxcfe536ff38bccb40</value>
+		<title>应用ID</title>
+	</option>
+	<option>
+		<summary>应用秘钥</summary>
+		<name>appkey</name>
+		<value>8c5054f0ff8fbd2f99a23cd2e31fb1e0</value>
+		<title>应用秘钥</title>
+	</option>
+	<option>
+		<summary>公众账号ID</summary>
+		<name>accountId</name>
+		<value></value>
+		<title>公众账号ID</title>
+	</option>
+	<option>
+		<summary>EncodingAESKey</summary>
+		<name>asekey</name>
+		<value>mmhS7gqiXtDnC0XEV5LR7JAm5dlLdgWvtBcyIv8N2Fi</value>
+		<title>EncodingAESKey</title>
+	</option>
+	<option>
+		<summary>Token</summary>
+		<name>token</name>
+		<value>920wozhixihuanNI</value>
+		<title>Token</title>
+	</option>
+	<option>
+		<summary>AccessToken</summary>
+		<name>access_token_api</name>
+		<value>https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid={appid}&amp;secret={appkey}</value>
+		<title>Token</title>
+	</option>
+	
+</settings>

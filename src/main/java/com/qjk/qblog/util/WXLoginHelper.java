@@ -22,7 +22,7 @@ public final class WXLoginHelper {
 	public String getCodeUrl(String state,boolean isWeixinClient) throws Exception {
 
 		if (wx == null) {
-			throw new Exception("微信公众号参数尚未设置");
+			throw new Exception("微信授权登录参数尚未设置");
 		}
 
 		String api_code = isWeixinClient?wx.get("api_code"):wx.get("api_code");
@@ -32,7 +32,7 @@ public final class WXLoginHelper {
 
 		if (Value.isEmpty(api_code) || Value.isEmpty(appId)
 				|| Value.isEmpty(redirect_uri)) {
-			throw new Exception("微信公众号参数尚未设置");
+			throw new Exception("微信授权登录参数尚未设置");
 		}
 
 		api_code = api_code.replaceAll("\\{appid\\}", appId);
@@ -49,7 +49,7 @@ public final class WXLoginHelper {
 	public String getToken(String code) throws Exception {
 
 		if (wx == null) {
-			throw new Exception("微信公众号参数尚未设置");
+			throw new Exception("微信授权登录参数尚未设置");
 		}
 
 		String api_token = wx.get("api_token");
@@ -59,7 +59,7 @@ public final class WXLoginHelper {
 
 		if (Value.isEmpty(api_token) || Value.isEmpty(appId)
 				|| Value.isEmpty(appkey) || Value.isEmpty(redirect_uri)) {
-			throw new Exception("未配置微信公众号参数");
+			throw new Exception("未配置微信授权登录参数");
 		}
 		api_token = api_token.replaceAll("\\{appid\\}", appId);
 		api_token = api_token.replaceAll("\\{appkey\\}", appkey);
@@ -75,21 +75,21 @@ public final class WXLoginHelper {
 			return result;
 
 		} catch (Throwable e) {
-			throw new Exception("微信公众号获取token失败 : "+e.getMessage() +"   "+api_token, e);
+			throw new Exception("微信授权登录获取token失败 : "+e.getMessage() +"   "+api_token, e);
 		}
 
 	}
 
 	public String getUserInfo(String openId, String token) throws Exception {
 		if (wx == null) {
-			throw new Exception("微信公众号参数尚未设置");
+			throw new Exception("微信授权登录参数尚未设置");
 		}
 
 		String api_userInfo = wx.get("api_userInfo");
 		String appId = wx.get("appid");
 
 		if (Value.isEmpty(api_userInfo) || Value.isEmpty(appId)) {
-			throw new Exception("未配置微信公众号参数");
+			throw new Exception("未配置微信授权登录参数");
 		}
 		api_userInfo = api_userInfo.replaceAll("\\{token\\}", token);
 		api_userInfo = api_userInfo.replaceAll("\\{appid\\}", appId);
@@ -104,7 +104,7 @@ public final class WXLoginHelper {
 			return result;
 
 		} catch (Throwable e) {
-			throw new Exception("微信公众号 获取userInfo失败 : " + e.getMessage(), e);
+			throw new Exception("微信授权登录 获取userInfo失败 : " + e.getMessage(), e);
 		}
 	}
 
