@@ -42,6 +42,7 @@ public class WxmpMessage implements Serializable {
 	private String content = "";
 	private String format = "";
 	private String recognition = "";
+	private String msg;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,7 +54,7 @@ public class WxmpMessage implements Serializable {
 		this.wxMsgId = wxMsgId;
 	}
 
-	@Column(length=256)
+	@Column(length=64)
 	public String getToUserName() {
 		return toUserName;
 	}
@@ -61,8 +62,18 @@ public class WxmpMessage implements Serializable {
 	public void setToUserName(String toUserName) {
 		this.toUserName = toUserName;
 	}
+	
 
-	@Column(length=256)
+	@Column(columnDefinition="mediumtext")
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	@Column(length=64)
 	public String getFromUserName() {
 		return fromUserName;
 	}
@@ -89,7 +100,7 @@ public class WxmpMessage implements Serializable {
 		this.msgType = msgType;
 	}
 
-	@Column(length=128)
+	@Column(length=64)
 	public String getMsgId() {
 		return msgId;
 	}
@@ -107,7 +118,7 @@ public class WxmpMessage implements Serializable {
 		this.event = event;
 	}
 
-	@Column(length=256)
+	@Column(length=32)
 	public String getEventKey() {
 		return eventKey;
 	}
@@ -116,7 +127,7 @@ public class WxmpMessage implements Serializable {
 		this.eventKey = eventKey;
 	}
 
-	@Column(length=512)
+	@Column(length=256)
 	public String getTicket() {
 		return ticket;
 	}
@@ -125,7 +136,7 @@ public class WxmpMessage implements Serializable {
 		this.ticket = ticket;
 	}
 
-	@Column(length=512)
+	@Column(length=128)
 	public String getLatitude() {
 		return latitude;
 	}
@@ -134,7 +145,7 @@ public class WxmpMessage implements Serializable {
 		this.latitude = latitude;
 	}
 
-	@Column(length=512)
+	@Column(length=128)
 	public String getLongitude() {
 		return longitude;
 	}
@@ -143,7 +154,7 @@ public class WxmpMessage implements Serializable {
 		this.longitude = longitude;
 	}
 
-	@Column(length=512)
+	@Column(length=64,name="precision_")
 	public String getPrecision() {
 		return precision;
 	}
@@ -152,7 +163,7 @@ public class WxmpMessage implements Serializable {
 		this.precision = precision;
 	}
 
-	@Column(length=512)
+	@Column(length=256)
 	public String getPicUrl() {
 		return picUrl;
 	}
@@ -161,7 +172,7 @@ public class WxmpMessage implements Serializable {
 		this.picUrl = picUrl;
 	}
 
-	@Column(length=512)
+	@Column(length=64)
 	public String getMediaId() {
 		return mediaId;
 	}
@@ -170,7 +181,7 @@ public class WxmpMessage implements Serializable {
 		this.mediaId = mediaId;
 	}
 
-	@Column(length=512)
+	@Column(length=128)
 	public String getTitle() {
 		return title;
 	}
@@ -179,7 +190,7 @@ public class WxmpMessage implements Serializable {
 		this.title = title;
 	}
 
-	@Column(length=1024)
+	@Column(length=512)
 	public String getDescription() {
 		return description;
 	}
@@ -188,7 +199,7 @@ public class WxmpMessage implements Serializable {
 		this.description = description;
 	}
 
-	@Column(length=512)
+	@Column(length=128)
 	public String getUrl() {
 		return url;
 	}
@@ -215,7 +226,7 @@ public class WxmpMessage implements Serializable {
 		this.location_Y = location_Y;
 	}
 
-	@Column(length=512)
+	@Column(length=64)
 	public String getScale() {
 		return scale;
 	}
@@ -224,16 +235,16 @@ public class WxmpMessage implements Serializable {
 		this.scale = scale;
 	}
 
-	@Column(length=512)
+	@Column(length=256)
 	public String getLabel() {
 		return label;
 	}
 
 	public void setLabel(String label) {
-		this.label = label;
+		this.label = label; 
 	}
 
-	@Column(length=10240)
+	@Column(length=1024)
 	public String getContent() {
 		return content;
 	}
@@ -242,7 +253,7 @@ public class WxmpMessage implements Serializable {
 		this.content = content;
 	}
 
-	@Column(length=512)
+	@Column(length=64)
 	public String getFormat() {
 		return format;
 	}
@@ -251,7 +262,7 @@ public class WxmpMessage implements Serializable {
 		this.format = format;
 	}
 
-	@Column(length=512)
+	@Column(length=64)
 	public String getRecognition() {
 		return recognition;
 	}

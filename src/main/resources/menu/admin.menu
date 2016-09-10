@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <menu>
 	<name>admin</name>
-	<version>1.0.10</version>
+	<version>1.0.11</version>
 	<title>系统管理目录</title>
 
 	<menu>
@@ -31,6 +31,11 @@
 			<title>留言管理</title>
 			<href>/admin/user/message/</href>
 			<resource>admin/user/message</resource>
+		</menu>
+		<menu>
+			<title>微信消息管理</title>
+			<href>/admin/user/wxmessage/</href>
+			<resource>admin/user/wxmessage</resource>
 		</menu>
 	</menu>
 	

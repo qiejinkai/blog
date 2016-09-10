@@ -3,7 +3,7 @@
 	<title>微信公众平台设置</title>
 	<summary></summary>
 	<name>wxmp</name>
-	<version>1.0.1</version>
+	<version>1.0.4</version>
 	<types></types>
 	<indexId>5</indexId>
 	<option>
@@ -40,6 +40,30 @@
 		<summary>AccessToken</summary>
 		<name>access_token_api</name>
 		<value>https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid={appid}&amp;secret={appkey}</value>
+		<title>Token</title>
+	</option>
+	<option>
+		<summary>AccessToken</summary>
+		<name>access_token</name>
+		<value></value>
+		<title>Token</title>
+	</option>
+	<option>
+		<summary>AccessTokenCtime</summary>
+		<name>access_token_ctime</name>
+		<value></value>
+		<title>TokenTime</title>
+	</option>
+	<option>
+		<summary>AccessTokenExprie</summary>
+		<name>access_token_exprie</name>
+		<value>7200</value>
+		<title>TokenExprie</title>
+	</option>
+	<option>
+		<summary>UserInfo</summary>
+		<name>user_info_api</name>
+		<value>https://api.weixin.qq.com/cgi-bin/user/info?access_token={token}&amp;openid={openId}&amp;lang=zh_CN </value>
 		<title>Token</title>
 	</option>
 	

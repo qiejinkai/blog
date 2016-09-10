@@ -3,6 +3,7 @@ package com.qjk.qblog.dao.impl;
 import org.springframework.stereotype.Repository;
 
 import com.qjk.qblog.dao.IWxmpMessageDao;
+import com.qjk.qblog.data.Pager;
 import com.qjk.qblog.data.WBUser;
 import com.qjk.qblog.data.WxmpMessage;
 
@@ -20,6 +21,12 @@ public class WxmpMessageDaoImpl extends BaseDaoImpl<WxmpMessage> implements IWxm
 	protected Class<WxmpMessage> getDataClass() {
 		
 		return WxmpMessage.class;
+	}
+
+	@Override
+	public Pager<WxmpMessage> selectPager(Pager<WxmpMessage> pager) {
+		
+		return this.queryPager(pager);
 	}
 
 }

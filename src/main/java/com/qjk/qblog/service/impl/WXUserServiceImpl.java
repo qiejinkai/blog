@@ -72,6 +72,38 @@ public class WXUserServiceImpl implements IWXUserService {
 
 		return user;
 	}
+	
+	@Override
+	public void add(WXUser WXuser) {
+
+		String openId = WXuser.getOpenid();
+		WXUser u = WXUserDao.findWXUserbyOpenId(openId);
+
+		if (u == null) {
+
+			WXuser.setCtime(new Date().getTime() / 1000);
+			WXUserDao.addWXUser(WXuser);
+			
+		} else {
+			u.setNick(WXuser.getNick());
+			u.setLogo(WXuser.getLogo());
+			u.setGender(WXuser.getGender());
+			u.setSubcribe(WXuser.getSubcribe());
+			u.setOpenid(openId);
+			u.setNick(WXuser.getNick());
+			u.setGender(WXuser.getGender());
+			u.setCity(WXuser.getCity());
+			u.setCountry(WXuser.getCountry());
+			u.setProvince(WXuser.getProvince());
+			u.setLogo(WXuser.getLogo());
+			u.setSubscribeTime(WXuser.getSubscribeTime());
+			u.setUnionid(WXuser.getUnionid());
+			u.setGroupId(WXuser.getGroupId());
+			u.setRemark(WXuser.getRemark());
+			WXUserDao.updateWXUser(u);
+		}
+
+	}
 
 	@Override
 	public User login(String openId, String ip) {

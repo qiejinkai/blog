@@ -5,6 +5,7 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -236,5 +237,32 @@ public class TestSettingDao extends AbstractJUnit4SpringContextTests {
 			}
 		}
 		
+	}
+	
+	@Test
+	public void testServiceUpdate(){
+		Setting setting = settingService.getSettingByName("wxmp");
+		List<SettingOption> options = setting.getOptions();
+		String token = "asd";
+		long expires_in = 7200;
+		long now = new Date().getTime()/1000;
+		options = options.stream().peek(o->{
+			
+			if(o != null){
+				if("access_token".equals(o.getName())){
+					o.setValue(token);
+				}
+				if("access_token_expire".equals(o.getName())){
+					o.setValue(expires_in+"");
+				}
+				if("access_token_ctime".equals(o.getName())){
+					o.setValue(now+"");
+				}
+			}
+		}).collect(Collectors.toList());
+		
+		setting.setOptions(options);
+		
+		settingService.updateSetting(setting);
 	}
 }

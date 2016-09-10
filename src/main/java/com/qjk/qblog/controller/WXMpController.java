@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.qjk.qblog.data.WXUser;
 import com.qjk.qblog.data.WxmpMessage;
 import com.qjk.qblog.service.ISettingService;
+import com.qjk.qblog.service.IWXUserService;
 import com.qjk.qblog.service.IWxmpMessageService;
 import com.qjk.qblog.util.WXMpHelper;
 
@@ -34,9 +36,12 @@ public class WXMpController {
 	Logger logger = Logger.getLogger(WXMpController.class);
 	@Resource
 	ISettingService settingService;
-	
+
 	@Resource
 	IWxmpMessageService wxmpService;
+	
+	@Resource
+	IWXUserService wxUserService;
 
 	WXMpHelper WXMpHelper;
 
@@ -99,9 +104,15 @@ public class WXMpController {
 			
 				wxmpService.addMessage(message);
 				
+				helper.refreshAccessToken(settingService);
 				
+				WXUser user = helper.getUser(message.getFromUserName());
 				
-				String content = message.getMsgType()+" 消息" +"\n "+message.getContent();
+				if(user != null){
+					wxUserService.add(user);
+				}
+				
+				String content = helper.answer(message);
 				
 				result = helper.formatXml(message.getFromUserName(), message.getToUserName(), content);
 				 

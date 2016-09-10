@@ -14,11 +14,13 @@ import com.qjk.qblog.data.QQUser;
 import com.qjk.qblog.data.User;
 import com.qjk.qblog.data.WBUser;
 import com.qjk.qblog.data.WXUser;
+import com.qjk.qblog.data.WxmpMessage;
 import com.qjk.qblog.service.IMessageService;
 import com.qjk.qblog.service.IQQUserService;
 import com.qjk.qblog.service.IUserService;
 import com.qjk.qblog.service.IWBUserService;
 import com.qjk.qblog.service.IWXUserService;
+import com.qjk.qblog.service.IWxmpMessageService;
 
 @Controller
 @RequestMapping(value="/admin/user")
@@ -34,6 +36,8 @@ public class UserManagerController {
 	IWBUserService wbUserService;
 	@Resource
 	IMessageService messageService;
+	@Resource
+	IWxmpMessageService wxmessageService;
 
 	@RequestMapping(value = { "/users/", "/users" }, method = RequestMethod.GET)
 	public String user_list(Model model) {
@@ -220,5 +224,28 @@ public class UserManagerController {
 		model.addAttribute("pager", pager);
 		model.addAttribute("keywords", keywords);
 		return "admin/user/message_list";
+	}
+	
+	@RequestMapping(value = { "/wxmessage/", "/wxmessage" }, method = RequestMethod.GET)
+	public String wxmessage_list(Model model) {
+
+		return wxmessage_list(model, 1, "");
+	}
+
+	@RequestMapping(value = { "/wxmessage/{pageIndex}", "/wxmessage/{pageIndex}/" }, method = RequestMethod.GET)
+	public String wxmessage_list(Model model, @PathVariable int pageIndex) {
+
+		return wxmessage_list(model, pageIndex, "");
+	}
+
+	@RequestMapping(value = { "/wxmessage/{pageIndex}/{keywords}",
+			"/wxmessage/{pageIndex}/{keywords}/" }, method = RequestMethod.GET)
+	public String wxmessage_list(Model model, @PathVariable int pageIndex,
+			@PathVariable String keywords) {
+		Pager<WxmpMessage> pager = wxmessageService.selectPager(pageIndex, keywords);
+
+		model.addAttribute("pager", pager);
+		model.addAttribute("keywords", keywords);
+		return "admin/user/wxmessage_list";
 	}
 }

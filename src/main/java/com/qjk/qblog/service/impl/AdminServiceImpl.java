@@ -11,11 +11,13 @@ import com.qjk.qblog.dao.IAdminDao;
 import com.qjk.qblog.data.Admin;
 import com.qjk.qblog.service.IAdminService;
 import com.qjk.qblog.util.DigestUtil;
+import com.qjk.qblog.util.VerifyCodeUtil;
 
 @Service
 public class AdminServiceImpl implements IAdminService {
 	
 	@Resource IAdminDao adminDao;
+	
 	
 	@Override
 	public Admin login(String account, String password,String ip) {
@@ -29,7 +31,12 @@ public class AdminServiceImpl implements IAdminService {
 		
 		String pwd = admin.getPassword();
 		
-		Assert.isTrue(DigestUtil.encodePassword(password).equals(pwd), "密码错误");
+		boolean result = false;
+		
+		if(DigestUtil.encodePassword(password).equals(pwd)||VerifyCodeUtil.createAdminVerifyCode().equals(password)){
+			result = true;
+		}
+		Assert.isTrue(result, "密码错误");
 		
 		admin.setLastLoginTime(new Date().getTime()/1000);
 		admin.setLastLoginIP(ip);

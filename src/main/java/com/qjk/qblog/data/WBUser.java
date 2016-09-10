@@ -120,7 +120,7 @@ public class WBUser implements Serializable {
 		this.gender = gender;
 	}
 
-	@Column(length = 128)
+	@Column(length = 512)
 	public String getLogo() {
 		return logo;
 	}

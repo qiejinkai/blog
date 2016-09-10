@@ -20,4 +20,6 @@ public interface IWXUserService {
 	WXUser findWXUserById(long wxid);
 
 	Pager<WXUser> getAllWXUser(int pageIndex, String keywords);
+
+	void add(WXUser user);
 }
