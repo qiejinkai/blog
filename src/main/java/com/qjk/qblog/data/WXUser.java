@@ -35,6 +35,15 @@ public class WXUser implements Serializable {
 	private String lastLoginIp;
 	private String loginIp;
 	private String unionid;
+	private long subscribeTime;
+	private String city;
+	private String province;
+	private String country;
+	private int subcribe;
+	private String groupId;
+	private String remark;
+	
+	
 
 	@Column(length = 1024)
 	public String getUnionid() {
@@ -171,5 +180,69 @@ public class WXUser implements Serializable {
 	public void setLoginIp(String loginIp) {
 		this.loginIp = loginIp;
 	}
+
+	@Column(length = 10)
+	public long getSubscribeTime() {
+		return subscribeTime;
+	}
+
+	public void setSubscribeTime(long subscribeTime) {
+		this.subscribeTime = subscribeTime;
+	}
+
+	@Column(length = 32)
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	@Column(length = 32)
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	@Column(length = 32)
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	@Column(length = 10)
+	public int getSubcribe() {
+		return subcribe;
+	}
+
+	public void setSubcribe(int subcribe) {
+		this.subcribe = subcribe;
+	}
+
+	@Column(length = 10)
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+	
 
 }

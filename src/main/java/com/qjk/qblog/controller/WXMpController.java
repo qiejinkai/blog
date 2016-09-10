@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qjk.qblog.data.WxmpMessage;
 import com.qjk.qblog.service.ISettingService;
+import com.qjk.qblog.service.IWxmpMessageService;
 import com.qjk.qblog.util.WXMpHelper;
 
 /**
@@ -33,6 +34,9 @@ public class WXMpController {
 	Logger logger = Logger.getLogger(WXMpController.class);
 	@Resource
 	ISettingService settingService;
+	
+	@Resource
+	IWxmpMessageService wxmpService;
 
 	WXMpHelper WXMpHelper;
 
@@ -88,21 +92,32 @@ public class WXMpController {
 				sb.append(s);
 			}
 			String xml = sb.toString(); // 次即为接收到微信端发送过来的xml数据
+			
 			WxmpMessage message = helper.analysisXml(xml);
 			
-			result = helper.formatXml(message.getFromUserName(), message.getToUserName(), "你好");
-			 
-			response.setCharacterEncoding("UTF-8");
-
-			response.setHeader("Content-Type", "text/plain;charset=UTF-8");
+			if(message != null){
 			
-			OutputStream out = response.getOutputStream();
+				wxmpService.addMessage(message);
+				
+				
+				
+				String content = message.getMsgType()+" 消息" +"\n "+message.getContent();
+				
+				result = helper.formatXml(message.getFromUserName(), message.getToUserName(), content);
+				 
+				response.setCharacterEncoding("UTF-8");
+	
+				response.setHeader("Content-Type", "text/plain;charset=UTF-8");
+				
+				OutputStream out = response.getOutputStream();
+				
+				out.write(result.getBytes("UTF-8"));
+				
+				out.flush();
+				
+				out.close();
 			
-			out.write(result.getBytes("UTF-8"));
-			
-			out.flush();
-			
-			out.close();
+			}
 			
 		}catch(Exception e){
 			

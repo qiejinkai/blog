@@ -19,6 +19,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 import com.qjk.qblog.data.Setting;
+import com.qjk.qblog.data.WXUser;
 import com.qjk.qblog.data.WxmpMessage;
 import com.qjk.qblog.http.CURL;
 import com.qjk.qblog.http.IGet;
@@ -196,6 +197,35 @@ public final class WXMpHelper {
 		}
 
 		return result;
+	}
+
+
+	public WXUser getUserInfo() throws Exception {
+
+		validateSetting("access_token_api", "appid", "appkey");
+
+		String result = "";
+
+		String access_token_api = Value.stringValueForKey(wxmp,
+				"access_token_api", "");
+		String appid = Value.stringValueForKey(wxmp, "appid", "");
+		String appkey = Value.stringValueForKey(wxmp, "appkey", "");
+
+		access_token_api = access_token_api.replaceAll("\\{appid\\}", appid);
+		access_token_api = access_token_api.replaceAll("\\{appkey\\}", appkey);
+
+		try {
+			IGet get = CURL.get(new URL(access_token_api));
+
+			result = get.exec();
+
+			validateResult(result);
+
+		} catch (Throwable e) {
+			throw new Exception("微信公众号 : " + e.getMessage(), e);
+		}
+
+		return null;
 	}
 
 	public WxmpMessage analysisXml(String xml) {
