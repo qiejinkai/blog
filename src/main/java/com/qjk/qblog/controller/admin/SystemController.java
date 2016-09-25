@@ -2,17 +2,12 @@ package com.qjk.qblog.controller.admin;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 import javax.annotation.Resource;
-import javax.persistence.Index;
 
-import org.hibernate.jpa.criteria.Renderable;
-import org.hibernate.loader.custom.Return;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,12 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.alibaba.druid.sql.ast.expr.SQLAggregateExpr.Option;
 import com.qjk.qblog.data.Setting;
 import com.qjk.qblog.data.SettingOption;
 import com.qjk.qblog.service.ISettingService;
-import com.qjk.qblog.util.DigestUtil;
-import com.qjk.qblog.util.JsonUtil;
 import com.qjk.qblog.util.Value;
 
 @Controller
@@ -77,7 +69,7 @@ public class SystemController {
 		return "redirect:/admin/system/setting/" + setting.getSettingId();
 	}
 
-	private void buildOptions(Setting setting, String[] names, String[] values,
+	public void buildOptions(Setting setting, String[] names, String[] values,
 			String[] summarys) {
 
 		if (setting == null || names == null || names.length == 0) {

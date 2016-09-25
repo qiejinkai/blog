@@ -11,21 +11,20 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.qjk.qblog.data.WXUser;
 import com.qjk.qblog.data.User;
-import com.qjk.qblog.service.IWXUserService;
+import com.qjk.qblog.data.WXUser;
 import com.qjk.qblog.service.ISettingService;
+import com.qjk.qblog.service.IWXUserService;
 import com.qjk.qblog.util.CacheManagerUtil;
 import com.qjk.qblog.util.JsonUtil;
-import com.qjk.qblog.util.WXLoginHelper;
 import com.qjk.qblog.util.RequestUtil;
 import com.qjk.qblog.util.Value;
+import com.qjk.qblog.util.WXLoginHelper;
 
 @Controller
 @RequestMapping("/wxuser")

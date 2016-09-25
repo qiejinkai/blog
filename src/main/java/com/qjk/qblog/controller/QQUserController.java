@@ -5,7 +5,6 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -161,19 +160,19 @@ public class QQUserController {
 
 	}
 
-	public static void main(String[] args) {
-		String string = "access_token=F884EE4A4A4AF1D5D1246F2A3358CDB0&expires_in=7776000&refresh_token=0B79A2242A479AC6A282B79A35F803CB";
-		String string2 = " callback( {123} )";
-		Map<String, Object> map = analysisOpenId(string2);
-
-		for (Entry<String, Object> entry : map.entrySet()) {
-			System.out.println(entry.getKey() + "   ,  " + entry.getValue());
-		}
-		
-	
-		
-		
-	}
+//	public static void main(String[] args) {
+//		String string = "access_token=F884EE4A4A4AF1D5D1246F2A3358CDB0&expires_in=7776000&refresh_token=0B79A2242A479AC6A282B79A35F803CB";
+//		String string2 = " callback( {123} )";
+//		Map<String, Object> map = analysisOpenId(string2);
+//
+//		for (Entry<String, Object> entry : map.entrySet()) {
+//			System.out.println(entry.getKey() + "   ,  " + entry.getValue());
+//		}
+//		
+//	
+//		
+//		
+//	}
 
 	private static Map<String, Object> analysisToken(String tokenStr) {
 

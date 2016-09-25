@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.qjk.qblog.data.Admin;
 import com.qjk.qblog.data.Menu;
-import com.qjk.qblog.data.User;
 import com.qjk.qblog.service.IAdminService;
 import com.qjk.qblog.service.IMenuService;
 import com.qjk.qblog.util.RequestUtil;

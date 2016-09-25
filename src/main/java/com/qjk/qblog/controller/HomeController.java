@@ -17,7 +17,6 @@ import com.qjk.qblog.data.User;
 import com.qjk.qblog.service.IAGroupSerivce;
 import com.qjk.qblog.service.IArticleService;
 import com.qjk.qblog.service.IUserService;
-import com.qjk.qblog.service.impl.UserServiceImpl;
 import com.qjk.qblog.util.RequestUtil;
 import com.qjk.qblog.util.Value;
 
